@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React, { useState } from "react";
+import styles from "./Navbar.module.css";
 
 const links = ["Home", "Events", "Projects", "Resources", "Log in"];
 
@@ -10,24 +11,26 @@ const Navbar = () => {
   const [currentLink, setCurrentLink] = useState<string>("Home");
 
   return (
-    <header className="w-full h-[4.5rem] border-b border-b-neutral-200 items-center flex flex-col">
-      <div className="h-full md:max-w-[90%] xl:max-w-[60%] w-full flex flex-row justify-between items-center">
+    <header className={styles.header}>
+      <div className={styles.navContainer}>
         <Image
           src="/images/gdsc/gdsc-csusm title light.png"
           alt="navbar-logo"
-          className="hidden md:block"
+          className={styles.logo}
           width="355"
           height="24"
         />
 
-        <div className="m-auto md:m-0 md:ml-auto h-full">
-          <ul className="flex flex-row space-x-6 h-full">
+        <div className={styles.navLinksContainer}>
+          <ul className={styles.navLinks}>
             {links.map((link, index) => (
               <li key={index}>
                 <div
                   className={cn(
-                    "text-neutral-600 h-full flex items-center border-b-4 text-sm hover:cursor-pointer hover:text-black transition",
-                    currentLink === link ? "border-blue" : "border-white"
+                    styles.navLink,
+                    currentLink === link
+                      ? styles.activeLink
+                      : styles.inactiveLink
                   )}
                   onClick={() => setCurrentLink(link)}
                 >

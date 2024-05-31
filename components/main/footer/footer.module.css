@@ -1,0 +1,42 @@
+.footer {
+  @apply w-full sm:h-[12rem] pb-4 sm:pb-0 border-t border-b-neutral-200 items-center flex flex-col;
+}
+  
+.content {
+  @apply h-full md:max-w-[90%] xl:max-w-[60%] w-full grid grid-cols-1 sm:grid-cols-4;
+}
+  
+.logoContainer {
+  @apply flex flex-col items-center justify-between h-full pt-10 sm:col-span-2 sm:mr-auto;
+}
+  
+.quickLinks,
+.resources {
+  @apply flex flex-col text-sm gap-2 pt-10 pl-4 sm:pl-0 sm:ml-auto;
+}
+  
+.quickLinks h1,
+.resources h1 {
+  @apply font-semibold;
+}
+  
+.footerBottom {
+  @apply w-full h-12 bg-neutral-100 flex flex-col items-center justify-center;
+}
+  
+.footerBottomContent {
+  @apply md:max-w-[90%] xl:max-w-[60%] w-full flex flex-row items-center justify-between;
+}
+  
+.footerText {
+  @apply text-neutral-400 font-semibold text-xs px-2 md:px-0;
+}
+  
+.socialIcons {
+  @apply flex flex-row gap-4 text-neutral-700;
+}
+  
+.icon {
+  @apply hover:text-blue hover:cursor-pointer transition;
+}
+  

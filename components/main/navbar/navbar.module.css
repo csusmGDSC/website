@@ -1,0 +1,32 @@
+.header {
+  @apply w-full h-[4.5rem] border-b border-b-neutral-200 items-center flex flex-col;
+}
+
+.navContainer {
+  @apply h-full md:max-w-[90%] xl:max-w-[60%] w-full flex flex-row justify-between items-center;
+}
+
+.logo {
+  @apply hidden md:block;
+}
+
+.navLinksContainer {
+  @apply m-auto md:m-0 md:ml-auto h-full;
+}
+
+.navLinks {
+  @apply flex flex-row space-x-6 h-full;
+}
+
+.navLink {
+  @apply text-neutral-600 h-full flex items-center border-b-4 text-sm hover:cursor-pointer hover:text-black transition;
+}
+
+.activeLink {
+  @apply border-blue;
+}
+
+.inactiveLink {
+  @apply border-white;
+}
+  
