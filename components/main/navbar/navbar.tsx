@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React, { useState } from "react";
-import styles from "./Navbar.module.css";
+import styles from "./navbar.module.css";
 
 const links = ["Home", "Events", "Projects", "Resources", "Log in"];
 

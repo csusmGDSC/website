@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
 import { IoMdAlert } from "react-icons/io";
-import styles from "./Hero.module.css";
+import styles from "./hero.module.css";
 
 const description =
   "The Google Developer Student Club (GDSC) at California State University San Marcos is a university-based community for students interested in developing technical skills and leadership. By joining GDSC, you can participate in projects, practice interview questions, and partake in peer-to-peer activities, while building real-world software products for stakeholders.";
