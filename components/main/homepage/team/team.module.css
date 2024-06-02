@@ -1,5 +1,5 @@
 .team {
-  @apply md:max-w-[90%] xl:max-w-[60%];
+  @apply md:max-w-[90%] xl:max-w-[60%] 2xl:max-w-[1200px];
 }
 
 .innerTeam {

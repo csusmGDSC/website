@@ -3,7 +3,7 @@
 }
 
 .navContainer {
-  @apply h-full md:max-w-[90%] xl:max-w-[60%] w-full flex flex-row justify-between items-center;
+  @apply h-full md:max-w-[90%] xl:max-w-[60%] 2xl:max-w-[1200px] w-full flex flex-row justify-between items-center;
 }
 
 .logo {

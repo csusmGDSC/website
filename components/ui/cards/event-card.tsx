@@ -76,7 +76,7 @@ const EventTags: React.FC<EventProps> = ({ tags }) => {
   return (
     <div className="flex flex-row items-center gap-1 mb-2">
       {tags.map((tag, index) => (
-        <Tag key={index} text={tag} color="red" />
+        <Tag key={index} text={tag} color="green" />
       ))}
     </div>
   );
@@ -104,7 +104,7 @@ const EventInfo: React.FC<EventProps> = ({ title, description }) => {
 const EventDetails: React.FC<EventProps> = ({ eventPageURL, date }) => {
   return (
     <div className="flex flex-row items-center justify-between mt-auto">
-      <Tag text="View Details" icon={FaExternalLinkAlt} color="yellow" />
+      <Tag text="View Details" icon={FaExternalLinkAlt} color="blue" />
       {date && (
         <p>
           {convertToReadableDate(

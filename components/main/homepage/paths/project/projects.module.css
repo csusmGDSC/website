@@ -1,9 +1,9 @@
 .centerContent {
-  @apply items-center justify-center md:max-w-[90%] xl:max-w-[60%] mt-20;
+  @apply items-center justify-center md:max-w-[90%] xl:max-w-[60%] 2xl:max-w-[1200px] mt-20;
 }
 
 .centerWithFlex {
-  @apply flex flex-col items-center justify-center md:max-w-[90%] xl:max-w-[60%] mt-20;
+  @apply flex flex-col items-center justify-center md:max-w-[90%] xl:max-w-[60%] 2xl:max-w-[1200px] mt-20;
 }
 
 .skillsGridLayout {

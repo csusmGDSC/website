@@ -2,6 +2,8 @@ import Container from "@/components/ui/helpers/container";
 import Image from "next/image";
 import React from "react";
 import styles from "./benefits.module.css";
+import { Button } from "@/components/ui/inputs/button";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 // TO-DO: Move static data elsewhere
 const benefits = [
@@ -39,16 +41,14 @@ const Benefits = () => {
         <Container
           key={index}
           // For each even benefit, have a white background, otherwise a gray background
-          className={`${
-            index % 2 === 0 ? "bg-[#f9f9f9]" : ""
-          } flex flex-col items-center py-5`}
+          className="flex flex-col items-center py-5"
           padding={false}
         >
           <div
             // For each even benefit, have the image on the left, otherwise on the right
             className={`flex flex-row ${
               index % 2 !== 0 ? "flex-row-reverse" : ""
-            } md:max-w-[90%] xl:max-w-[60%] w-full items-center justify-center sm:justify-between gap-8`}
+            } md:max-w-[90%] xl:max-w-[60%] 2xl:max-w-[1200px] w-full items-center justify-center sm:justify-between gap-8`}
           >
             <RoundedImage src={benefit.imageSrc} />
             <BenefitDescription
