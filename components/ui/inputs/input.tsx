@@ -1,6 +1,11 @@
-import * as React from "react"
+// ** IMPORTANT **
+// INFO: This file contains an external component from shadcn-ui
+// VISIT: https://ui.shadcn.com/docs/components/input
+// REASON: Uses conventional standards for text inputs
 
-import { cn } from "@/lib/utils"
+import * as React from "react";
+
+import { cn } from "@/lib/utils";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -17,9 +22,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         {...props}
       />
-    )
+    );
   }
-)
-Input.displayName = "Input"
+);
+Input.displayName = "Input";
 
-export { Input }
+export { Input };

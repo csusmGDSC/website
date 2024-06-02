@@ -1,0 +1,7 @@
+.navLinks {
+  @apply w-full flex items-center justify-center gap-4 py-10;
+}
+
+.navLink {
+  @apply text-neutral-600 h-full border-b-4 flex items-center text-xl hover:cursor-pointer hover:text-black transition;
+}

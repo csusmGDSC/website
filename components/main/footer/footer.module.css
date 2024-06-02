@@ -1,5 +1,5 @@
 .footer {
-  @apply w-full sm:h-[12rem] pb-4 sm:pb-0 border-t border-b-neutral-200 items-center flex flex-col;
+  @apply w-full sm:h-[12rem] pb-4 sm:pb-0 border-t border-b-neutral-200 items-center flex flex-col mt-20;
 }
   
 .content {

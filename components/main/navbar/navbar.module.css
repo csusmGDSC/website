@@ -1,5 +1,5 @@
-.header {
-  @apply w-full h-[4.5rem] border-b border-b-neutral-200 items-center flex flex-col;
+.navbar {
+  @apply w-full h-[4.5rem] border-b border-b-neutral-200 items-center flex flex-col fixed top-0 z-[999] bg-white;
 }
 
 .navContainer {

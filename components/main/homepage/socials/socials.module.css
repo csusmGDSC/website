@@ -1,0 +1,11 @@
+.container {
+  @apply flex flex-col items-center justify-center md:max-w-[90%] xl:max-w-[60%] mt-20;
+}
+
+.gridLayout {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4;
+}
+
+.innerCardLayout {
+  @apply [&_*]:!text-left [&_*]:!items-start;
+}

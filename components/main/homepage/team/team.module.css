@@ -1,0 +1,7 @@
+.team {
+  @apply md:max-w-[90%] xl:max-w-[60%];
+}
+
+.innerTeam {
+  @apply flex flex-row flex-wrap items-center justify-center mt-4;
+}
