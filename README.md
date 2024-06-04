@@ -45,10 +45,15 @@ To learn more about Next.js, take a look at the following resources:
 
 This website is using a variety of technologies that is used in modern web development.
 
-- HTML: The standard language used to create and structure content on the web. Can be extended in the form of TSX (HTML code inside of TypeScript code), you will see the .TSX extension, which just means HTML code along with some programmable code.
-- CSS: A stylesheet language used to describe the presentation and layout of a website. This is what makes the website pretty.
-- TypeScript: A programming language that builds on JavaScript by adding static types, helping developers catch errors early and write more robust code. Having type safety for your code will make your life much easier, trust me.
-- React: A JavaScript library for building user interfaces, particularly single-page applications, by creating reusable UI components.
-- NextJS: A React framework that enables server-side rendering and static website generation for building optimized and fast web applications. This is just a bunch of fancy words that means having a bunch of really helpful tools when building websites.
-- Shadcn/UI: A customizable component library for building user interfaces in web applications, providing pre-designed components that can be easily styled and integrated. This just helps expedite development of commonly used react components, this is not needed at all.
+- **HTML**: The standard language used to create and structure content on the web. Can be extended in the form of TSX (HTML code inside of TypeScript code), you will see the .TSX extension, which just means HTML code along with some programmable code.
+<br/>
+- **CSS**: A stylesheet language used to describe the presentation and layout of a website. This is what makes the website pretty.
+<br/>
+- **TypeScript**: A programming language that builds on JavaScript by adding static types, helping developers catch errors early and write more robust code. Having type safety for your code will make your life much easier, trust me.
+<br/>
+- **React**: A JavaScript library for building user interfaces, particularly single-page applications, by creating reusable UI components.
+<br/>
+- **NextJS**: A React framework that enables server-side rendering and static website generation for building optimized and fast web applications. This is just a bunch of fancy words that means having a bunch of really helpful tools when building websites.
+<br/>
+- **Shadcn/UI**: A customizable component library for building user interfaces in web applications, providing pre-designed components that can be easily styled and integrated. This just helps expedite development of commonly used react components, this is not needed at all.
 
