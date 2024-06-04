@@ -10,6 +10,8 @@ You can check if you have nodeJS installed by running the command,
 node -v
 ```
 
+If you don't have NodeJS installed, it is pretty easy to install it, just follow the instructions on the official website: [NodeJS](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs).
+
 Secondly, once you have NodeJS installed, clone the repository, then install the necessary dependencies by running the command inside your repository,
 
 ```
