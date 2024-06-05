@@ -17,7 +17,7 @@ export default function Josh() {
       <Paths />
       <Team />
       <Socials />
-      <p>Hello World - Josh</p>
+      <p>Hey Guys - Josh</p>
     </main>
   );
 }
