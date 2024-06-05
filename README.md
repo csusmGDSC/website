@@ -32,14 +32,15 @@ bun dev
 
 ## Making changes
 
-If you wish to make changes to the code as a contributor, you will have to start with the making a branch off of the "DEV" branch. You can name this branch whatever as long as it is descriptive and clarifies your goals. When you are ready to finalize those changes, you can request a merge with your changes to the "DEV" branch and then one of the administrators will review the changes and go from there.
+If you wish to make changes to the code as a contributor, you will have to start with the making a branch off of the "DEV" branch. When you are ready to finalize those changes, you can request a merge with your changes to the "DEV" branch and then one of the administrators will review the changes and go from there.
 
-Note: No one should be able to make direct changes to the "MAIN" branch or the "DEV" branch directly, only through merges.
+**Note**: No one should be able to make direct changes to the "MAIN" branch or the "DEV" branch directly, only through merges.
 
 The reason for this is the following,
 
-- Main Branch: This branch will be used as part of the deployment package with Vercel, meaning any new changes on this branch will "redeploy" the project automatically.
-- Dev Branch: It will be very confusing to have multiple collaborators working on the same branch at the same time, which can lead to merge conflicts. Making your own branch off of the "DEV" branch will alleviate this.
+- **Main Branch**: This branch will be used as part of the deployment package with Vercel, meaning any new changes on this branch will "redeploy" the project automatically.
+
+- **Dev Branch**: It will be very confusing to have multiple collaborators working on the same branch at the same time, which can lead to merge conflicts. Making your own branch off of the "DEV" branch will alleviate this.
 
 There will be branch protection on these branches to enforce these rules.
 
