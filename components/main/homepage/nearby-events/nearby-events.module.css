@@ -3,5 +3,5 @@
 }
 
 .container {
-  @apply items-center justify-center md:max-w-[90%] xl:max-w-[60%] 2xl:max-w-[1200px] mt-20;
+  @apply items-center justify-center px-16 md:px-0 md:max-w-[90%] xl:max-w-[60%] 2xl:max-w-[1200px] mt-20;
 }

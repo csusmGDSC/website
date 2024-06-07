@@ -8,7 +8,7 @@ import {
 import Container from "@/components/ui/helpers/container";
 import EventCard from "@/components/ui/cards/event-card";
 import React from "react";
-import styles from "./upcoming-events.module.css";
+import styles from "./nearby-events.module.css";
 
 // TO-DO: Move static data else-where
 const exampleEvents = [
@@ -71,23 +71,23 @@ const exampleEvents = [
 /**
  * Component that shows upcoming events for the user
  */
-const UpcomingEvents = () => {
+const NearbyEvents = () => {
   return (
     <Container
-      heading="Upcoming Events"
+      heading="Nearby Events"
       subheading="Check out upcoming workshops and sessions"
       className={styles.container}
     >
       {/* Interactive horizontal scroll for the event cards */}
       <Carousel>
-        <CarouselContent>
+        <CarouselContent className="py-1">
           {exampleEvents.map((eventItem, index) => (
             <CarouselItem key={index} className={styles.carouselItem}>
               <EventCard
-                tags={eventItem.tags}
                 title={eventItem.title}
                 description={eventItem.description}
                 date={eventItem.date}
+                imageSrc="/images/background-2.jpeg"
               />
             </CarouselItem>
           ))}
@@ -101,4 +101,4 @@ const UpcomingEvents = () => {
   );
 };
 
-export default UpcomingEvents;
+export default NearbyEvents;

@@ -74,3 +74,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+.custom-max-width {
+  @apply md:max-w-[90%] xl:max-w-[60%] 2xl:max-w-[1200px] w-full;
+}
+
+.flex-center-col {
+  @apply flex flex-col justify-center items-center;
+}
+
+.flex-center-row {
+  @apply flex flex-row justify-center items-center;
+}

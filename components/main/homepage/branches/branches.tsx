@@ -4,14 +4,14 @@ import React, { useState } from "react";
 import Projects from "./project/projects";
 import Interview from "./interview/interview";
 import { cn } from "@/lib/utils";
-import styles from "./paths.module.css";
+import styles from "./branches.module.css";
 
 const teams = ["Project", "Interview"];
 
 /**
  * Component that shows the different teams a member can join
  */
-const Paths = () => {
+const Branches = () => {
   const [currentTeam, setCurrentTeam] = useState<string>("Project");
 
   return (
@@ -38,4 +38,4 @@ const Paths = () => {
   );
 };
 
-export default Paths;
+export default Branches;

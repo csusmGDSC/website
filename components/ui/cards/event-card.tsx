@@ -1,45 +1,49 @@
 import { cn, convertToReadableDate } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
-import Tag from "../helpers/tag";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { Button } from "../inputs/button";
 
 interface EventProps {
-  tags?: string[];
   title?: string;
   description?: string;
   eventPageURL?: URL;
   date?: Date;
   imageSrc?: string;
+  className?: string;
 }
 
 /**
  * Component that shows an event card
- * @param {string[]} tags Filter tags of the event
  * @param {string} title Name of the event
  * @param {string} description Information relating to the event
  * @param {string} eventPageURL URL or path to event page
  * @param {Date} date Date object representing day the event starts
  * @param {string} imageSrc URL or path to image source (View NextJS documentation if using URL)
+ * @param {string} className Additional CSS classes to extend to the card
  */
 const EventCard: React.FC<EventProps> = ({
-  tags,
   title,
   description,
   eventPageURL,
   date,
-  imageSrc = "/images/google/card-background-template.jpg",
+  imageSrc,
+  className,
 }) => {
   return (
-    <div className="rounded-lg border border-[#CFCFCF] w-[250px] overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+    <div
+      className={cn(
+        "rounded-lg border border-[#CFCFCF] w-full overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-1",
+        className
+      )}
+    >
       <EventImage imageSrc={imageSrc} />
       <div
         className={cn(
-          "w-full h-[260px] p-4 flex flex-col",
+          "w-full p-4 flex flex-col justify-between min-h-[200px]",
           imageSrc ? "border-t border-[#CFCFCF]" : "border-none"
         )}
       >
-        <EventTags tags={tags} />
         <EventInfo title={title} description={description} />
         <EventDetails eventPageURL={eventPageURL} date={date} />
       </div>
@@ -68,30 +72,15 @@ const EventImage: React.FC<EventProps> = ({ imageSrc }) => {
 };
 
 /**
- * Sub-component that displays tags of the event
- * @param {string[]} tags Filter tags of the event
- */
-const EventTags: React.FC<EventProps> = ({ tags }) => {
-  if (!tags) return null;
-  return (
-    <div className="flex flex-row items-center gap-1 mb-2">
-      {tags.map((tag, index) => (
-        <Tag key={index} text={tag} color="green" />
-      ))}
-    </div>
-  );
-};
-
-/**
  * Sub-component that displays information about the event
  * @param {string} title Name of the event
  * @param {string} description Information relating to the event
  */
 const EventInfo: React.FC<EventProps> = ({ title, description }) => {
   return (
-    <div className="space-y-2">
-      <h1 className="text-lg font-bold text-[#3F3F3F]">{title}</h1>
-      <p className="text-sm text-[#3F3F3F]">{description}</p>
+    <div className="space-y-2 line-clamp-6">
+      <h1 className="font-bold text-[#3F3F3F]">{title}</h1>
+      <p className="text-xs text-[#3F3F3F]">{description}</p>
     </div>
   );
 };
@@ -103,10 +92,16 @@ const EventInfo: React.FC<EventProps> = ({ title, description }) => {
  */
 const EventDetails: React.FC<EventProps> = ({ eventPageURL, date }) => {
   return (
-    <div className="flex flex-row items-center justify-between mt-auto">
-      <Tag text="View Details" icon={FaExternalLinkAlt} color="blue" />
+    <div className="flex flex-row items-center justify-between">
+      <Button
+        className={cn(
+          "px-3 rounded-lg truncate gap-2 text-center max-w-fit text-[10px] font-semibold text-background flex flex-row items-center bg-blue hover:bg-blue/80"
+        )}
+      >
+        View Details <FaExternalLinkAlt size={10} />
+      </Button>
       {date && (
-        <p>
+        <p className="text-sm">
           {convertToReadableDate(
             date.getMonth(),
             date.getDate(),

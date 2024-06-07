@@ -1,0 +1,4 @@
+.eventCardWidths {
+    @apply sm:!w-[calc(50%-1rem)] md:!w-[calc(33.333%-1rem)] 2xl:!w-[calc(25%-1rem)];
+}
+
