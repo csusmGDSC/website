@@ -7,5 +7,5 @@
 }
 
 .innerCardLayout {
-  @apply [&_*]:!text-left [&_*]:!items-start;
+  @apply [&_*]:!text-left [&_*]:!items-start h-[300px];
 }

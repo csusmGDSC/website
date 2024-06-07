@@ -7,6 +7,7 @@ import {
 import React from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import styles from "./projects.module.css";
+import Link from "next/link";
 
 // TO-DO: Move static data else-where
 const projects = [
@@ -14,25 +15,25 @@ const projects = [
     topic: "Mobile",
     description: "Develop applications for a range of audiences",
     imageSrc: "/images/google/ecosystem-mobile.png",
-    topicLink: "https://www.google.com",
+    topicLink: "/projects",
   },
   {
     topic: "Web",
     description: "Create, fast, secure sites and apps for the web",
     imageSrc: "/images/google/ecosystem-web.png",
-    topicLink: "https://www.google.com",
+    topicLink: "/projects",
   },
   {
     topic: "Cybersecurity",
     description: "Construct security & safety solutions",
     imageSrc: "/images/google/ecosystem-ai.png",
-    topicLink: "https://www.google.com",
+    topicLink: "/projects",
   },
   {
     topic: "Cloud & APIs",
     description: "Simplify and scale end-to-end development",
     imageSrc: "/images/google/ecosystem-cloud.png",
-    topicLink: "https://www.google.com",
+    topicLink: "/projects",
   },
 ];
 
@@ -134,9 +135,11 @@ const Projects = () => {
         </div>
 
         {/* Navigate to projects page */}
-        <Button className={styles.button}>
-          VIEW PROJECTS <FaExternalLinkAlt />
-        </Button>
+        <Link href="/projects">
+          <Button className={styles.button}>
+            VIEW PROJECTS <FaExternalLinkAlt />
+          </Button>
+        </Link>
       </Container>
     </>
   );
