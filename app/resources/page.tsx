@@ -13,7 +13,7 @@ const Resources = () => {
       />
 
       {/* PAGE CONTENT */}
-      <FAQ/>
+      <FAQ />
     </main>
   );
 };
