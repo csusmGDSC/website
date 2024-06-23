@@ -4,9 +4,9 @@
 }
 
 .benefitsHeading {
-  @apply text-2xl font-bold text-[#3F3F3F];
+  @apply text-xl font-semibold text-[#3F3F3F];
 }
 
 .benefitsDescription {
-  @apply text-lg text-[#3F3F3F];
+  @apply text-sm text-[#3F3F3F];
 }

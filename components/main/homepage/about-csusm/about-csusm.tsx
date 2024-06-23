@@ -12,7 +12,7 @@ const description2 =
 
 const AboutCSUSM = () => {
   return (
-    <Container heading="About CSUSM" className={styles.container}>
+    <Container className="custom-max-width">
       <div className={styles.containerInnerContent}>
         {/* CSUSM Image */}
         <div className={styles.imageContainer}>

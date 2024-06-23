@@ -3,7 +3,7 @@
 }
   
 .content {
-  @apply h-full md:max-w-[90%] xl:max-w-[60%] 2xl:max-w-[1200px] w-full grid grid-cols-1 sm:grid-cols-4;
+  @apply h-full grid grid-cols-1 sm:grid-cols-4;
 }
   
 .logoContainer {
@@ -25,7 +25,7 @@
 }
   
 .footerBottomContent {
-  @apply md:max-w-[90%] xl:max-w-[60%] w-full flex flex-row items-center justify-between;
+  @apply flex flex-row items-center justify-between;
 }
   
 .footerText {

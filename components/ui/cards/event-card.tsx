@@ -33,7 +33,7 @@ const EventCard: React.FC<EventProps> = ({
   return (
     <div
       className={cn(
-        "rounded-lg border border-[#CFCFCF] w-full overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-1",
+        "rounded-lg border w-full overflow-hidden shadow-md hover:shadow-lg transition-all",
         className
       )}
     >

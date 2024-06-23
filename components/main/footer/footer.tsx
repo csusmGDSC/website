@@ -3,12 +3,13 @@ import React from "react";
 import { CiInstagram } from "react-icons/ci";
 import { FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import styles from "./footer.module.css";
+import { cn } from "@/lib/utils";
 
 const Footer = () => {
   return (
     <footer>
       <div className={styles.footer}>
-        <div className={styles.content}>
+        <div className={cn(styles.content, "custom-max-width")}>
           <div className={styles.logoContainer}>
             <Image
               src="/images/gdsc/gdsc-csusm title light.png"
@@ -45,7 +46,7 @@ const Footer = () => {
       </div>
 
       <div className={styles.footerBottom}>
-        <div className={styles.footerBottomContent}>
+        <div className={cn(styles.footerBottomContent, "custom-max-width")}>
           <span className={styles.footerText}>© 2024 CSUSM</span>
           <div className={styles.socialIcons}>
             <a href="https://www.instagram.com/gdsc.csusm/" target="_blank">

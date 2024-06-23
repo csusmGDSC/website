@@ -40,7 +40,7 @@ const Navbar = () => {
 
   return (
     <nav className={styles.navbar}>
-      <div className={styles.navContainer}>
+      <div className={cn(styles.navContainer, "custom-max-width")}>
         {/* GDSC logo, Click on it should bring back to root page*/}
         <Link href="/" onClick={() => setCurrentLink("Home")}>
           <Image

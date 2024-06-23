@@ -37,28 +37,32 @@ const benefits = [
 const Benefits = () => {
   return (
     <div className="group mt-20">
-      {benefits.map((benefit, index) => (
-        <Container
-          key={index}
-          // For each even benefit, have a white background, otherwise a gray background
-          className="flex flex-col items-center py-5"
-          padding={false}
-        >
-          <div
-            // For each even benefit, have the image on the left, otherwise on the right
-            className={`flex flex-row ${
-              index % 2 !== 0 ? "flex-row-reverse" : ""
-            } md:max-w-[90%] xl:max-w-[60%] 2xl:max-w-[1200px] w-full items-center justify-center sm:justify-between gap-8`}
-          >
-            <RoundedImage src={benefit.imageSrc} />
-            <BenefitDescription
-              heading={benefit.heading}
-              description={benefit.description}
-              imageSrc={benefit.IconImageSrc}
-            />
-          </div>
-        </Container>
-      ))}
+      <Container
+        // For each even benefit, have a white background, otherwise a gray background
+        className="relative overflow-hidden flex flex-col text-center sm:text-left sm:flex-row custom-max-width gap-10 border rounded-lg px-6 py-10 shadow-md"
+        padding={false}
+      >
+        <div>
+          <h1 className="text-3xl font-bold text-neutral-700">
+            Join a community of passionate developers.
+          </h1>
+          <RoundedImage src="/images/screenshot-dark.png" />
+        </div>
+        <div className="space-y-8">
+          {benefits.map((benefit, index) => (
+            <div
+              key={index}
+              className={`flex flex-row w-full items-center justify-center sm:justify-between gap-8`}
+            >
+              <BenefitDescription
+                heading={benefit.heading}
+                description={benefit.description}
+                imageSrc={benefit.IconImageSrc}
+              />
+            </div>
+          ))}
+        </div>
+      </Container>
     </div>
   );
 };
@@ -69,7 +73,7 @@ const Benefits = () => {
  */
 const RoundedImage = ({ src }: { src: string }) => {
   return (
-    <div className="hidden sm:block overflow-hidden w-1/2 h-[300px] rounded-lg">
+    <div className="hidden sm:block overflow-hidden h-[300px] rounded-lg absolute -translate-x-28 translate-y-10">
       <Image
         src={src}
         alt="benefits"
@@ -98,8 +102,10 @@ const BenefitDescription = ({
 }) => {
   return (
     <div className={styles.benefitsDescriptionContainer}>
-      <Image src={imageSrc} alt="Benefit Icon" width="80" height="80" />
-      <h1 className={styles.benefitsHeading}>{heading}</h1>
+      <div className="flex flex-row items-center gap-2">
+        <Image src={imageSrc} alt="Benefit Icon" width="50" height="50" />
+        <h1 className={styles.benefitsHeading}>{heading}</h1>
+      </div>
       <p className={styles.benefitsDescription}>{description}</p>
     </div>
   );
