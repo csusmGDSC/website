@@ -74,7 +74,7 @@ const futureCompetitions = [
 const leetcodeTeam = {
   "Interview Team": [
     {
-      name: "Alexandra Collins",
+      name: "Thanh",
       role: "Computer Science Major",
       linkedinLink: "",
       gitHubLink: "",
@@ -82,24 +82,24 @@ const leetcodeTeam = {
       imageSrc: "/images/test/fake-people/1.jpg",
     },
     {
-      name: "Benjamin Harper",
-      role: "Project",
+      name: "Aaron",
+      role: "Computer Science Major",
       linkedinLink: "",
       gitHubLink: "",
       instagramLink: "",
       imageSrc: "/images/test/fake-people/2.jpg",
     },
     {
-      name: "Catherine Reed",
-      role: "Project",
+      name: "Jacob",
+      role: "Computer Science Major",
       linkedinLink: "",
       gitHubLink: "",
       instagramLink: "",
       imageSrc: "/images/test/fake-people/3.jpg",
     },
     {
-      name: "David Turner",
-      role: "Interview",
+      name: "Max",
+      role: "Computer Science Major",
       linkedinLink: "",
       gitHubLink: "",
       instagramLink: "",
