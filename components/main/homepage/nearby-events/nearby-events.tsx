@@ -9,6 +9,7 @@ import Container from "@/components/ui/helpers/container";
 import EventCard from "@/components/ui/cards/event-card";
 import React from "react";
 import styles from "./nearby-events.module.css";
+import { cn } from "@/lib/utils";
 
 // TO-DO: Move static data else-where
 const exampleEvents = [
@@ -76,7 +77,7 @@ const NearbyEvents = () => {
     <Container
       heading="Nearby Events"
       subheading="Check out upcoming workshops and sessions"
-      className={styles.container}
+      className={cn(styles.container, "custom-max-width")}
     >
       {/* Interactive horizontal scroll for the event cards */}
       <Carousel>
@@ -87,7 +88,7 @@ const NearbyEvents = () => {
                 title={eventItem.title}
                 description={eventItem.description}
                 date={eventItem.date}
-                imageSrc="/images/background-2.jpeg"
+                imageSrc="/images/gdsc/short logo light.png"
               />
             </CarouselItem>
           ))}

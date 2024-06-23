@@ -1,7 +1,3 @@
-.container {
-  @apply md:max-w-[90%] xl:max-w-[60%] 2xl:max-w-[1200px];
-}
-
 .containerInnerContent {
   @apply w-full flex flex-row items-center justify-center mt-10 gap-4 mb-10;
 }

@@ -76,7 +76,7 @@
 }
 
 .custom-max-width {
-  @apply md:max-w-[90%] xl:max-w-[60%] 2xl:max-w-[1200px] w-full;
+  @apply md:max-w-[90%] 2xl:max-w-[1000px] w-full;
 }
 
 .flex-center-col {

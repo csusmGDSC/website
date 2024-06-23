@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { IoMdAlert } from "react-icons/io";
 import styles from "./hero.module.css";
+import { cn } from "@/lib/utils";
 
 // TO-DO: Move static data else-where
 const description =
@@ -24,7 +25,7 @@ const Hero = () => {
       />
 
       {/* Hero Section Content */}
-      <div className={styles.heroContent}>
+      <div className={cn(styles.heroContent, "custom-max-width")}>
         <div className={styles.heroText}>
           <h1 className={styles.heroTitle}>
             Developer Student Club <br /> CSUSM
