@@ -42,6 +42,8 @@ const EventCard: React.FC<EventProps> = ({
         className={cn(
           "w-full p-4 flex flex-col justify-between min-h-[200px] custom-dark-background",
           imageSrc ? "border-t border-border" : "border-none"
+          "w-full p-4 flex flex-col justify-between min-h-[200px] custom-dark-background",
+          imageSrc ? "border-t border-border" : "border-none"
         )}
       >
         <EventInfo title={title} description={description} />
@@ -81,6 +83,8 @@ const EventInfo: React.FC<EventProps> = ({ title, description }) => {
     <div className="space-y-2 line-clamp-6">
       <h1 className="font-bold text-foreground/60">{title}</h1>
       <p className="text-xs text-foreground/60">{description}</p>
+      <h1 className="font-bold text-foreground/60">{title}</h1>
+      <p className="text-xs text-foreground/60">{description}</p>
     </div>
   );
 };
@@ -95,7 +99,7 @@ const EventDetails: React.FC<EventProps> = ({ eventPageURL, date }) => {
     <div className="flex flex-row items-center justify-between">
       <Button
         className={cn(
-          "px-3 rounded-lg truncate gap-2 text-center max-w-fit text-[10px] font-semibold text-foreground flex flex-row items-center bg-blue hover:bg-blue/80"
+          "px-3 rounded-lg truncate gap-2 text-center max-w-fit text-[10px] font-semibold text-white flex flex-row items-center bg-blue hover:bg-blue/80"
         )}
       >
         View Details <FaExternalLinkAlt size={10} />
