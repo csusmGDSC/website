@@ -41,7 +41,7 @@ const EventCard: React.FC<EventProps> = ({
       <div
         className={cn(
           "w-full p-4 flex flex-col justify-between min-h-[200px] custom-dark-background",
-          imageSrc ? "border-t border-border" : "border-none"
+          imageSrc ? "border-t border-border" : "border-none",
           "w-full p-4 flex flex-col justify-between min-h-[200px] custom-dark-background",
           imageSrc ? "border-t border-border" : "border-none"
         )}
