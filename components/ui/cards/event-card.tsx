@@ -2,7 +2,7 @@ import { cn, convertToReadableDate } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import { Button } from "../inputs/button";
+import { Button } from "../shadcn/button";
 
 interface EventProps {
   title?: string;
@@ -33,14 +33,14 @@ const EventCard: React.FC<EventProps> = ({
   return (
     <div
       className={cn(
-        "rounded-lg border w-full overflow-hidden shadow-md hover:shadow-lg transition-all",
+        "rounded-lg border w-full overflow-hidden [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] hover:shadow-lg transition-all",
         className
       )}
     >
       <EventImage imageSrc={imageSrc} />
       <div
         className={cn(
-          "w-full p-4 flex flex-col justify-between min-h-[200px]",
+          "w-full p-4 flex flex-col justify-between min-h-[200px] bg-white",
           imageSrc ? "border-t border-[#CFCFCF]" : "border-none"
         )}
       >

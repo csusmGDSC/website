@@ -1,9 +1,30 @@
-import CardGrid from "@/components/ui/card-grid";
+import CardGrid from "@/components/ui/cards/card-grid";
 import EventCard from "@/components/ui/cards/event-card";
 import TitleHeader from "@/components/ui/title-header";
 import React from "react";
-import styles from "./events.module.css";
 
+const PastEvents = () => {
+  return (
+    <section>
+      <TitleHeader heading="Past Events" />
+      <CardGrid placeholder="There are no past events yet.">
+        {exampleEvents.map((e, index) => (
+          <EventCard
+            title={e.title}
+            description={e.description}
+            date={e.date}
+            key={index}
+            className="sm:!w-[calc(50%-1rem)] md:!w-[calc(33.333%-1rem)]"
+          />
+        ))}
+      </CardGrid>
+    </section>
+  );
+};
+
+export default PastEvents;
+
+// TO-DO: Move static data somewhere else
 const exampleEvents = [
   {
     title: "Build the web: REACT",
@@ -52,24 +73,3 @@ const exampleEvents = [
     date: new Date(2025, 3, 30, 14, 30, 0),
   },
 ];
-
-const PastEvents = () => {
-  return (
-    <section>
-      <TitleHeader heading="Past Events" />
-      <CardGrid placeholder="There are no past events yet.">
-        {exampleEvents.map((e, index) => (
-          <EventCard
-            title={e.title}
-            description={e.description}
-            date={e.date}
-            key={index}
-            className={styles.eventCardWidths}
-          />
-        ))}
-      </CardGrid>
-    </section>
-  );
-};
-
-export default PastEvents;

@@ -8,8 +8,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../ui/table";
-import Container from "../ui/helpers/container";
+} from "../ui/shadcn/table";
+import Container from "../ui/container";
 import Avatar from "../ui/avatar";
 import {
   ColumnDef,
@@ -24,7 +24,7 @@ import {
   Column,
   Table as TanStackTable,
 } from "@tanstack/react-table";
-import { Button } from "../ui/inputs/button";
+import { Button } from "../ui/shadcn/button";
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -35,20 +35,20 @@ import {
   MdOutlineKeyboardDoubleArrowRight,
   MdOutlineKeyboardDoubleArrowLeft,
 } from "react-icons/md";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/shadcn/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "../ui/shadcn/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "../ui/shadcn/dropdown-menu";
 import { PiCaretUpDownBold } from "react-icons/pi";
 import { cn } from "@/lib/utils";
 
