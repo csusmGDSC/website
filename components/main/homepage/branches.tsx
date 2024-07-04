@@ -30,7 +30,7 @@ const Branches = () => {
     <Container
       heading="Branches"
       subheading="Choose your desired development path"
-      className="w-full flex gap-4 items-center mt-10 custom-max-width"
+      className="w-full flex flex-col md:flex-row gap-4 items-center mt-10 custom-max-width"
     >
       <BranchCard
         title="Project Team"
@@ -96,7 +96,7 @@ const BranchCard = ({
   linkText: string;
 }) => {
   return (
-    <div className="border rounded-md p-6 w-full custom-box-shadow h-full">
+    <div className="border rounded-md p-6 w-full custom-box-shadow">
       <div>
         <h2 className="text-2xl font-semibold text-neutral-700 mb-4">
           {title}
@@ -178,12 +178,12 @@ const interviewBranch = [
   },
   {
     icon: FaLaptop,
-    heading: "Partake in coding competitions",
+    heading: "Partake in coding comps",
     description: "",
   },
   {
     icon: SiFuturelearn,
-    heading: "Learn interview-level problems",
+    heading: "Learn interview problems",
     description: "",
   },
 ];
