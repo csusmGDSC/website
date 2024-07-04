@@ -27,6 +27,10 @@ const links = [
     name: "Resources",
     ref: "/resources",
   },
+  {
+    name: "Admin",
+    ref: "/admin",
+  },
   // TO-DO: Add user authentication to log in
   // {
   //   name: "Log in",
@@ -59,9 +63,7 @@ const Navbar = () => {
                 <Link
                   className={cn(
                     "text-neutral-600 h-full flex items-center border-b-4 text-sm hover:cursor-pointer hover:text-black transition",
-                    currentLink === link.name
-                      ? "border-blue"
-                      : "border-white"
+                    currentLink === link.name ? "border-blue" : "border-white"
                   )}
                   // When a link is clicked, change active link
                   // Note: Does not reset on new page, since the navbar is the globally used across all pages
