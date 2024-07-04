@@ -14,7 +14,10 @@ const Socials = () => {
       <div className="flex flex-wrap gap-4">
         {socials.map((social, index) => (
           <a key={index} href={social.topicLink} target="_blank">
-            <span className="border w-20 h-20 rounded-lg flex items-center justify-center hover:shadow-md transition-shadow">
+            <span
+              className="border w-20 h-20 rounded-lg flex items-center
+              custom-dark-background justify-center hover:bg-foreground/10 transition-shadow"
+            >
               <Image src={social.imageSrc} alt="topic" width={35} height={35} />
             </span>
           </a>

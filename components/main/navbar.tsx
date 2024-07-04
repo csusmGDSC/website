@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
+import { ModeToggle } from "../ui/mode-toggle";
 
 // TO-DO: Keep links in different place
 const links = [
@@ -42,7 +43,7 @@ const Navbar = () => {
   const [currentLink, setCurrentLink] = useState<string>("Home");
 
   return (
-    <nav className="w-full h-[4.5rem] border-b border-b-neutral-200 items-center flex flex-col fixed top-0 z-[999] bg-white">
+    <nav className="w-full h-[4.5rem] border-b border-b-border items-center flex flex-col fixed top-0 z-[999] bg-background">
       <div className="h-full flex flex-row justify-between items-center custom-max-width">
         {/* GDSC logo, Click on it should bring back to root page*/}
         <Link href="/" onClick={() => setCurrentLink("Home")}>
@@ -56,14 +57,16 @@ const Navbar = () => {
         </Link>
 
         {/* Navigation links */}
-        <div className="m-auto md:m-0 md:ml-auto h-full">
+        <div className="m-auto md:m-0 md:ml-auto h-full flex items-center gap-6">
           <ul className="flex flex-row space-x-6 h-full">
             {links.map((link, index) => (
               <li key={index}>
                 <Link
                   className={cn(
-                    "text-neutral-600 h-full flex items-center border-b-4 text-sm hover:cursor-pointer hover:text-black transition",
-                    currentLink === link.name ? "border-blue" : "border-white"
+                    "text-foreground/70 h-full flex items-center border-b-4 text-sm hover:cursor-pointer hover:text-foreground transition",
+                    currentLink === link.name
+                      ? "border-blue"
+                      : "border-background"
                   )}
                   // When a link is clicked, change active link
                   // Note: Does not reset on new page, since the navbar is the globally used across all pages
@@ -75,6 +78,7 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
+          <ModeToggle />
         </div>
       </div>
     </nav>

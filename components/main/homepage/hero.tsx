@@ -28,12 +28,12 @@ const Hero = () => {
         <div className="space-y-10 w-full md:w-1/2">
           <h1
             className="text-center md:text-left text-4xl md:text-3xl lg:text-4xl
-            font-semibold text-[#3F3F3F]"
+            font-semibold text-foreground/70"
           >
             Developer Student Club <br /> CSUSM
           </h1>
 
-          <p className="text-center md:text-left text-[#3F3F3F]">
+          <p className="text-center md:text-left text-foreground/70">
             {description}
           </p>
 
@@ -45,7 +45,7 @@ const Hero = () => {
             >
               <Button
                 className="m-auto w-full md:m-0 h-10 rounded-md font-bold
-                text-xs bg-blue hover:bg-blue/80 gap-2"
+                text-xs bg-blue hover:bg-blue/80 gap-2 text-white"
               >
                 <GrDocumentUser size={20} /> APPLY
               </Button>

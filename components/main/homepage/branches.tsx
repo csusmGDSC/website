@@ -70,7 +70,7 @@ const BranchDescription = ({
       <div className="flex flex-row items-center gap-4">
         <Icon size={40} />
         <FadeText
-          className="text-lg font-medium text-[#3F3F3F]"
+          className="text-lg font-medium text-foreground/70"
           direction="right"
           framerProps={{
             show: { transition: { delay: index * 0.5 } },
@@ -96,9 +96,9 @@ const BranchCard = ({
   linkText: string;
 }) => {
   return (
-    <div className="border rounded-md p-6 w-full custom-box-shadow">
+    <div className="border rounded-md p-6 w-full custom-box-shadow custom-dark-background">
       <div>
-        <h2 className="text-2xl font-semibold text-neutral-700 mb-4">
+        <h2 className="text-2xl font-semibold text-foreground/70 mb-4">
           {title}
         </h2>
         {descriptionItems.map((benefit: any, index: number) => (
@@ -113,7 +113,7 @@ const BranchCard = ({
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold text-neutral-700 mt-4 mb-2">
+        <h2 className="text-lg font-semibold text-foreground/70 mt-4 mb-2">
           Technologies You&apos;ll Learn
         </h2>
         <div className="w-full flex flex-row items-center overflow-x-auto gap-4">

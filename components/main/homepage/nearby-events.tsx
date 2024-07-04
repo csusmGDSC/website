@@ -25,13 +25,13 @@ const NearbyEvents = () => {
           {exampleEvents.map((eventItem, index) => (
             <CarouselItem
               key={index}
-              className="md:basis-1/2 lg:basis-1/3 2xl:basis-[25%] flex flex-col items-center"
+              className="sm:basis-1/2 md:basis-1/3 xl:basis-[25%] flex flex-col items-center"
             >
               <EventCard
                 title={eventItem.title}
                 description={eventItem.description}
                 date={eventItem.date}
-                imageSrc="/images/gdsc/short logo light.png"
+                imageSrc="/images/react-background.png"
               />
             </CarouselItem>
           ))}

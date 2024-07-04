@@ -23,19 +23,19 @@ const AccordionGroup: React.FC<AccordionGroupProps> = ({
   accordionTuples,
 }) => {
   return (
-    <div className="w-full px-2 md:px-0 ">
-      <h1 className="text-lg text-[#4d4d4d] font-semibold mb-2">{title}</h1>
+    <div className="w-full px-2 md:px-0">
+      <h1 className="text-lg text-foreground/80 font-semibold mb-2">{title}</h1>
       <Accordion
         type="single"
         collapsible
-        className="w-full border px-2 rounded-sm shadow-sm"
+        className="w-full border px-2 rounded-sm shadow-sm custom-dark-background"
       >
         {accordionTuples.map((tuple, index) => (
           <AccordionItem key={index} value={`item-${index}}`}>
-            <AccordionTrigger className="text-[#5a5a5a] text-sm">
+            <AccordionTrigger className="text-foreground/70 text-sm">
               {tuple[0]}
             </AccordionTrigger>
-            <AccordionContent className="text-[#5a5a5a] text-xs">
+            <AccordionContent className="text-foreground/70 text-xs">
               {tuple[1]}
             </AccordionContent>
           </AccordionItem>

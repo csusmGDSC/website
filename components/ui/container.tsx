@@ -33,12 +33,12 @@ const Container: React.FC<ContainerProps> = ({
       )}
     >
       {heading && (
-        <h1 className="text-4xl font-bold text-[#3F3F3F] text-center">
+        <h1 className="text-4xl font-bold text-foreground/70 text-center">
           {heading}
         </h1>
       )}
       {subheading && (
-        <h2 className="text-2xl mt-2 text-[#3F3F3F] text-center">
+        <h2 className="text-2xl mt-2 text-foreground/70 text-center">
           {subheading}
         </h2>
       )}

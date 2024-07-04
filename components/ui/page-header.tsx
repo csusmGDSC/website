@@ -30,7 +30,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
       />
 
       <div className="text-center space-y-2">
-        <h1 className="text-2xl sm:text-4xl font-semibold text-[#3F3F3F]">
+        <h1 className="text-2xl sm:text-4xl font-semibold text-foreground/70">
           {title}
         </h1>
         <h2 className="text-xs sm:text-sm">{subTitle}</h2>
