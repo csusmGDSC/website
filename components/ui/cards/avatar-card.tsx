@@ -29,11 +29,11 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
   imageSrc,
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center p-4">
+    <div className="flex flex-col items-center justify-center p-4 custom-dark-background dark:rounded-lg">
       <Avatar imageSrc={imageSrc} />
-      <h2 className="mt-2 text-lg font-semibold text-[#3F3F3F]">{name}</h2>
-      <p className="text-sm font-medium text-[#3F3F3F]/80">{role}</p>
-      <div className="mt-2 flex flex-rol gap-2 text-xl text-[#3F3F3F]/80">
+      <h2 className="mt-2 text-lg font-semibold text-foreground/70">{name}</h2>
+      <p className="text-sm font-medium text-foreground/50">{role}</p>
+      <div className="mt-2 flex flex-rol gap-2 text-xl text-foreground/50">
         <BsLinkedin className="hover:text-blue hover:cursor-pointer transition" />
         <BsGithub className="hover:text-blue hover:cursor-pointer transition" />
         <BsInstagram className="hover:text-blue hover:cursor-pointer transition" />

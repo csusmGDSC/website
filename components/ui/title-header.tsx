@@ -11,7 +11,7 @@ interface TitleHeaderProps {
  */
 const TitleHeader: React.FC<TitleHeaderProps> = ({ heading }) => {
   return (
-    <h1 className="text-2xl font-bold text-[#3F3F3F] w-full text-center sm:text-left px-2 md:px-0 mb-8">
+    <h1 className="text-2xl font-bold text-foreground/80 w-full text-center sm:text-left px-2 md:px-0 mb-8">
       {heading}
     </h1>
   );
