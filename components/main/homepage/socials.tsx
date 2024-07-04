@@ -1,8 +1,30 @@
-import { VerticalTopicCard } from "@/components/ui/cards/topic-card";
-import Container from "@/components/ui/helpers/container";
+import Container from "@/components/ui/container";
+import Image from "next/image";
 import React from "react";
-import styles from "./socials.module.css";
-import { cn } from "@/lib/utils";
+
+/**
+ * Component that shows the socials of GDSC-CSUSM
+ */
+const Socials = () => {
+  return (
+    <Container
+      heading="Follow GDSC-CSUSM"
+      className="flex flex-col items-center justify-center mt-10 custom-max-width"
+    >
+      <div className="flex flex-wrap gap-4">
+        {socials.map((social, index) => (
+          <a key={index} href={social.topicLink} target="_blank">
+            <span className="border w-20 h-20 rounded-lg flex items-center justify-center hover:shadow-md transition-shadow">
+              <Image src={social.imageSrc} alt="topic" width={35} height={35} />
+            </span>
+          </a>
+        ))}
+      </div>
+    </Container>
+  );
+};
+
+export default Socials;
 
 // TO-DO: Move static data else-where
 const socials = [
@@ -41,38 +63,4 @@ const socials = [
     imageSrc: "/images/csusm.jpg",
     topicLink: "https://www.csusm.edu/index.html",
   },
-  {
-    topic: "Another Social",
-    description:
-      "There should be another social link here so that it don't look awkward.",
-    imageSrc: "/images/socials/X.svg",
-    topicLink: "https://x.com/dsccsusm?lang=en",
-  },
 ];
-
-/**
- * Component that shows the socials of GDSC-CSUSM
- */
-const Socials = () => {
-  return (
-    <Container
-      heading="Follow GDSC-CSUSM"
-      className={cn(styles.container, "custom-max-width")}
-    >
-      <div className={styles.gridLayout}>
-        {socials.map((social, index) => (
-          <VerticalTopicCard
-            key={index}
-            topic={social.topic}
-            description={social.description}
-            imageSrc={social.imageSrc}
-            topicLink={social.topicLink}
-            className={styles.innerCardLayout}
-          />
-        ))}
-      </div>
-    </Container>
-  );
-};
-
-export default Socials;

@@ -1,10 +1,12 @@
-import Benefits from "@/components/main/homepage/benefits/benefits";
-import Hero from "@/components/main/homepage/hero/hero";
-import Team from "@/components/main/homepage/team/team";
-import Socials from "@/components/main/homepage/socials/socials";
-import Branches from "@/components/main/homepage/branches/branches";
-import NearbyEvents from "@/components/main/homepage/nearby-events/nearby-events";
-import AboutCSUSM from "@/components/main/homepage/about-csusm/about-csusm";
+import Hero from "@/components/main/homepage/hero";
+import Team from "@/components/main/homepage/team";
+import Socials from "@/components/main/homepage/socials";
+import Branches from "@/components/main/homepage/branches";
+import NearbyEvents from "@/components/main/homepage/nearby-events";
+import AboutCSUSM from "@/components/main/homepage/about-csusm";
+import Leaderboard from "@/components/main/leaderboard";
+import Features from "@/components/main/homepage/features";
+import Gallery from "@/components/main/homepage/gallery";
 
 /**
  * The home page of the website, for more information on NextJS page routing, visit the documentation
@@ -14,9 +16,11 @@ export default function Home() {
     <main className="w-full mt-[4.5rem]">
       <Hero />
       <NearbyEvents />
-      <Benefits />
+      {/* <Gallery /> */}
+      <Features />
       <Branches />
-      <AboutCSUSM />
+      {/* <Leaderboard /> */}
+      {/* <AboutCSUSM /> */}
       <Team />
       <Socials />
     </main>

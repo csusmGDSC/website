@@ -4,12 +4,54 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/helpers/carousel";
-import Container from "@/components/ui/helpers/container";
+} from "@/components/ui/shadcn/carousel";
+import Container from "@/components/ui/container";
 import EventCard from "@/components/ui/cards/event-card";
 import React from "react";
-import styles from "./nearby-events.module.css";
-import { cn } from "@/lib/utils";
+
+/**
+ * Component that shows upcoming events for the user
+ */
+const NearbyEvents = () => {
+  return (
+    <Container
+      heading="Nearby Events"
+      subheading="Check out upcoming workshops and sessions"
+      className="items-center justify-center px-16 md:px-0 mt-10 custom-max-width relative"
+    >
+      {/* Interactive horizontal scroll for the event cards */}
+      <Carousel className="bg-background">
+        <CarouselContent className="py-1">
+          {exampleEvents.map((eventItem, index) => (
+            <CarouselItem
+              key={index}
+              className="md:basis-1/2 lg:basis-1/3 2xl:basis-[25%] flex flex-col items-center"
+            >
+              <EventCard
+                title={eventItem.title}
+                description={eventItem.description}
+                date={eventItem.date}
+                imageSrc="/images/gdsc/short logo light.png"
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+
+        {/* Navigation buttons */}
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+
+      {/* Background Circles */}
+      <div className="absolute top-24 -right-20 -z-20 rounded-full w-[6rem] h-[6rem] bg-red" />
+      <div className="absolute top-32 -right-20 -z-20 rounded-full w-[12rem] h-[12rem] bg-yellow" />
+      <div className="absolute top-24 -left-20 -z-20 rounded-full w-[14rem] h-[14rem] bg-green" />
+      <div className="absolute top-24 -left-20 -z-20 rounded-full w-[6rem] h-[6rem] bg-blue" />
+    </Container>
+  );
+};
+
+export default NearbyEvents;
 
 // TO-DO: Move static data else-where
 const exampleEvents = [
@@ -68,38 +110,3 @@ const exampleEvents = [
     date: new Date(2025, 3, 30, 14, 30, 0),
   },
 ];
-
-/**
- * Component that shows upcoming events for the user
- */
-const NearbyEvents = () => {
-  return (
-    <Container
-      heading="Nearby Events"
-      subheading="Check out upcoming workshops and sessions"
-      className={cn(styles.container, "custom-max-width")}
-    >
-      {/* Interactive horizontal scroll for the event cards */}
-      <Carousel>
-        <CarouselContent className="py-1">
-          {exampleEvents.map((eventItem, index) => (
-            <CarouselItem key={index} className={styles.carouselItem}>
-              <EventCard
-                title={eventItem.title}
-                description={eventItem.description}
-                date={eventItem.date}
-                imageSrc="/images/gdsc/short logo light.png"
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-
-        {/* Navigation buttons */}
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-    </Container>
-  );
-};
-
-export default NearbyEvents;

@@ -1,8 +1,7 @@
-import CardGrid from "@/components/ui/card-grid";
+import CardGrid from "@/components/ui/cards/card-grid";
 import EventCard from "@/components/ui/cards/event-card";
 import TitleHeader from "@/components/ui/title-header";
 import React from "react";
-import styles from "./projects.module.css";
 
 const exampleProjects = [
   {
@@ -37,7 +36,7 @@ const ProjectList = () => {
             title={e.title}
             description={e.description}
             key={index}
-            className={styles.eventCardWidths}
+            className="sm:!w-[calc(50%-1rem)] md:!w-[calc(33.333%-1rem)]"
           />
         ))}
       </CardGrid>
