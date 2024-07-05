@@ -1,17 +1,15 @@
 import AdminInterface from "@/components/main/admin-interface";
 import React from "react";
 
-const Events = () => {
+const Dashboard = () => {
   return (
     <main className="w-full">
       {/* PAGE CONTENT */}
       <div className="w-full flex-center-col">
-        <div className="custom-max-width">
-          <AdminInterface />
-        </div>
+        <AdminInterface />
       </div>
     </main>
   );
 };
 
-export default Events;
+export default Dashboard;
