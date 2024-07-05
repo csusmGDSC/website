@@ -5,6 +5,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
 import { ModeToggle } from "../ui/mode-toggle";
+import { usePathname } from "next/navigation";
 
 // TO-DO: Keep links in different place
 const links = [
@@ -40,13 +41,13 @@ const links = [
 ] as const;
 
 const Navbar = () => {
-  const [currentLink, setCurrentLink] = useState<string>("Home");
+  const pathname = usePathname();
 
   return (
     <nav className="w-full h-[4.5rem] border-b border-b-border items-center flex flex-col fixed top-0 z-[999] bg-background">
       <div className="h-full flex flex-row justify-between items-center custom-max-width">
         {/* GDSC logo, Click on it should bring back to root page*/}
-        <Link href="/" onClick={() => setCurrentLink("Home")}>
+        <Link href="/">
           <Image
             src="/images/gdsc/gdsc-csusm title light.png"
             alt="navbar-logo"
@@ -64,13 +65,8 @@ const Navbar = () => {
                 <Link
                   className={cn(
                     "text-foreground/70 h-full flex items-center border-b-4 text-sm hover:cursor-pointer hover:text-foreground transition",
-                    currentLink === link.name
-                      ? "border-blue"
-                      : "border-background"
+                    pathname === link.ref ? "border-blue" : "border-background"
                   )}
-                  // When a link is clicked, change active link
-                  // Note: Does not reset on new page, since the navbar is the globally used across all pages
-                  onClick={() => setCurrentLink(link.name)}
                   href={link.ref}
                 >
                   {link.name}
