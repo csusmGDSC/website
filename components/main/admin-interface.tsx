@@ -146,7 +146,7 @@ const AdminInterface = () => {
   });
 
   return (
-    <section className="flex flex-col items-center">
+    <section className="flex flex-col items-center w-full">
       <Container className="custom-max-width">
         {/* TABLE SEARCH BOX */}
         <div className="flex flex-col sm:flex-row items-center py-4 justify-between">
@@ -161,38 +161,18 @@ const AdminInterface = () => {
               <MdDelete size={20} />
             </Button>
           </span>
-          <span className="flex items-center gap-2">
-            <span>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline">
-                    <span className="flex items-center justify-between text-primary/70">
-                      Department
-                      <ArrowDownIcon className="ml-2 h-4 w-4" />
-                    </span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start">
-                  <DropdownMenuItem>Events</DropdownMenuItem>
-                  <DropdownMenuItem>Projects</DropdownMenuItem>
-                  <DropdownMenuItem>Resources</DropdownMenuItem>
-                  <DropdownMenuItem>Members</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </span>
-            <span className="relative w-[20rem]">
-              <Input
-                placeholder="Filter name..."
-                value={
-                  (table.getColumn("name")?.getFilterValue() as string) ?? ""
-                }
-                onChange={(event) =>
-                  table.getColumn("name")?.setFilterValue(event.target.value)
-                }
-                className="max-w-xs"
-              />
-              <FaSearch className="absolute right-4 top-1 translate-y-1/2 text-blue" />
-            </span>
+          <span className="relative w-[20rem]">
+            <Input
+              placeholder="Filter name..."
+              value={
+                (table.getColumn("name")?.getFilterValue() as string) ?? ""
+              }
+              onChange={(event) =>
+                table.getColumn("name")?.setFilterValue(event.target.value)
+              }
+              className="max-w-xs"
+            />
+            <FaSearch className="absolute right-4 top-1 translate-y-1/2 text-blue" />
           </span>
         </div>
 

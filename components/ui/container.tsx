@@ -28,7 +28,7 @@ const Container: React.FC<ContainerProps> = ({
   return (
     <section
       className={cn(
-        "w-full flex flex-col items-center justify-center px-2 sm:px-0",
+        "w-full flex flex-col items-center justify-center px-2 md:px-0",
         padding ? "pt-20" : ""
       )}
     >
