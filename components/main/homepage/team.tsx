@@ -8,7 +8,7 @@ import React from "react";
 const Team = () => {
   return (
     <Container heading="GDSC-CSUSM Team 2024" className="custom-max-width">
-      <Container className="flex flex-row flex-wrap items-center justify-center dark:gap-4">
+      <Container className="flex flex-row flex-wrap items-center justify-center gap-4">
         {team.map((member, index) => (
           <AvatarCard
             key={index}

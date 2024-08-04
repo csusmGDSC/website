@@ -28,10 +28,10 @@ const AccordionGroup: React.FC<AccordionGroupProps> = ({
       <Accordion
         type="single"
         collapsible
-        className="w-full border px-2 rounded-sm shadow-sm custom-dark-background"
+        className="w-full px-4 rounded-md custom-box-shadow dark:bg-primary-foreground"
       >
         {accordionTuples.map((tuple, index) => (
-          <AccordionItem key={index} value={`item-${index}}`}>
+          <AccordionItem key={index} value={`item-${index}}`} className="py-1">
             <AccordionTrigger className="text-foreground/70 text-sm">
               {tuple[0]}
             </AccordionTrigger>

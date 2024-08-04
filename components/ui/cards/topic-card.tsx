@@ -29,7 +29,7 @@ export const HorizontalTopicCard: React.FC<TopicCardProps> = ({
   className,
 }) => {
   return (
-    <div className="w-full h-[230px] border flex flex-row justify-center custom-dark-background sm:justify-between items-center px-8 rounded-lg space-x-4 [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] hover:shadow-lg transition-all">
+    <div className="w-full h-[230px] border flex flex-row justify-center dark:bg-primary-foreground sm:justify-between items-center px-8 rounded-lg space-x-4 transition-all">
       {/* TOPIC CARD CONTENT */}
       <div className="flex flex-col gap-2 items-center sm:items-start">
         {/* DETAILS */}
@@ -78,7 +78,7 @@ export const VerticalTopicCard: React.FC<TopicCardProps> = ({
   return (
     <div
       className={cn(
-        "w-full border flex flex-col items-center p-4 pr-8  rounded-lg space-x-4 custom-dark-background [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] hover:shadow-lg transition-all",
+        "w-full border flex flex-col items-center p-4 pr-8 rounded-xl space-x-4 dark:bg-primary-foreground transition-all",
         className
       )}
     >

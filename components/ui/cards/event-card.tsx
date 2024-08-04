@@ -1,13 +1,16 @@
+"use client";
+
 import { cn, convertToReadableDate } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { Button } from "../shadcn/button";
+import { BentoCard } from "../magicui/bento-grid";
 
 interface EventProps {
   title?: string;
   description?: string;
-  eventPageURL?: URL;
+  eventPageURL?: string;
   date?: Date;
   imageSrc?: string;
   className?: string;
@@ -33,15 +36,14 @@ const EventCard: React.FC<EventProps> = ({
   return (
     <div
       className={cn(
-        "rounded-lg border w-full overflow-hidden [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] hover:shadow-lg transition-all",
+        "rounded-xl custom-box-shadow w-full overflow-hidden",
         className
       )}
     >
-      <EventImage imageSrc={imageSrc} />
+      <EventImage imageSrc={imageSrc || "/images/gdsc/gdsc-1.png"} />
       <div
         className={cn(
-          "w-full p-4 flex flex-col justify-between min-h-[200px] custom-dark-background",
-          imageSrc ? "border-t border-border" : "border-none"
+          "w-full p-4 flex flex-col justify-between min-h-[200px] dark:bg-primary-foreground"
         )}
       >
         <EventInfo title={title} description={description} />
@@ -59,7 +61,7 @@ export default EventCard;
 const EventImage: React.FC<EventProps> = ({ imageSrc }) => {
   if (!imageSrc) return null;
   return (
-    <div className="w-full overflow-hidden h-[180px]">
+    <div className="w-full overflow-hidden h-[170px]">
       <Image
         src={imageSrc}
         alt={"event-image"}
@@ -79,8 +81,10 @@ const EventImage: React.FC<EventProps> = ({ imageSrc }) => {
 const EventInfo: React.FC<EventProps> = ({ title, description }) => {
   return (
     <div className="space-y-2 line-clamp-6">
-      <h1 className="font-bold text-foreground/60">{title}</h1>
-      <p className="text-xs text-foreground/60">{description}</p>
+      <h1 className="text-xl font-semibold text-neutral-700 dark:text-neutral-300 line-clamp-1">
+        {title}
+      </h1>
+      <p className=" text-neutral-400 line-clamp-3">{description}</p>
     </div>
   );
 };

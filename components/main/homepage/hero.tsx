@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/shadcn/button";
 import Image from "next/image";
 import React from "react";
 import { IoMdAlert } from "react-icons/io";
-import IconCloud from "@/components/ui/magicui/icon-cloud";
 import { GrDocumentUser } from "react-icons/gr";
 
 /**
@@ -12,20 +11,11 @@ const Hero = () => {
   return (
     <section
       className="relative w-full h-[30rem] items-center flex flex-col
-      justify-center overflow-hidden"
+      justify-center overflow-hidden bg-primary-foreground border-b border-border"
     >
-      {/* The background of the hero section*/}
-      <Image
-        src="/images/header-background.png"
-        alt="header-background"
-        width="1920"
-        height="1080"
-        className="absolute -z-10 object-cover w-full h-full"
-      />
-
       {/* Hero Section Content */}
-      <div className="px-2 md:px-0 flex flex-row items-center custom-max-width">
-        <div className="space-y-10 w-full md:w-1/2">
+      <div className="px-2 md:px-0 flex flex-row items-center custom-max-width gap-8">
+        <div className="space-y-10 w-full md:w-2/3">
           <h1
             className="text-center md:text-left text-4xl md:text-3xl lg:text-4xl
             font-semibold text-foreground/70"
@@ -61,10 +51,16 @@ const Hero = () => {
         </div>
 
         <div
-          className="relative hidden md:flex h-full w-1/2 max-w-[32rem]
-          items-center justify-center overflow-hidden pb-20 pl-20 pt-8"
+          className="hidden md:block h-full w-1/3 max-w-[32rem]
+          overflow-hidden rounded-lg"
         >
-          <IconCloud iconSlugs={slugs} />
+          <Image
+            src="/images/hero-image.png"
+            alt="header-background"
+            width="1920"
+            height="1080"
+            className="-z-10 object-cover w-full h-full"
+          />
         </div>
       </div>
     </section>
@@ -72,35 +68,6 @@ const Hero = () => {
 };
 
 export default Hero;
-
-const slugs = [
-  "googlechrome",
-  "google",
-  "typescript",
-  "javascript",
-  "react",
-  "android",
-  "apple",
-  "html5",
-  "css3",
-  "tailwind",
-  "prisma",
-  "github",
-  "git",
-  "docker",
-  "cypress",
-  "figma",
-  "jest",
-  "visualstudiocode",
-  "androidstudio",
-  "nextdotjs",
-  "nodedotjs",
-  "amazonaws",
-  "vercel",
-  "python",
-  "leetcode",
-  "hackerrank",
-];
 
 // TO-DO: Move static data else-where
 const description =

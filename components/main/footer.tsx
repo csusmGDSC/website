@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="w-full h-12 custom-dark-background flex flex-col items-center justify-center">
+      <div className="w-full h-12 flex flex-col items-center justify-center">
         <div className="flex flex-row items-center justify-between custom-max-width">
           <span className="text-neutral-400 font-semibold text-xs px-2 md:px-0">
             © 2024 CSUSM

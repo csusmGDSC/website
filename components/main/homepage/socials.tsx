@@ -1,69 +1,51 @@
 import Container from "@/components/ui/container";
-import Image from "next/image";
+import { Button } from "@/components/ui/shadcn/button";
 import React from "react";
+import { BiQuestionMark } from "react-icons/bi";
+import { GrDocumentUser } from "react-icons/gr";
 
 /**
  * Component that shows the socials of GDSC-CSUSM
  */
 const Socials = () => {
   return (
-    <Container
-      heading="Follow GDSC-CSUSM"
-      className="flex flex-col items-center justify-center mt-10 custom-max-width"
-    >
-      <div className="flex flex-wrap gap-4">
-        {socials.map((social, index) => (
-          <a key={index} href={social.topicLink} target="_blank">
-            <span
-              className="border w-20 h-20 rounded-lg flex items-center
-              custom-dark-background justify-center hover:bg-foreground/10 transition-shadow"
+    <section className="w-full custom-gradient-background -mb-20 pb-20 ">
+      <Container className="flex flex-col items-center justify-center mt-32 custom-max-width">
+        <div className="flex flex-row justify-between w-full">
+          <h1 className="text-5xl font-semibold text-primary/90">
+            Propel your dream.
+          </h1>
+
+          <span className="flex flex-row gap-1 items-center">
+            <a
+              href="https://gdsc.community.dev/"
+              target="_blank"
+              className="w-1/2"
             >
-              <Image src={social.imageSrc} alt="topic" width={35} height={35} />
-            </span>
-          </a>
-        ))}
-      </div>
-    </Container>
+              <Button
+                className="h-10 rounded-md font-bold
+                text-xs bg-blue hover:bg-blue/80 gap-2 text-white"
+              >
+                <GrDocumentUser size={20} /> APPLY
+              </Button>
+            </a>
+            <a
+              href="https://gdsc.community.dev/"
+              target="_blank"
+              className="w-1/2"
+            >
+              <Button
+                className="h-10 rounded-md font-bold
+                text-xs bg-primary-foreground hover:bg-primary-foreground/80 gap-2 text-primary/70"
+              >
+                <BiQuestionMark size={20} /> More info
+              </Button>
+            </a>
+          </span>
+        </div>
+      </Container>
+    </section>
   );
 };
 
 export default Socials;
-
-// TO-DO: Move static data else-where
-const socials = [
-  {
-    topic: "YouTube",
-    description:
-      "Subscribe to join a community of creative developers and learn the latest in Google technology",
-    imageSrc: "/images/socials/youtube.webp",
-    topicLink: "https://www.instagram.com/gdsc.csusm/",
-  },
-  {
-    topic: "Instagram",
-    description:
-      "Follow and discover developer resources, community events, and inspirational stories",
-    imageSrc: "/images/socials/instagram.png",
-    topicLink: "https://www.instagram.com/gdsc.csusm/",
-  },
-  {
-    topic: "LinkedIn",
-    description:
-      "Join a community of creative developers and learn how to use the latest in technology",
-    imageSrc: "/images/socials/linkedin.png",
-    topicLink: "https://www.instagram.com/gdsc.csusm/",
-  },
-  {
-    topic: "X",
-    description:
-      "Join the conversation to discover the latest resources, events, and announcements",
-    imageSrc: "/images/socials/X.svg",
-    topicLink: "https://x.com/dsccsusm?lang=en",
-  },
-  {
-    topic: "CSUSM",
-    description:
-      "University in San Marcos that's part of the Cal State System.",
-    imageSrc: "/images/csusm.jpg",
-    topicLink: "https://www.csusm.edu/index.html",
-  },
-];
