@@ -6,14 +6,6 @@ import { Share2Icon } from "lucide-react";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/shadcn/calendar";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/shadcn/command";
 import { AnimatedBeamMultipleOutputDemo } from "@/components/ui/magicui/output-demo";
 
 const Features = () => {
@@ -94,39 +86,12 @@ const features = [
     ),
   },
   {
-    Icon: InputIcon,
-    name: "Events",
-    description:
-      "We host and archive technical workshops, competitions, and mock interviews",
-    href: "/",
-    cta: "Learn more",
-    className: "col-span-3 lg:col-span-2",
-    background: (
-      <Command className="absolute right-10 top-10 w-[70%] origin-top translate-x-0 border transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] group-hover:-translate-x-10">
-        <CommandInput placeholder="Find an event near you..." />
-        <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions">
-            <CommandItem>React Intro</CommandItem>
-            <CommandItem>Git & GitHub Intro</CommandItem>
-            <CommandItem>HTML, CSS, and JavaScript Intro</CommandItem>
-            <CommandItem>Swift Demo</CommandItem>
-            <CommandItem>How to deploy software</CommandItem>
-            <CommandItem>
-              Introduction to Google Cloud Platform (GCP)
-            </CommandItem>
-          </CommandGroup>
-        </CommandList>
-      </Command>
-    ),
-  },
-  {
     Icon: Share2Icon,
     name: "Software",
     description: "We help build production-ready software",
     href: "/",
     cta: "Learn more",
-    className: "col-span-3 lg:col-span-2",
+    className: "col-span-3 lg:col-span-1",
     background: (
       <AnimatedBeamMultipleOutputDemo className="absolute right-2 top-4 h-[300px] w-[600px] border-none transition-all duration-300 ease-out [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] group-hover:scale-105" />
     ),

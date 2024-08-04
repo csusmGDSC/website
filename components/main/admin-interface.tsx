@@ -55,6 +55,7 @@ import { PiCaretUpDownBold } from "react-icons/pi";
 import { cn } from "@/lib/utils";
 import { IoIosAdd, IoMdAdd } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
+import TitleHeader from "../ui/title-header";
 
 const people = [
   { name: "Alice Johnson", contests_attended: 5, total_points: 150 },
@@ -147,8 +148,10 @@ const AdminInterface = () => {
 
   return (
     <section className="flex flex-col items-center w-full">
-      <Container className="custom-max-width">
-        {/* TABLE SEARCH BOX */}
+      <Container className="custom-max-width mt-8">
+        <TitleHeader heading="Events" />
+
+        {/* TABLE ACTIONS ROW */}
         <div className="flex flex-col sm:flex-row items-center py-4 justify-between">
           <span className="flex items-center gap-4 text-blue">
             <Button variant="outline" className="hover:text-blue/80">

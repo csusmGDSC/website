@@ -1,70 +1,39 @@
 "use client";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/shadcn/carousel";
 import Container from "@/components/ui/container";
 import React from "react";
-import Autoplay from "embla-carousel-autoplay";
-import Fade from "embla-carousel-fade";
-import Image from "next/image";
+import BlurFade from "@/components/ui/magicui/blur-fade";
+import { cn } from "@/lib/utils";
 
-const images = [
-  "/images/test/workshop-test-1.jpg",
-  "/images/test/workshop-test-2.jpg",
-  "/images/test/workshop-test-3.jpg",
-];
+const images = Array.from({ length: 9 }, (_, i) => {
+  const isLandscape = i % 2 === 0;
+  const width = isLandscape ? 800 : 600;
+  const height = isLandscape ? 600 : 800;
+  return `https://picsum.photos/seed/${i + 1}/${width}/${height}`;
+});
 
 const Gallery = () => {
   return (
-    <Container className="custom-max-width px-16 md:px-0">
-      <Carousel
-        opts={{ loop: true, containScroll: false }}
-        plugins={[
-          //@ts-ignore
-          Autoplay({
-            delay: 4000,
-          }),
-          //@ts-ignore
-          Fade(),
-        ]}
-        className="custom-box-shadow"
-      >
-        <CarouselContent>
-          {images.map((image, index) => (
-            <CarouselItem key={index}>
-              <div className="relative rounded-md overflow-hidden w-full h-[30rem]">
-                <Image
-                  src={image}
-                  alt="CSUSM Communities"
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  className="object-cover w-full h-full"
-                />
-
-                <div className="absolute bottom-0 left-0 w-full bg-neutral-200/50 backdrop-blur-sm">
-                  <div className="p-4 w-full">
-                    <h1 className="text-3xl font-bold text-neutral-800">
-                      Why GDSC-CSUSM is the right choice
-                    </h1>
-                    <h2 className="text-xl text-primary">
-                      Here, we channel our efforts to bring forth innovation
-                      like no other.
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </CarouselItem>
+    <Container
+      className="custom-max-width px-16 md:px-0 mt-10"
+      heading="Join a Community"
+      subheading="Be apart of something special"
+    >
+      <section id="photos">
+        <div className="columns-2 gap-4 sm:columns-3">
+          {images.map((imageUrl, idx) => (
+            <BlurFade key={imageUrl} delay={0.25 + idx * 0.05} inView>
+              <img
+                className={cn(
+                  "mb-4 size-full rounded-lg object-contain custom-box-shadow opacity-85"
+                )}
+                src={imageUrl}
+                alt={`Random stock image ${idx + 1}`}
+              />
+            </BlurFade>
           ))}
-        </CarouselContent>
-        <CarouselNext />
-        <CarouselPrevious />
-      </Carousel>
+        </div>
+      </section>
     </Container>
   );
 };

@@ -29,8 +29,8 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
   imageSrc,
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center p-4 custom-dark-background dark:rounded-lg">
-      <Avatar imageSrc={imageSrc} />
+    <div className="flex flex-col items-center justify-center p-6 dark:bg-primary-foreground rounded-xl custom-box-shadow">
+      <Avatar imageSrc={imageSrc} size={70} />
       <h2 className="mt-2 text-lg font-semibold text-foreground/70">{name}</h2>
       <p className="text-sm font-medium text-foreground/50">{role}</p>
       <div className="mt-2 flex flex-rol gap-2 text-xl text-foreground/50">

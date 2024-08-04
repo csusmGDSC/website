@@ -29,11 +29,12 @@ const Branches = () => {
   return (
     <Container
       heading="Branches"
-      subheading="Choose your desired development path"
+      subheading="Choose your desired team at GDSC"
       className="w-full flex flex-col md:flex-row gap-4 items-center mt-10 custom-max-width"
     >
       <BranchCard
         title="Project Team"
+        description="Collaborate on a variety of software applications and business solutions"
         descriptionItems={projectBranch}
         technologies={projectTechnologies}
         linkText="VIEW PROJECTS"
@@ -41,6 +42,7 @@ const Branches = () => {
       />
       <BranchCard
         title="Interview Team"
+        description="Improve your technical and soft skills to propel your chances of winning interviews"
         descriptionItems={interviewBranch}
         technologies={interviewTechnologies}
         linkText="VIEW INTERVIEW"
@@ -68,9 +70,9 @@ const BranchDescription = ({
   return (
     <div className="space-y-2 px-2 sm:block text-left">
       <div className="flex flex-row items-center gap-4">
-        <Icon size={40} />
+        <Icon size={40} className="text-primary" />
         <FadeText
-          className="text-lg font-medium text-foreground/70"
+          className="text-neutral-400 text-foreground/70"
           direction="right"
           framerProps={{
             show: { transition: { delay: index * 0.5 } },
@@ -85,6 +87,7 @@ const BranchDescription = ({
 const BranchCard = ({
   title,
   descriptionItems,
+  description,
   technologies,
   linkHref,
   linkText,
@@ -92,15 +95,18 @@ const BranchCard = ({
   title: string;
   descriptionItems: any;
   technologies: any;
+  description: string;
   linkHref: string;
   linkText: string;
 }) => {
   return (
-    <div className="border rounded-md p-6 w-full custom-box-shadow custom-dark-background">
+    <div className="rounded-xl p-6 w-full custom-box-shadow dark:bg-primary-foreground">
       <div>
-        <h2 className="text-2xl font-semibold text-foreground/70 mb-4">
+        <h2 className="text-xl text-neutral-700 dark:text-neutral-300 font-semibold mb-2">
           {title}
         </h2>
+        <h2 className="text-neutral-400">{description}</h2>
+        <hr className="my-4" />
         {descriptionItems.map((benefit: any, index: number) => (
           <div key={index} className={`flex flex-col w-full gap-8 mb-8`}>
             <BranchDescription
@@ -119,7 +125,7 @@ const BranchCard = ({
         <div className="w-full flex flex-row items-center overflow-x-auto gap-4">
           {technologies.map((tech: any, index: number) => (
             <TooltipProvider key={index}>
-              <Tooltip>
+              <Tooltip delayDuration={150}>
                 <TooltipTrigger>
                   <Image
                     src={tech.imageSrc}
@@ -141,7 +147,7 @@ const BranchCard = ({
       <Link href={linkHref}>
         <Button
           className="mt-10 h-10 rounded-md font-bold text-xs
-     bg-blue hover:bg-blue/80 gap-2"
+     bg-blue hover:bg-blue/80 gap-2 text-white"
         >
           {linkText} <FaExternalLinkAlt />
         </Button>

@@ -9,6 +9,7 @@ import { ThemeProvider } from "next-themes";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
