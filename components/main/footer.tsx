@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { CiInstagram } from "react-icons/ci";
-import { FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { FaDiscord, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="w-full h-12 flex flex-col items-center justify-center">
+      <div className="w-full h-12 flex flex-col items-center justify-center bg-primary-foreground">
         <div className="flex flex-row items-center justify-between custom-max-width">
           <span className="text-neutral-400 font-semibold text-xs px-2 md:px-0">
             © 2024 CSUSM
@@ -62,6 +62,10 @@ const Footer = () => {
               />
             </a>
             <FaLinkedin
+              className="hover:text-blue hover:cursor-pointer transition"
+              size={20}
+            />
+            <FaDiscord
               className="hover:text-blue hover:cursor-pointer transition"
               size={20}
             />

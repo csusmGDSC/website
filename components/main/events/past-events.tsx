@@ -1,23 +1,35 @@
 import CardGrid from "@/components/ui/cards/card-grid";
 import EventCard from "@/components/ui/cards/event-card";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
 import TitleHeader from "@/components/ui/title-header";
+import { TabsContent } from "@radix-ui/react-tabs";
 import React from "react";
 
 const PastEvents = () => {
   return (
     <section>
       <TitleHeader heading="Past Events" />
-      <CardGrid placeholder="There are no past events yet.">
-        {exampleEvents.map((e, index) => (
-          <EventCard
-            title={e.title}
-            description={e.description}
-            date={e.date}
-            key={index}
-            className="sm:!w-[calc(50%-1rem)] md:!w-[calc(33.333%-1rem)] 2xl:!w-[calc(25%-1rem)]"
-          />
-        ))}
-      </CardGrid>
+      <Tabs defaultValue="2024">
+        <TabsList>
+          <TabsTrigger value="2024">2024</TabsTrigger>
+          <TabsTrigger value="2023">2023</TabsTrigger>
+          <TabsTrigger value="2022">2022</TabsTrigger>
+        </TabsList>
+        <TabsContent value="2024" className="mt-6">
+          <CardGrid placeholder="There are no past events yet.">
+            {exampleEvents.map((e, index) => (
+              <EventCard
+                title={e.title}
+                description={e.description}
+                date={e.date}
+                key={index}
+                className="sm:!w-[calc(50%-1rem)] md:!w-[calc(33.333%-1rem)] 2xl:!w-[calc(25%-1rem)]"
+                eventPageURL="/events/100"
+              />
+            ))}
+          </CardGrid>
+        </TabsContent>
+      </Tabs>
     </section>
   );
 };

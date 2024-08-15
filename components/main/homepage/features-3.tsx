@@ -15,53 +15,49 @@ const Features3 = () => {
           <h1 className="font-semibold text-5xl text-primary">
             Built on strong foundations
           </h1>
-          <p className="my-8">
+          <p className="my-8 text-primary/90">
             GDSC is a community driven to give students the best software
             engineering experience at CSUSM.
           </p>
           <hr />
           <dl className="grid-cols-2 grid my-8 gap-y-8">
-            <Row
-              label="Linear Sync Engine"
-              desc="Built with a high-performance architecture and an obsessive focus on speed."
+          <Row
+              label="Welcoming"
+              desc="We teach every passionate student that's interested in developing skills."
             />
             <Row
-              label="Enterprise-ready security"
-              desc="Best-in-class security practices keep your work safe and secure at every layer."
+              label="Collaboration"
+              desc="GDSC is built on collaboration and engagement between proactive students."
             />
             <Row
-              label="Engineered for scale"
-              desc="Built for teams of all sizes. From early-stage startups to global enterprises."
+              label="Rewarding"
+              desc="Students will learn modern, up-to-date technologies used in the industry."
             />
           </dl>
           <hr />
-          <div className="grid grid-cols-2 md:grid-cols-4 w-full gap-16 mt-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 w-full mt-8 gap-4">
             {[
               {
-                title: "Initiatives",
-                desc: "Coordinate strategic product efforts",
+                title: "Schedule Friendly",
                 icon: BsCheck2Circle,
               },
               {
                 title: "Cross-team projects",
-                desc: "Collaborate across teams and departments.",
                 icon: IoCubeOutline,
               },
               {
-                title: "Milestones",
-                desc: "Break projects down into concrete phases.",
+                title: "Active Community",
                 icon: BsFillSuitDiamondFill,
               },
               {
-                title: "Progress insights",
-                desc: "Track scope, velocity, and progress over time.",
+                title: "Constant Growth",
                 icon: BiSolidBarChartAlt2,
               },
             ].map((item, index) => (
               <Thing
                 title={item.title}
                 icon={item.icon}
-                className="col-span-1 w-fit"
+                className="col-span-1 flex-1 flex items-center"
                 key={index}
               />
             ))}

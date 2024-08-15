@@ -148,9 +148,8 @@ const AdminInterface = () => {
 
   return (
     <section className="flex flex-col items-center w-full">
-      <Container className="custom-max-width mt-8">
-        <TitleHeader heading="Events" />
-
+      <Container>
+        <TitleHeader heading="Users" />
         {/* TABLE ACTIONS ROW */}
         <div className="flex flex-col sm:flex-row items-center py-4 justify-between">
           <span className="flex items-center gap-4 text-blue">

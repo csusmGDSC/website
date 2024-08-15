@@ -6,6 +6,7 @@ import React from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { Button } from "../shadcn/button";
 import { BentoCard } from "../magicui/bento-grid";
+import Link from "next/link";
 
 interface EventProps {
   title?: string;
@@ -46,7 +47,11 @@ const EventCard: React.FC<EventProps> = ({
           "w-full p-4 flex flex-col justify-between min-h-[200px] dark:bg-primary-foreground"
         )}
       >
-        <EventInfo title={title} description={description} />
+        <EventInfo
+          title={title}
+          description={description}
+          eventPageURL={eventPageURL}
+        />
         <EventDetails eventPageURL={eventPageURL} date={date} />
       </div>
     </div>
@@ -97,13 +102,15 @@ const EventInfo: React.FC<EventProps> = ({ title, description }) => {
 const EventDetails: React.FC<EventProps> = ({ eventPageURL, date }) => {
   return (
     <div className="flex flex-row items-center justify-between">
-      <Button
-        className={cn(
-          "px-3 rounded-lg truncate gap-2 text-center max-w-fit text-[10px] font-semibold text-white flex flex-row items-center bg-blue hover:bg-blue/80"
-        )}
-      >
-        View Details <FaExternalLinkAlt size={10} />
-      </Button>
+      <Link href={eventPageURL || "/"}>
+        <Button
+          className={cn(
+            "px-3 rounded-lg truncate gap-2 text-center max-w-fit text-[10px] font-semibold text-white flex flex-row items-center bg-blue hover:bg-blue/80"
+          )}
+        >
+          View Details <FaExternalLinkAlt size={10} />
+        </Button>
+      </Link>
       {date && (
         <p className="text-sm">
           {convertToReadableDate(
