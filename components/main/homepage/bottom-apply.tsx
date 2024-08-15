@@ -1,19 +1,20 @@
 import Container from "@/components/ui/container";
+import DotPattern from "@/components/ui/magicui/dot-background";
 import { Button } from "@/components/ui/shadcn/button";
 import React from "react";
 import { BiQuestionMark } from "react-icons/bi";
 import { GrDocumentUser } from "react-icons/gr";
 
 /**
- * Component that shows the socials of GDSC-CSUSM
+ * Component that shows the BottomApplySection of GDSC-CSUSM
  */
-const Socials = () => {
+const BottomApplySection = () => {
   return (
-    <section className="w-full custom-gradient-background -mb-20 pb-20 ">
+    <section className="w-full -mb-20 pb-20 custom-gradient-background">
       <Container className="flex flex-col items-center justify-center mt-32 custom-max-width">
         <div className="flex flex-row justify-between w-full">
           <h1 className="text-5xl font-semibold text-primary/90">
-            Propel your dream.
+            Ready to join?
           </h1>
 
           <span className="flex flex-row gap-1 items-center">
@@ -48,4 +49,4 @@ const Socials = () => {
   );
 };
 
-export default Socials;
+export default BottomApplySection;

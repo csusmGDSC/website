@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { IoMdAlert } from "react-icons/io";
 import { GrDocumentUser } from "react-icons/gr";
+import DotPattern from "@/components/ui/magicui/dot-background";
 
 /**
  * Component that shows the hero (top section) of the web-page
@@ -11,8 +12,11 @@ const Hero = () => {
   return (
     <section
       className="relative w-full h-[30rem] items-center flex flex-col
-      justify-center overflow-hidden bg-primary-foreground border-b border-border"
+      justify-center overflow-hidden border-b border-border bg-primary-foreground"
     >
+      {/* Background */}
+      <DotPattern className="[mask-image:linear-gradient(to_bottom,white,transparent,transparent)]" />
+
       {/* Hero Section Content */}
       <div className="px-2 md:px-0 flex flex-row items-center custom-max-width gap-8">
         <div className="space-y-10 w-full md:w-2/3">
@@ -52,14 +56,14 @@ const Hero = () => {
 
         <div
           className="hidden md:block h-full w-1/3 max-w-[32rem]
-          overflow-hidden rounded-lg"
+          overflow-hidden rounded-lg z-10"
         >
           <Image
             src="/images/hero-image.png"
             alt="header-background"
             width="1920"
             height="1080"
-            className="-z-10 object-cover w-full h-full"
+            className="object-cover w-full h-full"
           />
         </div>
       </div>
