@@ -1,4 +1,4 @@
-import Avatar from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AvatarCard from "@/components/ui/cards/avatar-card";
 import Container from "@/components/ui/container";
 import { Button } from "@/components/ui/shadcn/button";
@@ -21,6 +21,7 @@ import {
 import { GrResources } from "react-icons/gr";
 import { MdAccessTime, MdArticle, MdPerson } from "react-icons/md";
 
+// TO-DO: Make the event details more dynamic using Event interface
 const EventDetails = () => {
   return (
     <section className="w-full pt-10">
@@ -341,7 +342,10 @@ const Attendee = ({
   return (
     <div className="flex justify-between my-3 pr-6">
       <span className="flex gap-3 items-center">
-        <Avatar imageSrc={imageSrc} size={50} />
+        <Avatar>
+          <AvatarImage src={imageSrc} />
+          <AvatarFallback>{name[0]}</AvatarFallback>
+        </Avatar>
 
         <span>
           <p className="text-sm text-primary/90 font-semibold">{name}</p>

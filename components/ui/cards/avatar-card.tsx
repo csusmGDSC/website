@@ -1,5 +1,5 @@
 import React from "react";
-import Avatar from "../avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
 import { BsGithub, BsInstagram, BsLinkedin } from "react-icons/bs";
 
 interface AvatarCardProps {
@@ -30,7 +30,10 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
 }) => {
   return (
     <div className="flex flex-col items-center justify-center p-6 dark:bg-primary-foreground rounded-xl custom-box-shadow">
-      <Avatar imageSrc={imageSrc} size={70} />
+      <Avatar>
+        <AvatarImage src={imageSrc} />
+        <AvatarFallback>{name[0]}</AvatarFallback>
+      </Avatar>
       <h2 className="mt-2 text-lg font-semibold text-foreground/70">{name}</h2>
       <p className="text-sm font-medium text-foreground/50">{role}</p>
       <div className="mt-2 flex flex-rol gap-2 text-xl text-foreground/50">
