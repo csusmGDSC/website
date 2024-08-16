@@ -294,7 +294,7 @@ const EventDetails = () => {
           {/* LIST OF ATTENDEES */}
           <div>
             <h1 className="text-3xl font-bold text-primary">
-              See who's attending
+              See who is attending
             </h1>
             <p className="text-primary/80 mb-4">
               Connect early and come together this event
