@@ -9,10 +9,10 @@ import {
 
 const Dashboard = () => {
   return (
-    <main className="w-full flex-center-col py-[10rem]">
+    <main className="w-full flex-center-col py-[6rem]">
       {/* PAGE CONTENT */}
       <div className="custom-max-width">
-        <Tabs defaultValue="users" className="w-full">
+        <Tabs defaultValue="overview" className="w-full">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="users">Users</TabsTrigger>
