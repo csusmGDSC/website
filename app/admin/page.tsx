@@ -1,4 +1,3 @@
-import AdminInterface from "@/components/main/admin-interface";
 import React from "react";
 import {
   Tabs,
@@ -6,6 +5,9 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/shadcn/tabs";
+import EventsTable from "@/components/main/admin/events/events-table";
+import UsersTable from "@/components/main/admin/users/users-table";
+import Container from "@/components/ui/container";
 
 const Dashboard = () => {
   return (
@@ -19,10 +21,14 @@ const Dashboard = () => {
             <TabsTrigger value="events">Events</TabsTrigger>
           </TabsList>
           <TabsContent value="users">
-            <AdminInterface />
+            <UsersTable />
           </TabsContent>
-          <TabsContent value="overview">test o</TabsContent>
-          <TabsContent value="events">test e</TabsContent>
+          <TabsContent value="overview">
+            <Container heading="ADMIN DASHBOARD"></Container>
+          </TabsContent>
+          <TabsContent value="events">
+            <EventsTable />
+          </TabsContent>
         </Tabs>
       </div>
     </main>
