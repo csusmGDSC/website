@@ -12,7 +12,7 @@ const Features3 = () => {
     <Container className="custom-max-width">
       <div className="flex flex-row items-center gap-20">
         <div className="w-full md:w-1/2">
-          <h1 className="font-semibold text-5xl text-primary">
+          <h1 className="text-4xl font-bold text-foreground/70">
             Built on strong foundations
           </h1>
           <p className="my-8 text-primary/90">

@@ -19,7 +19,7 @@ const Dashboard = () => {
       {/* PAGE CONTENT */}
       <div className="custom-max-width">
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList>
+          <TabsList className="custom-box-shadow">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="users">Users</TabsTrigger>
             <TabsTrigger value="events">Events</TabsTrigger>

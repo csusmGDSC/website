@@ -11,8 +11,8 @@ import { AnimatedBeamMultipleOutputDemo } from "@/components/ui/magicui/output-d
 const Features = () => {
   return (
     <Container
-      heading="Empowering Innovation"
-      subheading="We help students deliver real solutions "
+      heading="What does GDSC-CSUSM do?"
+      subheading="We help students grow and accelerate their technical development"
       className="custom-max-width mt-10"
     >
       <BentoGrid>
@@ -52,8 +52,8 @@ const files = [
 const features = [
   {
     Icon: FileTextIcon,
-    name: "Profile your code",
-    description: "We let students save and ask questions about their code",
+    name: "Host Workshops",
+    description: "We host a variety of technical skill workshops",
     href: "/",
     cta: "Learn more",
     className: "col-span-3 lg:col-span-1",
@@ -87,8 +87,8 @@ const features = [
   },
   {
     Icon: Share2Icon,
-    name: "Software",
-    description: "We help build production-ready software",
+    name: "Build Projects",
+    description: "We build production-ready software for the industry",
     href: "/",
     cta: "Learn more",
     className: "col-span-3 lg:col-span-1",

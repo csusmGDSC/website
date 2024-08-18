@@ -2,7 +2,6 @@ import Hero from "@/components/main/homepage/hero";
 import Team from "@/components/main/homepage/team";
 import Branches from "@/components/main/homepage/branches";
 import Features from "@/components/main/homepage/features";
-import Features2 from "@/components/main/homepage/features-2";
 import Features3 from "@/components/main/homepage/features-3";
 import BottomApplySection from "@/components/main/homepage/bottom-apply";
 
@@ -17,7 +16,6 @@ export default function Home() {
         <Features />
         <Features3 />
         <Branches />
-        <Features2 />
         <Team />
       </div>
       <BottomApplySection />

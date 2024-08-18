@@ -7,7 +7,7 @@ import { MdEvent, MdPeople } from "react-icons/md";
 
 const OverviewCards = () => {
   return (
-    <Container className="custom-max-width -mt-20">
+    <Container className="custom-max-width -mt-16">
       <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <li className="w-full rounded-xl border border-border p-2 flex items-center gap-4">
           <span className="p-4 rounded-full bg-blue bg-opacity-10">
