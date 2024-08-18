@@ -33,14 +33,10 @@ const Container: React.FC<ContainerProps> = ({
       )}
     >
       {heading && (
-        <h1 className="text-4xl font-bold text-foreground/70 text-center">
-          {heading}
-        </h1>
+        <h1 className="text-4xl font-bold text-foreground/70">{heading}</h1>
       )}
       {subheading && (
-        <h2 className="text-2xl mt-2 text-foreground/70 text-center">
-          {subheading}
-        </h2>
+        <h2 className="text-2xl mt-2 text-foreground/70">{subheading}</h2>
       )}
       <div className={cn("w-full", className)}>{children}</div>
     </section>

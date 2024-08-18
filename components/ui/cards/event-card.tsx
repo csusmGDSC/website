@@ -41,7 +41,7 @@ const EventCard: React.FC<EventProps> = ({
         className
       )}
     >
-      <EventImage imageSrc={imageSrc || "/images/gdsc/gdsc-1.png"} />
+      <EventImage imageSrc={imageSrc || "/images/gdsc/short logo light.png"} />
       <div
         className={cn(
           "w-full p-4 flex flex-col justify-between min-h-[200px] dark:bg-primary-foreground"
@@ -66,7 +66,7 @@ export default EventCard;
 const EventImage: React.FC<EventProps> = ({ imageSrc }) => {
   if (!imageSrc) return null;
   return (
-    <div className="w-full overflow-hidden h-[170px]">
+    <div className="w-full overflow-hidden h-[170px] border-b border-border">
       <Image
         src={imageSrc}
         alt={"event-image"}
