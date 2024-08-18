@@ -86,10 +86,8 @@ const EventImage: React.FC<EventProps> = ({ imageSrc }) => {
 const EventInfo: React.FC<EventProps> = ({ title, description }) => {
   return (
     <div className="space-y-2 line-clamp-6">
-      <h1 className="text-xl font-semibold text-neutral-700 dark:text-neutral-300 line-clamp-1">
-        {title}
-      </h1>
-      <p className=" text-neutral-400 line-clamp-3">{description}</p>
+      <h1 className="font-bold text-foreground/80">{title}</h1>
+      <p className="text-xs text-foreground/80">{description}</p>
     </div>
   );
 };

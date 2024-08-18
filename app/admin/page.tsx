@@ -8,6 +8,10 @@ import {
 import EventsTable from "@/components/main/admin/events/events-table";
 import UsersTable from "@/components/main/admin/users/users-table";
 import Container from "@/components/ui/container";
+import OverviewCards from "@/components/main/admin/overview/overview-cards";
+import AttendenceGraph from "@/components/main/admin/overview/attendence-graph";
+import Notifications from "@/components/main/admin/overview/notifcations";
+import OverviewAnalytics from "@/components/main/admin/overview/overview-analytics";
 
 const Dashboard = () => {
   return (
@@ -24,7 +28,8 @@ const Dashboard = () => {
             <UsersTable />
           </TabsContent>
           <TabsContent value="overview">
-            <Container heading="ADMIN DASHBOARD"></Container>
+            <OverviewCards />
+            <OverviewAnalytics />
           </TabsContent>
           <TabsContent value="events">
             <EventsTable />
