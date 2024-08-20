@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { GDSCEvent } from "@/types/gdsc-event";
+import { CSUSM_ROOM, GDSCEvent } from "@/types/gdsc-event";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -57,6 +57,7 @@ export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
     ),
     enableHiding: false,
     cell: ({ row }) => {
+      if (!row.getValue("date")) return null;
       const date = new Date(row.getValue("date"));
       return <p className="text-xs">{date.toLocaleDateString()}</p>;
     },
@@ -97,9 +98,14 @@ export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
     accessorKey: "room",
     header: "Room",
     enableHiding: false,
-    cell: ({ row }) => (
-      <p className="text-xs font-semibold">{row.getValue("room")}</p>
-    ),
+    cell: ({ row }) => {
+      const room = row.getValue("room") as CSUSM_ROOM;
+      return (
+        <p className="text-xs font-semibold">
+          {room?.building} {room?.room}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "type",
@@ -108,7 +114,7 @@ export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
     cell: ({ row }) => {
       const type = row.getValue("type") as GDSCEvent["type"];
 
-      const typeColors: Record<GDSCEvent["type"], string> = {
+      const typeColors: Record<Exclude<GDSCEvent["type"], null>, string> = {
         challenge: "bg-red/20",
         competition: "bg-yellow/20",
         workshop: "bg-blue/20",
@@ -120,7 +126,7 @@ export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
         <div
           className={cn(
             "p-1 border border-border rounded-lg text-center",
-            typeColors[type]
+            type && typeColors[type]
           )}
         >
           <p className="font-semibold text-xs">{type}</p>

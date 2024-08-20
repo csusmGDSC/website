@@ -21,18 +21,33 @@
 export interface GDSCEvent {
   id: string;
   name: string;
-  room: string;
-  tags: string[];
-  duration: number;
-  type: "virtual" | "workshop" | "competition" | "challenge" | "other";
-  location: string;
-  date: Date;
-  githubRepo: string;
-  slidesURL: string;
-  imageSrc: string;
-  extraImageSrcs: string[];
+  room?: CSUSM_ROOM;
+  tags?: string[];
+  duration?: number;
+  type: "virtual" | "workshop" | "competition" | "challenge" | "other" | null;
+  location?: string;
+  date: Date | null;
+  githubRepo?: string;
+  slidesURL?: string;
+  imageSrc?: string;
+  extraImageSrcs?: string[];
   description: string;
-  about: string;
-  attendeeIds: number[];
+  about?: string;
+  attendeeIds?: number[];
   organizerIds: number[];
+}
+
+/**
+ * Interface representing a room in California State University San Marcos.
+ * @interface CSUSM_ROOM
+ * @property {string} building - The building where the room is located.
+ * @property {number} room - The room number.
+ * @property {"lecture" | "classroom" | "auditorium" | "other"} type - The type of the room.
+ * @property {number} capacity - The maximum capacity of the room.
+ */
+export interface CSUSM_ROOM {
+  building: string;
+  room: number;
+  type: "lecture" | "classroom" | "auditorium" | "other";
+  capacity: number;
 }

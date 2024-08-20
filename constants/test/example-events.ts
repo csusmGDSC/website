@@ -4,7 +4,12 @@ export const testEvents: GDSCEvent[] = [
   {
     id: "66bf19a78e5a5cdea29e9dda",
     name: "Tech Conference 2024",
-    room: "Hall A",
+    room: {
+      building: "Academic Hall",
+      room: 102,
+      type: "lecture",
+      capacity: 50,
+    },
     location: "New York, NY",
     date: new Date("2024-09-12T09:00:00Z"),
     githubRepo: "https://github.com/techconf2024",
@@ -23,7 +28,12 @@ export const testEvents: GDSCEvent[] = [
   {
     id: "66bf19a78e5a5cdea29e9dda",
     name: "Tech Conference 2024",
-    room: "Hall A",
+    room: {
+      building: "Academic Hall",
+      room: 102,
+      type: "lecture",
+      capacity: 50,
+    },
     location: "New York, NY",
     date: new Date("2024-09-12T09:00:00Z"),
     githubRepo: "https://github.com/techconf2024",
@@ -45,7 +55,12 @@ export const testEvents: GDSCEvent[] = [
   {
     id: "43242fsnjasdfjn324",
     name: "AI Workshop",
-    room: "Room 202",
+    room: {
+      building: "Academic Hall",
+      room: 102,
+      type: "lecture",
+      capacity: 50,
+    },
     location: "San Francisco, CA",
     date: new Date("2024-10-05T13:00:00Z"),
     githubRepo: "https://github.com/aiworkshop",
@@ -64,7 +79,6 @@ export const testEvents: GDSCEvent[] = [
   {
     id: "G3242fsnj3452sdfjn324",
     name: "Virtual Coding Bootcamp",
-    room: "",
     location: "virtual",
     date: new Date("2024-11-20T00:00:00Z"),
     githubRepo: "https://github.com/virtualbootcamp",
@@ -83,7 +97,12 @@ export const testEvents: GDSCEvent[] = [
   {
     id: "96bfa5a5cdea29e9dda",
     name: "Data Science Summit",
-    room: "Room 305",
+    room: {
+      building: "Academic Hall",
+      room: 102,
+      type: "lecture",
+      capacity: 50,
+    },
     location: "Austin, TX",
     date: new Date("2024-12-01T10:00:00Z"),
     githubRepo: "https://github.com/datasciencesummit",
@@ -102,7 +121,12 @@ export const testEvents: GDSCEvent[] = [
   {
     id: "596bf19a78e234529e9dda",
     name: "Web Development Meetup",
-    room: "Main Hall",
+    room: {
+      building: "Academic Hall",
+      room: 102,
+      type: "lecture",
+      capacity: 50,
+    },
     location: "Los Angeles, CA",
     date: new Date("2024-08-30T18:00:00Z"),
     githubRepo: "https://github.com/webdevmeetup",
@@ -120,7 +144,12 @@ export const testEvents: GDSCEvent[] = [
   {
     id: "asmkdfakmf212345",
     name: "Cybersecurity Workshop",
-    room: "Room 109",
+    room: {
+      building: "Academic Hall",
+      room: 102,
+      type: "lecture",
+      capacity: 50,
+    },
     location: "Chicago, IL",
     date: new Date("2024-09-25T11:00:00Z"),
     githubRepo: "https://github.com/cybersecurityworkshop",
@@ -138,7 +167,6 @@ export const testEvents: GDSCEvent[] = [
   {
     id: "324124efmkskK",
     name: "Blockchain Basics",
-    room: "Virtual Room",
     location: "virtual",
     date: new Date("2024-10-15T15:00:00Z"),
     githubRepo: "https://github.com/blockchainbasics",
@@ -157,7 +185,12 @@ export const testEvents: GDSCEvent[] = [
   {
     id: "23942mkmweral0",
     name: "AI for Healthcare",
-    room: "Conference Room 2",
+    room: {
+      building: "Academic Hall",
+      room: 102,
+      type: "lecture",
+      capacity: 50,
+    },
     location: "Seattle, WA",
     date: new Date("2024-11-10T14:00:00Z"),
     githubRepo: "https://github.com/aiforhealthcare",
@@ -175,7 +208,12 @@ export const testEvents: GDSCEvent[] = [
   {
     id: "3423k2mksdfsefse",
     name: "DevOps Training",
-    room: "Room 310",
+    room: {
+      building: "Academic Hall",
+      room: 102,
+      type: "lecture",
+      capacity: 50,
+    },
     location: "Boston, MA",
     date: new Date("2024-12-15T09:00:00Z"),
     githubRepo: "https://github.com/devopstraining",
@@ -193,7 +231,6 @@ export const testEvents: GDSCEvent[] = [
   {
     id: "23423432ekma",
     name: "Introduction to JavaScript",
-    room: "",
     location: "virtual",
     date: new Date("2024-08-25T12:00:00Z"),
     githubRepo: "https://github.com/introtosjs",
@@ -211,7 +248,12 @@ export const testEvents: GDSCEvent[] = [
   {
     id: "234k2m342dadae",
     name: "Web Development Bootcamp",
-    room: "Room 201",
+    room: {
+      building: "Academic Hall",
+      room: 102,
+      type: "lecture",
+      capacity: 50,
+    },
     location: "San Francisco, CA",
     date: new Date("2024-09-20T14:00:00Z"),
     githubRepo: "https://github.com/webdevbootcamp",

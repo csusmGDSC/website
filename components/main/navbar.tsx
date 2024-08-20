@@ -44,7 +44,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="w-full h-[4.5rem] border-b border-b-border items-center flex flex-col fixed top-0 z-[999] bg-background">
+    <header className="w-full h-[4.5rem] border-b border-b-border items-center flex flex-col fixed top-0 z-[999] bg-background">
       <div className="h-full flex flex-row justify-between items-center custom-max-width">
         {/* GDSC logo, Click on it should bring back to root page*/}
         <Link href="/">
@@ -58,7 +58,7 @@ const Navbar = () => {
         </Link>
 
         {/* Navigation links */}
-        <div className="m-auto md:m-0 md:ml-auto h-full flex items-center gap-6">
+        <nav className="m-auto md:m-0 md:ml-auto h-full flex items-center gap-6">
           <ul className="flex flex-row space-x-6 h-full">
             {links.map((link, index) => (
               <li key={index}>
@@ -75,9 +75,9 @@ const Navbar = () => {
             ))}
           </ul>
           <ModeToggle />
-        </div>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 };
 
