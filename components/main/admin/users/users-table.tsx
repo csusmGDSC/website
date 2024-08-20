@@ -19,13 +19,6 @@ import { testUsers } from "@/constants/test/example-users";
 
 const ButtonActions: TableActionButtonProps[] = [
   {
-    action: "Add",
-    icon: IoMdAdd,
-    className: "hover:text-blue/80",
-    id: "add",
-    onClick: () => {},
-  },
-  {
     action: "Refresh",
     icon: LuRefreshCw,
     className: "hover:text-blue/80",
