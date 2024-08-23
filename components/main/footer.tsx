@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { CiInstagram } from "react-icons/ci";
 import { FaDiscord, FaLinkedin, FaXTwitter } from "react-icons/fa6";
@@ -27,18 +28,52 @@ const Footer = () => {
 
           <div className="flex flex-col text-sm gap-2 pt-10 pl-4 sm:pl-0 sm:ml-auto [&>h1]:font-semibold">
             <h1>Quick Links</h1>
-            <p>Home</p>
-            <p>Events</p>
-            <p>Projects</p>
-            <p>Resources</p>
+            <Link
+              href="/"
+              className="hover:underline hover:text-blue transition-colors"
+            >
+              Home
+            </Link>
+            <Link
+              href="/events"
+              className="hover:underline hover:text-blue transition-colors"
+            >
+              Events
+            </Link>
+            <Link
+              href="/projects"
+              className="hover:underline hover:text-blue transition-colors"
+            >
+              Projects
+            </Link>
+            <Link
+              href="/resources"
+              className="hover:underline hover:text-blue transition-colors"
+            >
+              Resources
+            </Link>
           </div>
 
           <div className="flex flex-col text-sm gap-2 pt-10 pl-4 sm:pl-0 sm:ml-auto [&>h1]:font-semibold">
             <h1>Resources</h1>
-            <p>FAQ</p>
-            <p>Terms of Service</p>
-            <p>Cookies Policy</p>
-            <p>Support</p>
+            <Link
+              href="/resources"
+              className="hover:underline hover:text-blue transition-colors"
+            >
+              FAQ
+            </Link>
+            <Link
+              href="/privacy"
+              className="hover:underline hover:text-blue transition-colors"
+            >
+              Terms of Service
+            </Link>
+            <Link
+              href="/privacy"
+              className="hover:underline hover:text-blue transition-colors"
+            >
+              Privacy Policy
+            </Link>
           </div>
         </div>
       </div>

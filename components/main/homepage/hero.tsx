@@ -4,6 +4,7 @@ import React from "react";
 import { IoMdAlert } from "react-icons/io";
 import { GrDocumentUser } from "react-icons/gr";
 import DotPattern from "@/components/ui/magicui/dot-background";
+import { ChevronRight } from "lucide-react";
 
 /**
  * Component that shows the hero (top section) of the web-page
@@ -39,9 +40,13 @@ const Hero = () => {
             >
               <Button
                 className="m-auto w-full md:m-0 h-10 rounded-md font-bold
-                text-xs bg-blue hover:bg-blue/80 gap-2 text-white"
+                text-xs bg-blue hover:bg-blue/80 gap-2 text-white group"
               >
-                <GrDocumentUser size={20} /> APPLY
+                APPLY
+                <ChevronRight
+                  size={20}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
               </Button>
             </a>
             <a
