@@ -1,6 +1,5 @@
 import CardGrid from "@/components/ui/cards/card-grid";
-import EventCard from "@/components/ui/cards/event-card";
-import ProjectCard from "@/components/ui/cards/project-card";
+import ContentCard from "@/components/ui/cards/content-card";
 import TitleHeader from "@/components/ui/title-header";
 import React from "react";
 
@@ -12,6 +11,16 @@ const exampleProjects = [
     websiteUrl: "https://www.routify.cc",
     githubUrl: "https://www.github.com/jaedonspurlock01/routify",
     imageSrc: "/images/projects/routify.gif",
+    tags: [
+      "JavaScript",
+      "NextJS",
+      "ReactJS",
+      "ThreeJS",
+      "Nominatim API",
+      "Overpass API",
+      "Amazon S3",
+    ],
+    date: "Jan 2024 - Mar 2024",
   },
 ];
 
@@ -21,7 +30,7 @@ const ProjectList = () => {
       <TitleHeader heading="Projects" />
       <CardGrid placeholder="There is currently no projects at the moment.">
         {exampleProjects.map((e, index) => (
-          <ProjectCard
+          <ContentCard
             title={e.title}
             description={e.description}
             key={index}
@@ -29,6 +38,9 @@ const ProjectList = () => {
             imageSrc={e.imageSrc}
             websiteUrl={e.websiteUrl}
             githubUrl={e.githubUrl}
+            tags={e.tags}
+            date={e.date}
+            type="project"
           />
         ))}
       </CardGrid>

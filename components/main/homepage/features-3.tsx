@@ -1,6 +1,7 @@
 import Container from "@/components/ui/container";
 import IconCloud from "@/components/ui/magicui/icon-cloud";
 import { Skeleton } from "@/components/ui/shadcn/skeleton";
+import { cn } from "@/lib/utils";
 import React from "react";
 import { IconType } from "react-icons";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
@@ -21,7 +22,7 @@ const Features3 = () => {
           </p>
           <hr />
           <dl className="grid-cols-2 grid my-8 gap-y-8">
-          <Row
+            <Row
               label="Welcoming"
               desc="We teach every passionate student that's interested in developing skills."
             />
@@ -40,24 +41,29 @@ const Features3 = () => {
               {
                 title: "Schedule Friendly",
                 icon: BsCheck2Circle,
+                color: "text-blue",
               },
               {
                 title: "Cross-team projects",
                 icon: IoCubeOutline,
+                color: "text-green",
               },
               {
                 title: "Active Community",
                 icon: BsFillSuitDiamondFill,
+                color: "text-yellow",
               },
               {
                 title: "Constant Growth",
                 icon: BiSolidBarChartAlt2,
+                color: "text-red",
               },
             ].map((item, index) => (
               <Thing
                 title={item.title}
                 icon={item.icon}
                 className="col-span-1 flex-1 flex items-center"
+                color={item.color}
                 key={index}
               />
             ))}
@@ -88,14 +94,15 @@ const Row = ({ label, desc }: { label: string; desc: string }) => {
 interface ThingProps {
   title: string;
   icon: IconType;
+  color: string;
   className?: string;
 }
 
-const Thing = ({ title, icon: Icon, className }: ThingProps) => {
+const Thing = ({ title, icon: Icon, color, className }: ThingProps) => {
   return (
     <div className={className}>
-      <span className="text-primary">
-        <Icon />
+      <span>
+        <Icon className={`${color}`}/>
         {title}
       </span>
     </div>

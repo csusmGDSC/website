@@ -14,7 +14,7 @@ interface CardGridProps {
 const CardGrid: React.FC<CardGridProps> = ({ children, placeholder }) => {
   return (
     <div className="w-full flex flex-row flex-wrap gap-[1rem] px-2 md:px-0">
-      {!children && <p>{placeholder}</p>}
+      {!children && <p className="text-primary/80">{placeholder}</p>}
       {children}
     </div>
   );
