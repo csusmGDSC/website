@@ -1,7 +1,5 @@
 import Container from "@/components/ui/container";
 import IconCloud from "@/components/ui/magicui/icon-cloud";
-import { Skeleton } from "@/components/ui/shadcn/skeleton";
-import { cn } from "@/lib/utils";
 import React from "react";
 import { IconType } from "react-icons";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
@@ -102,7 +100,7 @@ const Thing = ({ title, icon: Icon, color, className }: ThingProps) => {
   return (
     <div className={className}>
       <span>
-        <Icon className={`${color}`}/>
+        <Icon className={`${color}`} />
         {title}
       </span>
     </div>

@@ -1,3 +1,20 @@
+export const GDSC_POSITIONS = [
+  "student",
+  "alumni",
+  "mentor",
+  "president",
+  "staff",
+  "instructor",
+  "other",
+] as const;
+
+export const GDSC_BRANCHES = [
+  "project",
+  "interview",
+  "marketing",
+  "other",
+] as const;
+
 /**
  * Interface representing a GDSC User.
  * @interface GDSCUser
@@ -8,7 +25,6 @@
  * @property {string} email - The email of the user.
  * @property {string} [image] - The URL of the user's image.
  * @property {number} total_points - The total points of the user.
- * @property {boolean} isAdmin - Indicates whether the user is an admin or not.
  * @property {string} [github] - The GitHub URL of the user.
  * @property {string} [linkedin] - The LinkedIn URL of the user.
  * @property {string} [instagram] - The Instagram URL of the user.
@@ -23,21 +39,16 @@ export interface GDSCUser {
   lastName: string;
   email: string;
   image?: string;
-  total_points: number;
-  isAdmin: boolean;
+  total_points?: number;
   role: "USER" | "ADMIN";
-  position:
-    | "student"
-    | "alumni"
-    | "mentor"
-    | "president"
-    | "instructor"
-    | "other";
-  branch: "project" | "interview" | "marketing" | "other";
+  position: (typeof GDSC_POSITIONS)[number];
+  branch: (typeof GDSC_BRANCHES)[number];
   github?: string;
   linkedin?: string;
   instagram?: string;
   twitter?: string;
+  discord?: string;
   bio?: string;
   tags?: string[];
+  website?: string;
 }
