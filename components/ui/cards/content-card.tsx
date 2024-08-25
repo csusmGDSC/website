@@ -45,7 +45,7 @@ const ContentCard: React.FC<ContentProps> = ({
   return (
     <div
       className={cn(
-        "rounded-xl border border-border w-full overflow-hidden",
+        "rounded-xl border border-border w-full overflow-hidden custom-box-shadow",
         className
       )}
     >

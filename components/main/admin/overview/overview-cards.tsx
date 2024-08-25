@@ -7,7 +7,7 @@ import { MdEvent, MdPeople } from "react-icons/md";
 
 const OverviewCards = () => {
   return (
-    <Container className="custom-max-width -mt-16">
+    <Container className="-mt-16">
       <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <li className="w-full rounded-xl border border-border p-2 flex items-center gap-4">
           <span className="p-4 rounded-full bg-blue bg-opacity-10">
@@ -15,8 +15,10 @@ const OverviewCards = () => {
           </span>
 
           <span>
-            <h1 className="text-2xl font-semibold text-primary/90">53</h1>
-            <h2 className="text-lg text-primary/70">Events</h2>
+            <h1 className="text-lg lg:text-2xl font-semibold text-primary/90">
+              53
+            </h1>
+            <h2 className="lg:text-lg text-primary/70">Events</h2>
           </span>
         </li>
 
@@ -26,8 +28,10 @@ const OverviewCards = () => {
           </span>
 
           <span>
-            <h1 className="text-2xl font-semibold text-primary/90">103</h1>
-            <h2 className="text-lg text-primary/70">Members</h2>
+            <h1 className="text-lg lg:text-2xl font-semibold text-primary/90">
+              103
+            </h1>
+            <h2 className="lg:text-lg text-primary/70">Members</h2>
           </span>
         </li>
 
@@ -37,8 +41,10 @@ const OverviewCards = () => {
           </span>
 
           <span>
-            <h1 className="text-2xl font-semibold text-primary/90">3</h1>
-            <h2 className="text-lg text-primary/70">Projects</h2>
+            <h1 className="text-lg lg:text-2xl font-semibold text-primary/90">
+              3
+            </h1>
+            <h2 className="lg:text-lg text-primary/70">Projects</h2>
           </span>
         </li>
 
@@ -48,8 +54,10 @@ const OverviewCards = () => {
           </span>
 
           <span>
-            <h1 className="text-2xl font-semibold text-primary/90">23</h1>
-            <h2 className="text-lg text-primary/70">Blogs</h2>
+            <h1 className="text-lg lg:text-2xl font-semibold text-primary/90">
+              23
+            </h1>
+            <h2 className="lg:text-lg text-primary/70">Blogs</h2>
           </span>
         </li>
       </ul>

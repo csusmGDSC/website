@@ -6,6 +6,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ModeToggle } from "../ui/mode-toggle";
 import { usePathname } from "next/navigation";
+import {
+  SignedIn,
+  SignedOut,
+  SignIn,
+  SignInButton,
+  useClerk,
+  UserButton,
+} from "@clerk/nextjs";
 
 // TO-DO: Keep links in different place
 const links = [
@@ -29,19 +37,15 @@ const links = [
     name: "Resources",
     ref: "/resources",
   },
-  {
-    name: "Admin",
-    ref: "/admin",
-  },
-  // TO-DO: Add user authentication to log in
   // {
-  //   name: "Log in",
-  //   ref: "#",
+  //   name: "Admin",
+  //   ref: "/admin",
   // },
 ] as const;
 
-const Navbar = () => {
+const Header = () => {
   const pathname = usePathname();
+  const clerk = useClerk();
 
   return (
     <header className="w-full h-[4.5rem] border-b border-b-border items-center flex flex-col fixed top-0 z-[999] bg-background">
@@ -51,7 +55,7 @@ const Navbar = () => {
           <Image
             src="/images/gdsc/gdsc-csusm title light.png"
             alt="navbar-logo"
-            className="hidden md:block"
+            className="hidden md:block w-auto h-auto"
             width="355"
             height="24"
           />
@@ -74,11 +78,21 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <ModeToggle />
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+          <SignedOut>
+            <p
+              onClick={() => clerk.openSignIn()}
+              className="text-foreground/70 h-full flex items-center border-b-4 border-background text-sm hover:cursor-pointer hover:text-foreground transition"
+            >
+              Sign In
+            </p>
+          </SignedOut>
         </nav>
       </div>
     </header>
   );
 };
 
-export default Navbar;
+export default Header;

@@ -15,12 +15,13 @@ const Footer = () => {
               alt="navbar-logo"
               width="355"
               height="24"
+              className="w-auto h-auto"
             />
 
             <Image
               src="/images/google-city.png"
               alt="navbar-logo"
-              className="hidden md:block"
+              className="hidden md:block w-auto h-auto"
               width="255"
               height="24"
             />
