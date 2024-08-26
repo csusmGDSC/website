@@ -17,6 +17,7 @@
  * @property {string[]} tags - An array of tags associated with the event.
  * @property {"online" | "in-person" | "hybrid"} type - The type of event.
  * @property {number} duration - The duration of the event in minutes.
+ * @property {string[]} usersAttended - An array of usernames of users who attended the event.
  */
 export interface GDSCEvent {
   id: string;
@@ -24,7 +25,7 @@ export interface GDSCEvent {
   room?: CSUSM_ROOM;
   tags?: string[];
   duration?: number;
-  type: "virtual" | "workshop" | "competition" | "challenge" | "other" | null;
+  type: (typeof EVENT_TYPES)[number];
   location?: string;
   date: Date | null;
   githubRepo?: string;
@@ -35,6 +36,7 @@ export interface GDSCEvent {
   about?: string;
   attendeeIds?: number[];
   organizerIds: number[];
+  usersAttended?: string[];
 }
 
 /**
@@ -48,6 +50,20 @@ export interface GDSCEvent {
 export interface CSUSM_ROOM {
   building: string;
   room: number;
-  type: "lecture" | "classroom" | "auditorium" | "other";
+  type: (typeof ROOM_TYPES)[number];
   capacity: number;
 }
+
+export const EVENT_TYPES = [
+  "virtual",
+  "workshop",
+  "competition",
+  "challenge",
+  "other",
+] as const;
+export const ROOM_TYPES = [
+  "lecture",
+  "classroom",
+  "auditorium",
+  "other",
+] as const;

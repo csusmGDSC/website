@@ -22,7 +22,8 @@ import { GrResources } from "react-icons/gr";
 import { MdAccessTime, MdArticle, MdPerson } from "react-icons/md";
 
 // TO-DO: Make the event details more dynamic using Event interface
-const EventDetails = () => {
+const EventDetails = ({
+}) => {
   return (
     <section className="w-full pt-10">
       <Container className="custom-max-width flex flex-col gap-10">
