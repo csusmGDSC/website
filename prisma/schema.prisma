@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// Prisma schema for GDSCEvent
+model GDSCEvent {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  roomId         String?    @db.ObjectId
+  tags           String[]
+  duration       Int?
+  type           EventType
+  location       String?
+  date           DateTime?
+  githubRepo     String?
+  slidesURL      String?
+  imageSrc       String?
+  extraImageSrcs String[]
+  description    String
+  about          String?
+  attendeeIds    Int[]
+  organizerIds   Int[]
+  usersAttended  String[]
+
+  room CSUSM_ROOM? @relation(fields: [roomId], references: [id])
+
+  @@map("events")
+}
+
+// Prisma schema for CSUSM_ROOM
+model CSUSM_ROOM {
+  id       String      @id @default(auto()) @map("_id") @db.ObjectId
+  building String
+  room     Int
+  type     RoomType
+  capacity Int
+  events   GDSCEvent[]
+
+  @@map("rooms")
+}
+
+enum EventType {
+  virtual
+  workshop
+  competition
+  challenge
+  other
+}
+
+enum RoomType {
+  lecture
+  classroom
+  auditorium
+  other
+}

@@ -5,7 +5,7 @@ import * as React from "react";
 // USER AUTHENTICATION
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { completeOnboarding } from "./_actions";
+import { completeOnboarding } from "@/actions/onboarding";
 
 import { cn } from "@/lib/utils";
 
@@ -84,6 +84,7 @@ export default function OnboardingPage() {
       setError(res?.error);
     }
   };
+
   return (
     <Container className="custom-max-width pt-20">
       <div className="flex flex-col gap-10">
