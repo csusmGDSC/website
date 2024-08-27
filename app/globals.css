@@ -30,7 +30,7 @@
 
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --ring: 206, 80%, 35%;
 
     --radius: 0.5rem;
 
@@ -68,7 +68,7 @@
 
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --ring: 206, 80%, 35%;
 
     --chart-1: 217, 90%, 60%;
     --chart-2: 4, 84%, 59%;
@@ -109,4 +109,53 @@
 
 .custom-gradient-background {
   background: linear-gradient(0deg, hsl(var(--primary-foreground)) 55.66%, hsl(var(--background)) 100%);
+}
+
+
+/* Quill Editor Styles. See https://quilljs.com/docs/customization*/
+.ql-toolbar {
+  border: none !important;
+  background: #f8f8f8 !important;
+}
+
+.ql-toolbar .ql-formats:not(:last-child) {
+  border-right: 1px solid #dcdcdc !important;
+  padding-right: 12px !important;
+}
+
+.ql-container {
+  font-family: "Lato", sans-serif !important;
+  border: none !important;
+  height: unset !important;
+}
+
+.ql-editor {
+  line-height: 22px !important;
+  padding: 8px 12px !important;
+  color: #1d1c1d !important;
+  font-weight: 400 !important;
+  font-family: "Lato", sans-serif !important;
+  font-size: 14px !important;
+}
+
+.ql-editor a {
+  color: #1264a3 !important;
+}
+
+.ql-editor a:hover {
+  text-decoration: underline !important;
+}
+
+.ql-renderer {
+  padding: 0 !important;
+}
+
+.ql-editor:before {
+  left: 12px !important;
+  font-family: "Lato", sans-serif !important;
+  color: #8d8d8d !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  @apply truncate;
 }

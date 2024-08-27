@@ -11,9 +11,11 @@ import {
   SignedOut,
   SignIn,
   SignInButton,
-  useClerk,
   UserButton,
+  useClerk,
 } from "@clerk/nextjs";
+
+import dynamic from "next/dynamic";
 
 // TO-DO: Keep links in different place
 const links = [
