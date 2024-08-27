@@ -26,12 +26,14 @@ model GDSCEvent {
   githubRepo     String?
   slidesURL      String?
   imageSrc       String?
-  extraImageSrcs String[]
+  extraImageSrcs Bytes[]
   description    String
   about          String?
   attendeeIds    Int[]
   organizerIds   Int[]
   usersAttended  String[]
+  updatedAt      DateTime
+  createdAt      DateTime
 
   room CSUSM_ROOM? @relation(fields: [roomId], references: [id])
 

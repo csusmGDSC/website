@@ -30,13 +30,15 @@ export interface GDSCEvent {
   date: Date | null;
   githubRepo?: string;
   slidesURL?: string;
-  imageSrc?: string;
-  extraImageSrcs?: string[];
+  imageSrc?: File | null;
+  extraImageSrcs?: File[] | null;
   description: string;
   about?: string;
   attendeeIds?: number[];
   organizerIds: number[];
   usersAttended?: string[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 /**

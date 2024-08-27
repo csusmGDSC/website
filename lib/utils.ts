@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { format } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -33,3 +34,34 @@ export function convertToReadableDate(
 
   return `${months[month]} ${day}, ${year}`;
 }
+
+/**
+ * Formats a given number of minutes into a human-readable string, including hours and minutes.
+ *
+ * @param {number} minutes - The number of minutes to format.
+ * @return {string} A string representing the formatted minutes, e.g. "1h 30m" or "45m".
+ */
+export const formatMinutes = (minutes: number) => {
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+
+  const hourString = hours > 0 ? `${hours}h` : "";
+  const minuteString = remainingMinutes > 0 ? `${remainingMinutes}m` : "";
+
+  return [hourString, minuteString].filter(Boolean).join(" ");
+};
+
+/**
+ * Converts a file to a buffer.
+ *
+ * @param {File} file - The file to be converted.
+ * @return {Promise<Buffer>} A promise that resolves with the file buffer.
+ */
+export const fileToBuffer = async (file: File): Promise<Buffer> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(Buffer.from(reader.result as ArrayBuffer));
+    reader.onerror = reject;
+    reader.readAsArrayBuffer(file);
+  });
+};

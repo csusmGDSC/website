@@ -5,8 +5,8 @@ import { GDSC_BRANCHES, GDSC_POSITIONS } from "@/types/gdsc-user";
 import { EVENT_TYPES, ROOM_TYPES } from "@/types/gdsc-event";
 
 export const SHORT_BIO_MAX_LENGTH = 200;
-export const DESCRIPTION_MAX_LENGTH = 500;
-export const ABOUT_MAX_LENGTH = 2000;
+export const DESCRIPTION_MAX_LENGTH = 200;
+export const ABOUT_MAX_LENGTH = 3000;
 
 /**
  * Zod Schema for onboarding user form.
@@ -34,6 +34,14 @@ export const OnboardingSchema = z
     path: ["branch"],
   });
 
+const MAX_UPLOAD_SIZE = 1024 * 1024 * 16; // 16MB MAX BYTES ON MONGODB
+const ACCEPTED_FILE_TYPES = [
+  "image/png",
+  "image/jpeg",
+  "image/jpg",
+  "image/webp",
+];
+
 /**
  * Zod Schema for GDSC event form.
  */
@@ -49,17 +57,20 @@ export const EventSchema = z
       })
       .optional(),
     tags: z.array(z.string()).optional(),
-    duration: z.number().optional(),
+    duration: z.number().min(0).optional(),
     type: z.enum(EVENT_TYPES).nullable(),
     location: z.string().optional(),
     date: z.date(),
     githubRepo: z.string().url().optional().or(z.literal("")),
     slidesURL: z.string().url().optional().or(z.literal("")),
-    imageSrc: z.string().optional(),
-    extraImageSrcs: z.array(z.string()).optional(),
+    imageSrc: z.instanceof(File).optional(),
     description: z.string().min(2).max(DESCRIPTION_MAX_LENGTH),
-    about: z.string().min(2).max(ABOUT_MAX_LENGTH),
-    attendeeIds: z.array(z.string()).optional(),
+    about: z
+      .object({
+        body: z.string().max(ABOUT_MAX_LENGTH).optional(),
+        images: z.array(z.instanceof(File)).optional(),
+      })
+      .optional(),
     organizerIds: z.array(z.string()),
   })
   .refine((data) => data.type !== null, {
@@ -69,4 +80,22 @@ export const EventSchema = z
   .refine((data) => data?.room?.type !== null, {
     message: "Room type is required.",
     path: ["room", "type"],
-  });
+  })
+  .refine((data) => {
+    let incorrectFileSizeFound = false;
+
+    for (const file of data.about?.images || []) {
+      if (file.size > MAX_UPLOAD_SIZE) {
+        incorrectFileSizeFound = true;
+      }
+    }
+  }, "Each file must be less than 3MB")
+  .refine((data) => {
+    let incorrectFileTypeFound = false;
+
+    for (const file of data.about?.images || []) {
+      if (!ACCEPTED_FILE_TYPES.includes(file.type)) {
+        incorrectFileTypeFound = true;
+      }
+    }
+  }, "Each file size must be either PNG, JPEG, JPG, or WEBP");
