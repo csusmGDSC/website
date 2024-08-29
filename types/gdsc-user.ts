@@ -51,4 +51,5 @@ export interface GDSCUser {
   bio?: string;
   tags?: string[];
   website?: string;
+  graduationYear?: number;
 }

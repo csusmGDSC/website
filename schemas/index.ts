@@ -24,6 +24,7 @@ export const OnboardingSchema = z
     instagram: z.string().url().optional().or(z.literal("")),
     twitter: z.string().url().optional().or(z.literal("")),
     discord: z.string().optional(),
+    graduationYear: z.number().optional(),
   })
   .refine((data) => data.position !== null, {
     message: "Position is required.",
@@ -47,17 +48,11 @@ const ACCEPTED_FILE_TYPES = [
  */
 export const EventSchema = z
   .object({
-    name: z.string().min(2).max(100),
-    room: z
-      .object({
-        building: z.string().min(2).max(100),
-        room: z.string().min(2).max(100),
-        type: z.enum(ROOM_TYPES).nullable(),
-        capacity: z.number(),
-      })
-      .optional(),
+    eventName: z.string().min(2).max(100),
+    room: z.string().optional(),
     tags: z.array(z.string()).optional(),
-    duration: z.number().min(0).optional(),
+    startTime: z.string(),
+    endTime: z.string(),
     type: z.enum(EVENT_TYPES).nullable(),
     location: z.string().optional(),
     date: z.date(),
@@ -77,10 +72,16 @@ export const EventSchema = z
     message: "Event type is required.",
     path: ["type"],
   })
-  .refine((data) => data?.room?.type !== null, {
-    message: "Room type is required.",
-    path: ["room", "type"],
-  })
+  .refine((data) => {
+    const time12HourPattern = /^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i;
+
+    if (
+      !time12HourPattern.test(data.startTime) ||
+      !time12HourPattern.test(data.endTime)
+    ) {
+      return false;
+    }
+  }, "Start and end time must be in the format 'HH:MM AM/PM'.")
   .refine((data) => {
     let incorrectFileSizeFound = false;
 
@@ -89,7 +90,7 @@ export const EventSchema = z
         incorrectFileSizeFound = true;
       }
     }
-  }, "Each file must be less than 3MB")
+  }, "Each file must be less than 16MB")
   .refine((data) => {
     let incorrectFileTypeFound = false;
 

@@ -11,9 +11,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { EVENT_TYPES, GDSCEvent } from "@/types/gdsc-event";
+import { EVENT_TYPES } from "@/types/gdsc-event";
 import { Button } from "@/components/ui/shadcn/button";
-import { cn, formatMinutes } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { Calendar as CalendarIcon, ImageIcon, XIcon } from "lucide-react";
 import { format, formatDate, formatDuration } from "date-fns";
 
@@ -87,9 +87,10 @@ const AddNewEventModal = ({
   const form = useForm<z.infer<typeof EventSchema>>({
     resolver: zodResolver(EventSchema),
     defaultValues: {
-      name: "",
+      eventName: "",
       tags: [],
-      duration: 0,
+      startTime: "Not set",
+      endTime: "Not set",
       type: null,
       location: "California State University, San Marcos",
       date: new Date(),
@@ -99,18 +100,31 @@ const AddNewEventModal = ({
   });
 
   const onBack = () => {
-    setStep((value) => value - 1);
+    // Skip the location step since event is virtual
+    if (form.watch("type") === "virtual" && step - 1 === STEPS.LOCATION) {
+      setStep((value) => value - 2);
+    } else {
+      setStep((value) => value - 1);
+    }
   };
 
   const onNext = () => {
-    setStep((value) => value + 1);
+    // Skip the location step since event is virtual
+    if (form.watch("type") === "virtual" && step + 1 === STEPS.LOCATION) {
+      setStep((value) => value + 2);
+    } else {
+      setStep((value) => value + 1);
+    }
   };
 
   const handleSubmit = async (values: z.infer<typeof EventSchema>) => {
-    console.log("HERE", values);
-    // if (res?.error) {
-    //   setError(res?.error);
-    // }
+    // If there are issues with the form input, don't close the modal
+    if (!form.formState.isDirty) {
+      setAddEventModalOpen(false);
+      setStep(STEPS.BASIC_INFO);
+    }
+
+    console.log("SUBMITTED FORM: ", values);
   };
 
   const InfoSection = (
@@ -120,7 +134,7 @@ const AddNewEventModal = ({
       {/* NAME OF EVENT */}
       <FormField
         control={form.control}
-        name="name"
+        name="eventName"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Name of Event</FormLabel>
@@ -211,30 +225,35 @@ const AddNewEventModal = ({
       />
 
       {/* DURATION OF EVENT */}
-      <FormField
-        control={form.control}
-        name="duration"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Duration of Event</FormLabel>
-            <FormControl>
-              <Input
-                placeholder="Enter in minutes"
-                {...field}
-                type="number"
-                min="0"
-                onChange={(e) => {
-                  // Convert the string value to a number and update the field
-                  const numericValue = Number(e.target.value);
-                  field.onChange(numericValue);
-                }}
-                value={field.value || ""}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <div className="flex gap-2">
+        <FormField
+          control={form.control}
+          name="startTime"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>From</FormLabel>
+              <FormControl>
+                <Input placeholder="HH:MM AM/PM" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="endTime"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>To</FormLabel>
+              <FormControl>
+                <Input placeholder="HH:MM AM/PM" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
 
       {/* MAIN IMAGE OF THE EVENT */}
       <FormField
@@ -297,7 +316,7 @@ const AddNewEventModal = ({
       {/* ORGANIZERS OF EVENT, TODO: MAKE THIS DYNAMIC, DOESN'T DO ANYTHING YET */}
       <FormField
         control={form.control}
-        name="name"
+        name="organizerIds"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Organizers</FormLabel>
@@ -333,12 +352,6 @@ const AddNewEventModal = ({
   );
 
   const MediaSection = (
-    /**
-     * GitHub Repository (githubRepo)
-        Slides URL (slidesURL)
-        Main Image (imageSrc)
-        Additional Images (extraImageSrcs)
-     */
     <div className="flex flex-col gap-8">
       <h1 className="text-xl text-primary font-semibold">Media & Resources</h1>
 
@@ -373,11 +386,6 @@ const AddNewEventModal = ({
   );
 
   const DescriptionSection = (
-    /**
-     * Description (description)
-        About (about)
-        Tags (tags
-     */
     <div className="flex flex-col gap-8">
       <h1 className="text-xl text-primary font-semibold">Description</h1>
 
@@ -427,10 +435,6 @@ const AddNewEventModal = ({
   );
 
   const LocationSection = (
-    /**
-     * Location (location)
-        Date (date)
-     */
     <div className="flex flex-col gap-8">
       <h1 className="text-xl text-primary font-semibold">Location</h1>
 
@@ -466,7 +470,9 @@ const AddNewEventModal = ({
         render={({ field }) => (
           <FormItem>
             <FormLabel>Room</FormLabel>
-            <div className="p-4 border border-border w-full rounded-xl flex justify-between"></div>
+            <FormControl>
+              <Input {...field} placeholder="Enter where the room is located" />
+            </FormControl>
             <FormMessage />
           </FormItem>
         )}
@@ -492,7 +498,9 @@ const AddNewEventModal = ({
         <div className="flex justify-between">
           <p>Name</p>
           <p className="font-medium text-primary">
-            {form.watch("name") ? form.watch("name") : "Untitled Event"}
+            {form.watch("eventName")
+              ? form.watch("eventName")
+              : "Untitled Event"}
           </p>
         </div>
 
@@ -513,8 +521,9 @@ const AddNewEventModal = ({
         <div className="flex justify-between">
           <p>Duration</p>
           <p className="font-medium text-primary">
-            {form.watch("duration") &&
-              formatMinutes(form.watch("duration") || 0)}
+            {form.watch("startTime") &&
+              form.watch("endTime") &&
+              `${form.watch("startTime")} - ${form.watch("endTime")}`}
           </p>
         </div>
       </div>
@@ -609,16 +618,27 @@ const AddNewEventModal = ({
           <MdEdit />
         </Button>
       </div>
-      <div className="p-4 border border-border w-full rounded-xl">
-        <span className="flex gap-2 items-center">
-          <MdSchool size={25} /> <p>California State University, San Marcos</p>
-        </span>
-      </div>
-      <div className="p-4 border border-border w-full rounded-xl">
-        <span className="flex gap-2 items-center">
-          <FaBuilding size={25} /> <p>Science Hall 242</p>
-        </span>
-      </div>
+      {form.watch("type") === "virtual" ? (
+        <div className="flex justify-between">
+          <p>Virtual</p>
+        </div>
+      ) : (
+        <>
+          <div className="p-4 border border-border w-full rounded-xl">
+            <span className="flex gap-2 items-center">
+              <MdSchool size={25} />{" "}
+              <p>California State University, San Marcos</p>
+            </span>
+          </div>
+          {form.watch("room") && (
+            <div className="p-4 border border-border w-full rounded-xl">
+              <span className="flex gap-2 items-center">
+                <FaBuilding size={25} /> <p>{form.watch("room")}</p>
+              </span>
+            </div>
+          )}
+        </>
+      )}
 
       {/* RESOURCES SUMMARY */}
       <div className="flex justify-between items-center text-primary font-semibold">
@@ -678,7 +698,9 @@ const AddNewEventModal = ({
                     name="Description"
                     focused={step === STEPS.DESCRIPTION_AND_TAGS}
                   />
-                  <Step name="Location" focused={step === STEPS.LOCATION} />
+                  {form.watch("type") === "virtual" ? null : (
+                    <Step name="Location" focused={step === STEPS.LOCATION} />
+                  )}
                   <Step
                     name="Resources"
                     focused={step === STEPS.MEDIA_AND_RESOURCES}
@@ -699,7 +721,9 @@ const AddNewEventModal = ({
                     case STEPS.DESCRIPTION_AND_TAGS:
                       return DescriptionSection;
                     case STEPS.LOCATION:
-                      return LocationSection;
+                      return form.watch("type") === "virtual"
+                        ? null
+                        : LocationSection;
                     case STEPS.MEDIA_AND_RESOURCES:
                       return MediaSection;
                     case STEPS.REVIEW_AND_SUBMIT:
@@ -735,13 +759,6 @@ const AddNewEventModal = ({
                 </Button>
               ) : (
                 <AlertDialogAction
-                  onClick={() => {
-                    // If there are issues with the form input, don't close the modal
-                    if (!form.formState.isDirty) {
-                      setAddEventModalOpen(false);
-                      setStep(STEPS.BASIC_INFO);
-                    }
-                  }}
                   className="bg-blue text-white hover:bg-blue/70 hover:text-white"
                   type="submit"
                 >

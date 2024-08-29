@@ -38,6 +38,7 @@ export const completeOnboarding = async (
     twitter: validatedFields.data.twitter,
     discord: validatedFields.data.discord,
     bio: validatedFields.data.shortBio,
+    graduationYear: validatedFields.data.graduationYear,
     tags: [],
   };
 

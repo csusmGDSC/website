@@ -1,30 +1,34 @@
 /**
- * Interface representing an event.
+ * Interface representing a GDSC Event.
+ *
  * @interface GDSCEvent
  * @property {string} id - The unique identifier of the event.
  * @property {string} name - The name of the event.
- * @property {string} room - The room where the event is held.
- * @property {string} location - The location of the event.
- * @property {Date} date - The date of the event.
- * @property {string} githubRepo - The GitHub repository URL of the event.
- * @property {string} slidesURL - The URL of the event's slides.
- * @property {string} imageSrc - The URL of the event's image.
- * @property {string[]} extraImageSrcs - An array of URLs of extra images associated with the event.
- * @property {string} description - A brief description of the event.
- * @property {string} about - Information about the event.
- * @property {number[]} attendeeIds - An array of attendee IDs.
- * @property {number[]} organizerIds - An array of organizer IDs.
- * @property {string[]} tags - An array of tags associated with the event.
- * @property {"online" | "in-person" | "hybrid"} type - The type of event.
- * @property {number} duration - The duration of the event in minutes.
- * @property {string[]} usersAttended - An array of usernames of users who attended the event.
+ * @property {CSUSM_ROOM} [room] - The room where the event is taking place.
+ * @property {string[]} [tags] - The tags associated with the event.
+ * @property {number} [duration] - The duration of the event in minutes.
+ * @property {(typeof EVENT_TYPES)[number]} type - The type of the event.
+ * @property {string} [location] - The location of the event.
+ * @property {Date | null} date - The date of the event.
+ * @property {string} [githubRepo] - The GitHub repository associated with the event.
+ * @property {string} [slidesURL] - The URL of the slides associated with the event.
+ * @property {File | null} [imageSrc] - The image associated with the event.
+ * @property {File[]} [extraImageSrcs] - The extra images associated with the event.
+ * @property {string} description - The description of the event.
+ * @property {string} [about] - The about text of the event.
+ * @property {string[]} [attendeeIds] - The IDs of the attendees of the event.
+ * @property {string[]} organizerIds - The IDs of the organizers of the event.
+ * @property {string[]} [usersAttendedIds] - The IDs of the users that attended the event.
+ * @property {Date} createdAt - The date when the event was created.
+ * @property {Date} updatedAt - The date when the event was last updated.
  */
 export interface GDSCEvent {
   id: string;
   name: string;
-  room?: CSUSM_ROOM;
+  room?: string;
   tags?: string[];
-  duration?: number;
+  startTime: string; // "HH:MM AM/PM"
+  endTime: string; // "HH:MM AM/PM"
   type: (typeof EVENT_TYPES)[number];
   location?: string;
   date: Date | null;
@@ -34,13 +38,14 @@ export interface GDSCEvent {
   extraImageSrcs?: File[] | null;
   description: string;
   about?: string;
-  attendeeIds?: number[];
-  organizerIds: number[];
-  usersAttended?: string[];
+  attendeeIds?: string[];
+  organizerIds: string[];
+  usersAttendedIds?: string[];
   createdAt: Date;
   updatedAt: Date;
 }
 
+// TO:DO MIGRATE STRING INPUT TO CSUSM_ROOM TYPE.
 /**
  * Interface representing a room in California State University San Marcos.
  * @interface CSUSM_ROOM

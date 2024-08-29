@@ -177,6 +177,32 @@ export default function OnboardingPage() {
               )}
             />
 
+            {/* GRADUATION YEAR INPUT */}
+            <FormField
+              control={form.control}
+              name="graduationYear"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Graduation Year</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Enter year (e.g. 2024)"
+                      {...field}
+                      min="1960"
+                      onChange={(e) => {
+                        // Convert the string value to a number and update the field
+                        const numericValue = Number(e.target.value);
+                        field.onChange(numericValue);
+                      }}
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             {/* POSITION AND BRANCH SECTION */}
             <div className="flex flex-col gap-6">
               <div>

@@ -15,25 +15,26 @@ datasource db {
 
 // Prisma schema for GDSCEvent
 model GDSCEvent {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  name           String
-  roomId         String?    @db.ObjectId
-  tags           String[]
-  duration       Int?
-  type           EventType
-  location       String?
-  date           DateTime?
-  githubRepo     String?
-  slidesURL      String?
-  imageSrc       String?
-  extraImageSrcs Bytes[]
-  description    String
-  about          String?
-  attendeeIds    Int[]
-  organizerIds   Int[]
-  usersAttended  String[]
-  updatedAt      DateTime
-  createdAt      DateTime
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  roomId           String?   @db.ObjectId
+  tags             String[]
+  startTime        String
+  endTime          String
+  type             EventType
+  location         String?
+  date             DateTime?
+  githubRepo       String?
+  slidesURL        String?
+  imageSrc         String?
+  extraImageSrcs   Bytes[]
+  description      String
+  about            String?
+  attendeeIds      String[]
+  organizerIds     String[]
+  usersAttendedIds String[]
+  updatedAt        DateTime
+  createdAt        DateTime
 
   room CSUSM_ROOM? @relation(fields: [roomId], references: [id])
 
