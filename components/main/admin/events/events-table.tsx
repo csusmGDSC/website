@@ -15,7 +15,7 @@ import {
 import { DataTable } from "../data-table";
 import { EventTableColumns } from "./events-column-def";
 import { testEvents } from "@/constants/test/example-events";
-import AddNewEventModal from "./new-event-modal";
+import { useRouter } from "next/navigation";
 
 const EventsTable = () => {
   return (
@@ -36,7 +36,7 @@ export default EventsTable;
  * @return {JSX.Element} The JSX element representing the events table actions.
  */
 const EventsTableActions = () => {
-  const [addEventModalOpen, setAddEventModalOpen] = React.useState(false);
+  const router = useRouter();
 
   const ButtonActions: TableActionButtonProps[] = [
     {
@@ -44,7 +44,7 @@ const EventsTableActions = () => {
       icon: IoMdAdd,
       className: "hover:text-blue/80",
       id: "add",
-      onClick: () => setAddEventModalOpen(true),
+      onClick: () => router.push("/admin/create-event"),
     },
     {
       action: "Refresh",
@@ -73,12 +73,6 @@ const EventsTableActions = () => {
         <Input placeholder="Filter events..." className="max-w-xs" />
         <FaSearch className="absolute right-4 top-1 translate-y-1/2 text-blue" />
       </span>
-
-      {/* Add Event Modal, Triggers when Add button is clicked */}
-      <AddNewEventModal
-        addEventModalOpen={addEventModalOpen}
-        setAddEventModalOpen={setAddEventModalOpen}
-      />
     </div>
   );
 };

@@ -72,16 +72,22 @@ export const EventSchema = z
     message: "Event type is required.",
     path: ["type"],
   })
-  .refine((data) => {
-    const time12HourPattern = /^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i;
+  .refine(
+    (data) => {
+      const time12HourPattern = /^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i;
 
-    if (
-      !time12HourPattern.test(data.startTime) ||
-      !time12HourPattern.test(data.endTime)
-    ) {
-      return false;
+      if (
+        !time12HourPattern.test(data.startTime) ||
+        !time12HourPattern.test(data.endTime)
+      ) {
+        return false;
+      }
+    },
+    {
+      message: "Start and end time must be in the format 'HH:MM AM/PM'.",
+      path: ["startTime", "endTime"],
     }
-  }, "Start and end time must be in the format 'HH:MM AM/PM'.")
+  )
   .refine((data) => {
     let incorrectFileSizeFound = false;
 
@@ -99,4 +105,10 @@ export const EventSchema = z
         incorrectFileTypeFound = true;
       }
     }
-  }, "Each file size must be either PNG, JPEG, JPG, or WEBP");
+  }, "Each file size must be either PNG, JPEG, JPG, or WEBP")
+  .refine((data) => data.type === "virtual" || data.room !== null, {
+    message: "Room is required for non-virtual events.",
+    path: ["room"],
+  });
+
+export type EventFormValues = z.infer<typeof EventSchema>;
