@@ -65,3 +65,24 @@ export const fileToBuffer = async (file: File): Promise<Buffer> => {
     reader.readAsArrayBuffer(file);
   });
 };
+
+/**
+ * Converts a given buffer to a base64 encoded string.
+ *
+ * @param {Buffer} buffer - The buffer to be converted.
+ * @return {string} A base64 encoded string representation of the buffer.
+ */
+export const bufferToBase64 = (buffer: Buffer): string => {
+  return buffer.toString("base64");
+};
+
+/**
+ * Converts an image object to a data URL string.
+ *
+ * @param {Object} image - The image object containing data and mimeType.
+ * @return {string} A data URL string representation of the image.
+ */
+export const getImageDataUrl = (image: { data: Buffer; mimeType: string }): string => {
+  const base64String = bufferToBase64(image.data);
+  return `data:${image.mimeType};base64,${base64String}`;
+};
