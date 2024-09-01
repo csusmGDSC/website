@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useClerk, useUser } from "@clerk/nextjs";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarImage } from "../ui/avatar";
 import { LogOut, Settings } from "lucide-react";
 import { GrUserAdmin } from "react-icons/gr";
 import { MdManageHistory } from "react-icons/md";
@@ -31,7 +31,6 @@ const UserButton = () => {
             alt={user.user?.fullName || "User"}
             className="animate-in fade-in-50 zoom-in-90"
           />
-          <AvatarFallback className="rounded-md">CN</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
 
@@ -48,7 +47,6 @@ const UserButton = () => {
                 src={user.user?.imageUrl}
                 alt={user.user?.fullName || "User"}
               />
-              <AvatarFallback>{user.user?.firstName![0]}</AvatarFallback>
             </Avatar>
             <div className="grid flex-1">
               <div className="font-medium">{user.user?.fullName}</div>

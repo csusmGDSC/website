@@ -1,4 +1,5 @@
-"use client"
+"use server";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AvatarCard from "@/components/ui/cards/avatar-card";
 import Container from "@/components/ui/container";
@@ -7,9 +8,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { LucideMonitorPlay } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { CiInstagram } from "react-icons/ci";
-import { FaExternalLinkAlt } from "react-icons/fa";
 import {
   FaAngleLeft,
   FaBuilding,
@@ -21,15 +21,31 @@ import {
 } from "react-icons/fa6";
 import { GrResources } from "react-icons/gr";
 import { MdAccessTime, MdArticle, MdPerson } from "react-icons/md";
-import { testEvents } from "@/constants/test/example-events";
-import { GDSCEvent } from "@/types/gdsc-event";
- 
-const TEST_EVENT = testEvents[0]
+import { getEventById } from "@/actions/event";
+import dynamic from "next/dynamic";
+import EmptyState from "@/components/main/empty-state";
 
-// TO-DO: Make the event details more dynamic using Event interface
+const Renderer = dynamic(() => import("@/components/ui/renderer"), {
+  ssr: false,
+});
 
-const EventDetails = () => {
-  const [eventData, setEventData] = useState<GDSCEvent>(TEST_EVENT);
+interface IParams {
+  eventID: string;
+}
+
+export default async function EventDetails({ params }: { params: IParams }) {
+  const eventData = await getEventById(params.eventID);
+
+  if (!eventData) {
+    return (
+      <EmptyState
+        label="Event not found"
+        actionLabel="Go back to events"
+        href="/events"
+      />
+    );
+  }
+
   return (
     <section className="w-full pt-10">
       <Container className="custom-max-width flex flex-col gap-10">
@@ -59,25 +75,21 @@ const EventDetails = () => {
           <div className="flex-1 h-full flex flex-col gap-6">
             <div>
               <h1 className="text-3xl font-bold text-primary">
-                {eventData.name}
+                {eventData?.name}
               </h1>
               <span className="text-primary/90 items-center flex gap-2">
                 <FaBuilding />
-                <h2 className="font-semibold">{eventData.room}</h2>
+                <h2 className="font-semibold">{eventData?.room}</h2>
               </span>
               <span className="text-primary/70 flex items-center gap-2">
                 <FaLocationDot />
-                <h3 className="font-semibold">
-                  {eventData.location}
-                </h3>
+                <h3 className="font-semibold">{eventData?.location}</h3>
               </span>
             </div>
 
             <hr />
 
-            <p className="text-sm text-primary">
-              {eventData.description}
-            </p>
+            <p className="text-sm text-primary">{eventData?.description}</p>
 
             <div className="flex flex-row gap-4 text-neutral-700">
               <a
@@ -118,9 +130,10 @@ const EventDetails = () => {
 
             <h1 className="text-3xl font-bold text-primary">About the Event</h1>
 
-            <p className="text-sm text-primary">
-              {eventData.about}
-            </p>
+            <div>
+              {/* We have to use a quill editor to render the OPs language, so we can't use p tags here */}
+              <Renderer value={eventData?.about || ""} />
+            </div>
 
             <hr />
 
@@ -128,13 +141,11 @@ const EventDetails = () => {
               <h1 className="text-3xl font-bold text-primary">Location</h1>
               <span className="text-primary/90 items-center flex gap-2">
                 <FaBuilding />
-                <h2 className="font-semibold">{eventData.room}</h2>
+                <h2 className="font-semibold">{eventData?.room}</h2>
               </span>
               <span className="text-primary/70 flex items-center gap-2">
                 <FaLocationDot />
-                <h3 className="font-semibold">
-                  {eventData.location}
-                </h3>
+                <h3 className="font-semibold">{eventData?.location}</h3>
               </span>
             </div>
 
@@ -220,12 +231,22 @@ const EventDetails = () => {
               <span className="flex items-center gap-2">
                 <MdAccessTime />
                 <p className="text-primary font-semibold">
-                  {eventData.date ? eventData.date.toLocaleDateString() : ''} at{" "}
-                  {eventData.date ? eventData.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
+                  {eventData?.date ? eventData.date.toLocaleDateString() : ""}{" "}
+                  at{" "}
+                  {eventData?.date
+                    ? eventData.date.toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })
+                    : ""}
                 </p>
               </span>
 
-              <Link href={eventData.githubRepo || ''} target="_blank" className="w-full">
+              <Link
+                href={eventData?.githubRepo || ""}
+                target="_blank"
+                className="w-full"
+              >
                 <Button
                   variant="outline"
                   className="w-full gap-2 font-semibold text-primary/90"
@@ -233,7 +254,11 @@ const EventDetails = () => {
                   <FaGithub /> Source Code
                 </Button>
               </Link>
-              <Link href={eventData.slidesURL || ''} target="_blank" className="w-full">
+              <Link
+                href={eventData?.slidesURL || ""}
+                target="_blank"
+                className="w-full"
+              >
                 <Button
                   variant="outline"
                   className="w-full font-semibold text-primary/90"
@@ -246,16 +271,15 @@ const EventDetails = () => {
               </Button>
               <div className="flex gap-2 my-4 text-primary/70 justify-center items-center">
                 <MdPerson size={30} />
-                <p>Attendees: {eventData.attendeeIds?.length ?? 0}</p>
+                <p>Attendees: {eventData?.attendeeIds?.length ?? 0}</p>
               </div>
             </div>
           </div>
         </div>
 
-        <hr />
+        {/* <hr />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-14 sm:gap-4">
-          {/* RESOURCES TO GET STARTED */}
           <div>
             <h1 className="text-3xl font-bold text-primary">
               Resources To Get Started
@@ -282,7 +306,6 @@ const EventDetails = () => {
             </div>
           </div>
 
-          {/* LIST OF ATTENDEES */}
           <div>
             <h1 className="text-3xl font-bold text-primary">
               See who is attending
@@ -308,13 +331,11 @@ const EventDetails = () => {
               </ScrollArea>
             </div>
           </div>
-        </div>
+        </div> */}
       </Container>
     </section>
   );
-};
-
-export default EventDetails;
+}
 
 const Attendee = ({
   name,
