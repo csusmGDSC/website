@@ -4,7 +4,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./shadcn/tooltip";
+} from "./tooltip";
 
 export const Hint = ({
   children,
@@ -16,7 +16,7 @@ export const Hint = ({
   return (
     <TooltipProvider>
       <Tooltip delayDuration={150}>
-        <TooltipTrigger>{children}</TooltipTrigger>
+        <TooltipTrigger type="button">{children}</TooltipTrigger>
         <TooltipContent className="text-base font-medium">
           <p>{label}</p>
         </TooltipContent>

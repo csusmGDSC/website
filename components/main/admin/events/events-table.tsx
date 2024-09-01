@@ -1,7 +1,7 @@
 "use client";
 
 import Container from "@/components/ui/container";
-import { Input } from "@/components/ui/shadcn/input";
+import { Input } from "@/components/ui/input";
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
@@ -44,7 +44,7 @@ const EventsTableActions = () => {
       icon: IoMdAdd,
       className: "hover:text-blue/80",
       id: "add",
-      onClick: () => router.push("/admin/create-event"),
+      onClick: () => router.push("/new-admin/events/create-event"),
     },
     {
       action: "Refresh",

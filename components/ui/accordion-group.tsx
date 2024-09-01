@@ -4,7 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/shadcn/accordion";
+} from "@/components/ui/accordion";
 
 interface AccordionGroupProps {
   title?: string;

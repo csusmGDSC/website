@@ -21,7 +21,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/shadcn/table";
+} from "@/components/ui/table";
 import DateTablePagination from "./table-pagination";
 
 interface DataTableProps<TData, TValue> {

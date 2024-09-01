@@ -4,14 +4,14 @@ import { EventFormValues } from "@/schemas";
 import { UseFormReturn } from "react-hook-form";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { MdEdit, MdSchool } from "react-icons/md";
-import { Button } from "@/components/ui/shadcn/button";
+import { MdEdit, MdLaptop, MdSchool } from "react-icons/md";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useUser } from "@clerk/nextjs";
 import { formatDate } from "date-fns";
 import { FaBuilding } from "react-icons/fa6";
-import { ScrollArea, ScrollBar } from "@/components/ui/shadcn/scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { STEPS } from "./sidebar";
 
 const Renderer = dynamic(() => import("@/components/ui/renderer"), {
@@ -28,20 +28,24 @@ const Summary = ({ form, goTo }: SummaryProps) => {
 
   return (
     <FormWrapper
-      title="Information"
-      description="Please provide basic information about the event"
+      title="Summary"
+      description="Please review the details of the event before creating it"
     >
       {/* EVENT DETAILS SUMMARY */}
       <div className="flex justify-between items-center text-primary font-semibold">
         <p className="text-xl">Event Details</p>
-        <Button onClick={() => goTo(STEPS.BASIC_INFO)} variant="outline">
+        <Button
+          onClick={() => goTo(STEPS.BASIC_INFO)}
+          variant="outline"
+          type="button"
+        >
           <MdEdit />
         </Button>
       </div>
-      <div>
+      <div className="bg-primary-foreground rounded-xl border border-border p-5 text-sm">
         <div className="flex justify-between">
           <p>Name</p>
-          <p className="font-medium text-primary">
+          <p className="text-primary/80">
             {form.watch("eventName")
               ? form.watch("eventName")
               : "Untitled Event"}
@@ -50,21 +54,21 @@ const Summary = ({ form, goTo }: SummaryProps) => {
 
         <div className="flex justify-between">
           <p>Type</p>
-          <p className="font-medium text-primary">
+          <p className="text-primary/80">
             {form.watch("type") ? form.watch("type") : "Unselected"}
           </p>
         </div>
 
         <div className="flex justify-between">
           <p>Date</p>
-          <p className="font-medium text-primary">
+          <p className="text-primary/80">
             {formatDate(form.watch("date"), "PPP")}
           </p>
         </div>
 
         <div className="flex justify-between">
           <p>Duration</p>
-          <p className="font-medium text-primary">
+          <p className="text-primary/80">
             {form.watch("startTime") &&
               form.watch("endTime") &&
               `${form.watch("startTime")} - ${form.watch("endTime")}`}
@@ -74,7 +78,7 @@ const Summary = ({ form, goTo }: SummaryProps) => {
 
       {/* ORGANIZERS SUMMARY */}
       <p className="text-xl text-primary font-semibold">Organizers</p>
-      <div className="w-full border border-border rounded-xl p-4 flex items-center justify-between">
+      <div className="w-full border border-border rounded-xl p-5 bg-primary-foreground flex items-center justify-between">
         <span className="flex gap-2 items-center">
           <Avatar>
             <AvatarImage src={user?.imageUrl} />
@@ -112,25 +116,28 @@ const Summary = ({ form, goTo }: SummaryProps) => {
         <Button
           onClick={() => goTo(STEPS.DESCRIPTION_AND_TAGS)}
           variant="outline"
+          type="button"
         >
           <MdEdit />
         </Button>
       </div>
-      <p className="text-primary text-wrap">
-        {form.watch("description").length > 0
-          ? form.watch("description")
-          : "No description provided"}
-      </p>
+      <div className="bg-primary-foreground rounded-xl border border-border p-5">
+        <p className="text-primary text-sm text-wrap">
+          {form.watch("description")?.length > 0
+            ? form.watch("description")
+            : "No description provided"}
+        </p>
+      </div>
 
       {/* ABOUT SUMMARY */}
       <p className="text-xl text-primary font-semibold">About</p>
-      <p className="text-primary text-wrap">
+      <div className="text-primary text-wrap bg-primary-foreground rounded-xl border border-border p-5">
         {form.watch("about") ? (
           <Renderer value={form.watch("about")?.body || ""} />
         ) : (
           "No about provided"
         )}
-      </p>
+      </div>
 
       {/* EXTRA IMAGES SUMMARY */}
       <p className="text-xl text-primary font-semibold">Extra Images</p>
@@ -152,31 +159,37 @@ const Summary = ({ form, goTo }: SummaryProps) => {
           <ScrollBar orientation="horizontal" />
         </ScrollArea>
       ) : (
-        <p>No extra images provided</p>
+        <p className="text-sm">No extra images provided</p>
       )}
 
       {/* LOCATION AND ROOM SUMMARY */}
       <div className="flex justify-between items-center">
         <p className="text-xl text-primary font-semibold">Location</p>
-        <Button onClick={() => goTo(STEPS.LOCATION)} variant="outline">
+        <Button
+          onClick={() => goTo(STEPS.LOCATION)}
+          variant="outline"
+          type="button"
+        >
           <MdEdit />
         </Button>
       </div>
       {form.watch("type") === "virtual" ? (
-        <div className="flex justify-between">
-          <p>Virtual</p>
+        <div className="p-5 bg-primary-foreground border border-border w-full rounded-xl">
+          <span className="flex gap-2 items-center text-primary text-sm">
+            <MdLaptop size={25} /> <p>Virtual</p>
+          </span>
         </div>
       ) : (
         <>
-          <div className="p-4 border border-border w-full rounded-xl">
-            <span className="flex gap-2 items-center">
+          <div className="p-5 bg-primary-foreground border border-border w-full rounded-xl">
+            <span className="flex gap-2 items-center text-primary text-sm">
               <MdSchool size={25} />{" "}
               <p>California State University, San Marcos</p>
             </span>
           </div>
           {form.watch("room") && (
-            <div className="p-4 border border-border w-full rounded-xl">
-              <span className="flex gap-2 items-center">
+            <div className="p-5 bg-primary-foreground border border-border w-full rounded-xl">
+              <span className="flex gap-2 items-center text-primary text-sm">
                 <FaBuilding size={25} /> <p>{form.watch("room")}</p>
               </span>
             </div>
@@ -190,40 +203,43 @@ const Summary = ({ form, goTo }: SummaryProps) => {
         <Button
           onClick={() => goTo(STEPS.MEDIA_AND_RESOURCES)}
           variant="outline"
+          type="button"
         >
           <MdEdit />
         </Button>
       </div>
-      <div className="flex justify-between">
-        <p>Github Repository</p>
-        {form.watch("githubRepo") ? (
-          <Link
-            className="hover:underline text-blue"
-            // @ts-ignore
-            href={form.watch("githubRepo")}
-            target="_blank"
-          >
-            {form.watch("githubRepo")}
-          </Link>
-        ) : (
-          <p>No URL provided</p>
-        )}
-      </div>
+      <div className="bg-primary-foreground rounded-xl border border-border p-5 text-sm">
+        <div className="flex justify-between">
+          <p>Github Repository</p>
+          {form.watch("githubRepo") ? (
+            <Link
+              className="hover:underline text-blue"
+              // @ts-ignore
+              href={form.watch("githubRepo")}
+              target="_blank"
+            >
+              {form.watch("githubRepo")}
+            </Link>
+          ) : (
+            <p>No URL provided</p>
+          )}
+        </div>
 
-      <div className="flex justify-between">
-        <p>Slides</p>
-        {form.watch("slidesURL") ? (
-          <Link
-            className="hover:underline text-blue"
-            // @ts-ignore
-            href={form.watch("slidesURL")}
-            target="_blank"
-          >
-            {form.watch("slidesURL")}
-          </Link>
-        ) : (
-          <p>No URL provided</p>
-        )}
+        <div className="flex justify-between">
+          <p>Slides</p>
+          {form.watch("slidesURL") ? (
+            <Link
+              className="hover:underline text-blue"
+              // @ts-ignore
+              href={form.watch("slidesURL")}
+              target="_blank"
+            >
+              {form.watch("slidesURL")}
+            </Link>
+          ) : (
+            <p>No URL provided</p>
+          )}
+        </div>
       </div>
     </FormWrapper>
   );

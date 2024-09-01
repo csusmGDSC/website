@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import { cn, convertToReadableDate } from "@/lib/utils";
-import { Button } from "@/components/ui/shadcn/button";
+import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "lucide-react";
 
 const BentoGrid = ({

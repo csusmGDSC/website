@@ -11,9 +11,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { MdSchool } from "react-icons/md";
-import { Button } from "@/components/ui/shadcn/button";
+import { Button } from "@/components/ui/button";
 import { XIcon } from "lucide-react";
-import { Input } from "@/components/ui/shadcn/input";
+import { Input } from "@/components/ui/input";
 
 interface LocationFormProps {
   form: UseFormReturn<EventFormValues>;
@@ -41,6 +41,7 @@ const LocationForm = ({ form }: LocationFormProps) => {
                 variant="ghost"
                 size="sm"
                 onClick={() => {}}
+                type="button"
                 className="rounded-full"
               >
                 <XIcon />

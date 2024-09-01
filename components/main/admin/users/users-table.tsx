@@ -1,8 +1,8 @@
 "use client";
 
 import Container from "@/components/ui/container";
-import { Button } from "@/components/ui/shadcn/button";
-import { Input } from "@/components/ui/shadcn/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";

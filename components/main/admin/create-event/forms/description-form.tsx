@@ -57,9 +57,10 @@ const DescriptionForm = ({ form }: DescriptionFormProps) => {
       <Controller
         name="about"
         control={form.control}
-        defaultValue={{ images: [], body: "" }}
+        defaultValue={form.getValues("about")}
         render={({ field }) => (
           <div className="w-full">
+            <FormLabel>About</FormLabel>
             <Editor
               control={form.control}
               placeholder="Write a in-depth summary of the event."

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/shadcn/button";
+import { Button } from "@/components/ui/button";
 import React from "react";
 import { IoIosDocument } from "react-icons/io";
 import { MdEvent } from "react-icons/md";

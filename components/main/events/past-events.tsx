@@ -1,6 +1,6 @@
 import CardGrid from "@/components/ui/cards/card-grid";
 import ContentCard from "@/components/ui/cards/content-card";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TitleHeader from "@/components/ui/title-header";
 import { convertToReadableDate } from "@/lib/utils";
 import { GDSCEvent } from "@/types/gdsc-event";

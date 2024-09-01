@@ -10,9 +10,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/shadcn/input";
+import { Input } from "@/components/ui/input";
 import { EVENT_TYPES } from "@/types/gdsc-event";
-import { Button } from "@/components/ui/shadcn/button";
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
@@ -21,7 +21,7 @@ import {
 import { CalendarIcon, ImageIcon, XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import { Calendar } from "@/components/ui/shadcn/calendar";
+import { Calendar } from "@/components/ui/calendar";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useUser } from "@clerk/nextjs";
@@ -32,7 +32,6 @@ interface EventInfoFormProps {
 
 const EventInfoForm = ({ form }: EventInfoFormProps) => {
   const { user } = useUser();
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const imageElementRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -70,6 +69,12 @@ const EventInfoForm = ({ form }: EventInfoFormProps) => {
                     type="button"
                     variant="outline"
                     onClick={() => {
+                      if (event_type === "virtual") {
+                        form.setValue("room", "N/A");
+                      } else {
+                        form.resetField("room");
+                      }
+
                       field.onChange(
                         field.value === event_type ? null : event_type
                       );
@@ -107,6 +112,7 @@ const EventInfoForm = ({ form }: EventInfoFormProps) => {
                       "w-[280px] justify-start text-left font-normal",
                       !field.value && "text-muted-foreground"
                     )}
+                    type="button"
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
                     {field.value ? (
@@ -177,11 +183,6 @@ const EventInfoForm = ({ form }: EventInfoFormProps) => {
               ref={imageElementRef}
               onChange={(event) => {
                 const image = event.target.files?.[0];
-
-                // Set selected image for user to see
-                setSelectedImage(image || null);
-
-                // Set form field value to image
                 field.onChange(image || null);
               }}
               className="hidden"
@@ -189,10 +190,10 @@ const EventInfoForm = ({ form }: EventInfoFormProps) => {
 
             <FormLabel>Main Image</FormLabel>
             <div className="flex flex-col gap-2">
-              {selectedImage ? (
+              {form.watch("imageSrc") ? (
                 <div className="relative w-full h-[300px]">
                   <Image
-                    src={URL.createObjectURL(selectedImage)}
+                    src={URL.createObjectURL(form.watch("imageSrc")!)}
                     alt="event-image"
                     className="rounded-xl border object-cover aspect-square w-full h-full"
                     width={0}
@@ -202,8 +203,9 @@ const EventInfoForm = ({ form }: EventInfoFormProps) => {
                   <Button
                     size="sm"
                     variant="outline"
+                    type="button"
                     className="absolute top-2.5 right-2.5"
-                    onClick={() => setSelectedImage(null)}
+                    onClick={() => field.onChange(null)}
                   >
                     <XIcon />
                   </Button>
@@ -211,6 +213,7 @@ const EventInfoForm = ({ form }: EventInfoFormProps) => {
               ) : (
                 <Button
                   variant="outline"
+                  type="button"
                   onClick={() => imageElementRef.current?.click()}
                   className="text-primary gap-2 h-[300px]"
                 >
@@ -223,40 +226,41 @@ const EventInfoForm = ({ form }: EventInfoFormProps) => {
       />
 
       {/* ORGANIZERS OF EVENT, TODO: MAKE THIS DYNAMIC, DOESN'T DO ANYTHING YET */}
-      <FormField
+      {/* <FormField
         control={form.control}
         name="organizerIds"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Organizers</FormLabel>
-            <div className="w-full border border-border rounded-xl p-4 flex items-center justify-between">
-              <span className="flex gap-2 items-center">
-                <Avatar>
-                  <AvatarImage src={user?.imageUrl} />
-                  <AvatarFallback>{user?.fullName![0] || "?"}</AvatarFallback>
-                </Avatar>
+            <FormLabel>Organizers</FormLabel> */}
+      <div className="w-full border border-border rounded-xl p-5 bg-primary-foreground flex items-center justify-between">
+        <span className="flex gap-2 items-center">
+          <Avatar>
+            <AvatarImage src={user?.imageUrl} />
+            <AvatarFallback>{user?.fullName![0] || "?"}</AvatarFallback>
+          </Avatar>
 
-                <span>
-                  <p className="text-sm text-primary/90">{user?.fullName}</p>
-                  <p className="text-sm text-primary/70">
-                    {user?.publicMetadata.branch as string} team
-                  </p>
-                </span>
-              </span>
+          <span>
+            <p className="text-sm text-primary/90">{user?.fullName}</p>
+            <p className="text-sm text-primary/70">
+              {user?.publicMetadata.branch as string} team
+            </p>
+          </span>
+        </span>
 
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => {}}
-                className="rounded-full"
-              >
-                <XIcon />
-              </Button>
-            </div>
-            <FormMessage />
+        <Button
+          variant="ghost"
+          size="sm"
+          type="button"
+          onClick={() => {}}
+          className="rounded-full"
+        >
+          <XIcon />
+        </Button>
+      </div>
+      {/* <FormMessage />
           </FormItem>
         )}
-      />
+      /> */}
     </FormWrapper>
   );
 };

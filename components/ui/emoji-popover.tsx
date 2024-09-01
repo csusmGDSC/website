@@ -12,7 +12,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/shadcn/tooltip";
+} from "@/components/ui/tooltip";
 import { useState } from "react";
 
 interface EmojiPopoverProps {

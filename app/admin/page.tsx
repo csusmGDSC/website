@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/shadcn/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import EventsTable from "@/components/main/admin/events/events-table";
 import UsersTable from "@/components/main/admin/users/users-table";
 import OverviewCards from "@/components/main/admin/overview/overview-cards";

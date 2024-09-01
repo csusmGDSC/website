@@ -1,5 +1,5 @@
 import Container from "@/components/ui/container";
-import { Button } from "@/components/ui/shadcn/button";
+import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import React from "react";
 import { BiQuestionMark } from "react-icons/bi";
