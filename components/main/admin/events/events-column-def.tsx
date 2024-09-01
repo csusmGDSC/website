@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import DataTableColumnHeader from "../table-sorting-button";
 import Link from "next/link";
+import { testEvents } from "@/constants/test/example-events";
 
 export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
   {
@@ -67,44 +68,27 @@ export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
     header: "Time",
     enableHiding: false,
     cell: ({ row }) => {
-      const date = new Date(row.getValue("date"));
-      const duration = row.getValue("duration") as number;
-
-      // Add the duration to the start date in milliseconds
-      const endDate = new Date(date.getTime() + duration * 60000);
-
-      // Format time without seconds (eg. 00:00:00 (default) -> 00:00)
-      const options: Intl.DateTimeFormatOptions = {
-        hour: "2-digit",
-        minute: "2-digit",
-      };
-
-      const startTime = date.toLocaleTimeString(undefined, options);
-      const endTime = endDate.toLocaleTimeString(undefined, options);
+      const currentEvent = testEvents.filter(
+        (e) => e.name === row.getValue("name")
+      )[0];
 
       return (
         <p className="text-xs">
-          {startTime} - {endTime}
+          {currentEvent.startTime} - {currentEvent.endTime}
         </p>
       );
     },
-  },
-  {
-    accessorKey: "duration",
-    header: "Duration",
-    enableHiding: true,
   },
   {
     accessorKey: "room",
     header: "Room",
     enableHiding: false,
     cell: ({ row }) => {
-      const room = row.getValue("room") as CSUSM_ROOM;
-      return (
-        <p className="text-xs font-semibold">
-          {room?.building} {room?.room}
-        </p>
-      );
+      const currentEvent = testEvents.filter(
+        (e) => e.name === row.getValue("name")
+      )[0];
+
+      return <p className="text-xs font-semibold">{currentEvent?.room}</p>;
     },
   },
   {
