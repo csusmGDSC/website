@@ -1,8 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AvatarCard from "@/components/ui/cards/avatar-card";
 import Container from "@/components/ui/container";
-import { Button } from "@/components/ui/shadcn/button";
-import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { LucideMonitorPlay } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,8 +22,7 @@ import { GrResources } from "react-icons/gr";
 import { MdAccessTime, MdArticle, MdPerson } from "react-icons/md";
 
 // TO-DO: Make the event details more dynamic using Event interface
-const EventDetails = ({
-}) => {
+const EventDetails = ({}) => {
   return (
     <section className="w-full pt-10">
       <Container className="custom-max-width flex flex-col gap-10">

@@ -4,7 +4,7 @@ import React from "react";
 import { BsGithub } from "react-icons/bs";
 import Link from "next/link";
 import { CiCalendar, CiGlobe } from "react-icons/ci";
-import { Button } from "../shadcn/button";
+import { Button } from "../button";
 
 interface ContentProps {
   title?: string;

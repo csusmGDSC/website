@@ -5,7 +5,7 @@ import { CalendarIcon, FileTextIcon, InputIcon } from "@radix-ui/react-icons";
 import { Share2Icon } from "lucide-react";
 import React from "react";
 import { cn, convertToReadableDate } from "@/lib/utils";
-import { Calendar } from "@/components/ui/shadcn/calendar";
+import { Calendar } from "@/components/ui/calendar";
 import { AnimatedBeamMultipleOutputDemo } from "@/components/ui/magicui/output-demo";
 import { testEvents } from "@/constants/test/example-events";
 import ContentCard from "@/components/ui/cards/content-card";

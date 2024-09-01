@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/shadcn/button";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/shadcn/tooltip";
+} from "@/components/ui/tooltip";
 import { IconType } from "react-icons";
 
 export interface TableActionButtonProps {

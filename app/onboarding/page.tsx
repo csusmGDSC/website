@@ -18,11 +18,11 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/shadcn/tooltip";
+} from "@/components/ui/tooltip";
 import Container from "@/components/ui/container";
 import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/shadcn/input";
-import { Button } from "@/components/ui/shadcn/button";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { MdInfo } from "react-icons/md";
 

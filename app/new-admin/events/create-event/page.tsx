@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { AnimatePresence } from "framer-motion";
-import { useMultipleStepForm } from "@/hooks/useMultipleStepForm";
+import { useMultipleStepForm } from "@/hooks/use-multiple-step-form";
 import { useUser } from "@clerk/nextjs";
 
 import Container from "@/components/ui/container";
@@ -20,6 +20,7 @@ import LocationForm from "@/components/main/admin/create-event/forms/location-fo
 import DescriptionForm from "@/components/main/admin/create-event/forms/description-form";
 import LinksForm from "@/components/main/admin/create-event/forms/links-form";
 import Summary from "@/components/main/admin/create-event/summary";
+import { useState } from "react";
 
 export default function CreateEvent() {
   const {
@@ -31,24 +32,26 @@ export default function CreateEvent() {
     steps,
     goTo,
     showSuccessMsg,
-  } = useMultipleStepForm(STEPS.REVIEW_AND_SUBMIT);
+  } = useMultipleStepForm(STEPS.REVIEW_AND_SUBMIT + 1);
 
   const { user } = useUser();
 
   const form = useForm<z.infer<typeof EventSchema>>({
     resolver: zodResolver(EventSchema),
     defaultValues: {
-      eventName: "",
       tags: [],
-      startTime: "",
-      endTime: "",
-      type: null,
+      about: {
+        images: [],
+        // If you don't set default ops value, it will cause runtime error
+        body: '{"ops":[{"insert":""}]}',
+      },
       location: "California State University, San Marcos",
       date: new Date(),
-      description: "",
-      organizerIds: [user?.id],
+      organizerIds: ["12345"],
     },
   });
+
+  const [formErrorMessage, setFormErrorMessage] = useState<string | null>(null);
 
   const validateCurrentStep = async () => {
     let isValid = false;
@@ -65,7 +68,11 @@ export default function CreateEvent() {
         ]);
         break;
       case STEPS.DESCRIPTION_AND_TAGS:
-        isValid = await form.trigger(["description", "tags"]);
+        isValid = await form.trigger([
+          "description",
+          "about.body",
+          "about.images",
+        ]);
         break;
       case STEPS.LOCATION:
         isValid = await form.trigger(["room"]);
@@ -82,36 +89,50 @@ export default function CreateEvent() {
   };
 
   const handleSubmit = async (values: z.infer<typeof EventSchema>) => {
-    if (isLastStep) {
-      console.log("SUBMITTED FORM: ", values);
-      nextStep();
-    } else {
-      const isValid = await validateCurrentStep();
+    const isValid = await validateCurrentStep();
 
-      // If the section is valid, go to the next step
+    if (isLastStep) {
       if (isValid) {
         nextStep();
+
+        // TO-DO: Send API call to create event
+      } else {
+        setFormErrorMessage("Please fill out all required fields.");
+      }
+    } else {
+      // If the current inptus are valid, go to the next step
+      if (isValid) {
+        nextStep();
+
+        // If the selected event type is virtual, skip the location step
+        if (form.watch("type") === "virtual" && currentStepIndex === 1) {
+          nextStep();
+        }
       }
     }
   };
 
   return (
-    <Container className="w-full flex justify-center mt-20 custom-max-width">
+    <Container className="custom-max-width lg:-mt-20">
       <div
         className={`flex justify-between ${
           currentStepIndex === 1
-            ? "min-h-[600px] md:min-h-[500px]"
+            ? "min-h-[600px] lg:min-h-[500px]"
             : "min-h-[500px]"
-        } w-full relative m-1 rounded-lg border border-border bg-primary-foreground p-4`}
+        } w-full relative m-1 rounded-lg border border-border p-4`}
       >
         {!showSuccessMsg ? (
-          <SideBar currentStepIndex={currentStepIndex} goTo={goTo} />
+          <SideBar
+            currentStepIndex={currentStepIndex}
+            goTo={goTo}
+            showLocation={form.watch("type") === "virtual" ? false : true}
+          />
         ) : (
           ""
         )}
         <main
           className={`${
-            showSuccessMsg ? "w-full" : "w-full md:mt-5 md:w-[65%]"
+            showSuccessMsg ? "w-full" : "w-full lg:mt-5 lg:w-[73%]"
           }`}
         >
           {showSuccessMsg ? (
@@ -120,10 +141,7 @@ export default function CreateEvent() {
             </AnimatePresence>
           ) : (
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(handleSubmit)}
-                className="w-full flex flex-col justify-between h-full"
-              >
+              <form className="w-full flex flex-col justify-between h-full">
                 <AnimatePresence mode="wait">
                   {currentStepIndex === STEPS.BASIC_INFO && (
                     <EventInfoForm form={form} />
@@ -141,23 +159,37 @@ export default function CreateEvent() {
                     <Summary form={form} goTo={goTo} />
                   )}
                 </AnimatePresence>
+
                 <div className="w-full items-center flex justify-between mt-10">
-                  <div className="">
-                    <Button
-                      onClick={previousStep}
-                      type="button"
-                      variant="ghost"
-                      className={`${
-                        isFirstStep ? "invisible" : "visible hover:bg-inherit"
-                      }`}
-                    >
-                      Go Back
-                    </Button>
-                  </div>
+                  <Button
+                    onClick={() => {
+                      previousStep();
+                      // If the event type is virtual, skip the location step
+                      if (
+                        form.watch("type") === "virtual" &&
+                        currentStepIndex === 3
+                      ) {
+                        previousStep();
+                      }
+                    }}
+                    type="button"
+                    variant="ghost"
+                    className={`${
+                      isFirstStep ? "invisible" : "visible hover:bg-inherit"
+                    }`}
+                  >
+                    Go Back
+                  </Button>
                   <div className="flex items-center">
                     <div className="relative after:pointer-events-none after:absolute after:inset-px after:rounded-[11px] after:shadow-highlight after:shadow-white/10 focus-within:after:shadow-[#77f6aa] after:transition">
                       <Button
-                        type="submit"
+                        type="button"
+                        onClick={(e) => {
+                          // Manually submit form because using "submit" type causes the whole form to validate before actually
+                          // calling the function, which we don't want to do in a multi-step form since only some of the values may be valid
+                          e.preventDefault;
+                          handleSubmit(form.getValues());
+                        }}
                         className="relative text-white bg-blue border border-border hover:bg-blue/70 rounded-xl hover:text-white"
                       >
                         {isLastStep ? "Create" : "Next Step"}
@@ -165,6 +197,14 @@ export default function CreateEvent() {
                     </div>
                   </div>
                 </div>
+
+                {formErrorMessage && (
+                  <div className="flex justify-end">
+                    <p className="text-destructive text-xs">
+                      {formErrorMessage}
+                    </p>
+                  </div>
+                )}
               </form>
             </Form>
           )}

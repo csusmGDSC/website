@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/shadcn/button";
+import { Button } from "@/components/ui/button";
 import React, { useMemo } from "react";
 import { Label, Pie, PieChart } from "recharts";
 

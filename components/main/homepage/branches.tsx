@@ -4,7 +4,7 @@ import React from "react";
 import Container from "@/components/ui/container";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/shadcn/button";
+import { Button } from "@/components/ui/button";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
 import {
@@ -12,7 +12,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/shadcn/tooltip";
+} from "@/components/ui/tooltip";
 import { IconType } from "react-icons";
 import { GoProjectSymlink } from "react-icons/go";
 import { BiRun } from "react-icons/bi";

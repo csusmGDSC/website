@@ -1,12 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 import { CiInstagram } from "react-icons/ci";
 import { FaDiscord, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
+  const url = usePathname();
+  const isAdminPage = url.split("/")[1] === "new-admin";
+
   return (
-    <footer>
+    // TO-DO: Change this later to SITE-CONFIG hidden URLS
+    <footer className={isAdminPage ? "hidden" : ""}>
       <div className="w-full sm:h-[12rem] pb-4 sm:pb-0 border-t border-b-border bg-background items-center flex flex-col mt-20">
         <div className="h-full grid grid-cols-1 sm:grid-cols-4 custom-max-width">
           <div className="flex flex-col items-center justify-between h-full pt-10 sm:col-span-2 sm:mr-auto">

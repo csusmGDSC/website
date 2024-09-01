@@ -1,7 +1,7 @@
 import PastEvents from "@/components/main/events/past-events";
 import UpcomingEvents from "@/components/main/events/upcoming-events";
 import PageHeader from "@/components/ui/page-header";
-import { Input } from "@/components/ui/shadcn/input";
+import { Input } from "@/components/ui/input";
 import { testEvents } from "@/constants/test/example-events";
 import React from "react";
 import { FaSearch } from "react-icons/fa";

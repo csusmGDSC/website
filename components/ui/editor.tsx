@@ -8,7 +8,7 @@ import React, {
 import Quill, { type QuillOptions } from "quill";
 
 import "quill/dist/quill.snow.css";
-import { Button } from "./shadcn/button";
+import { Button } from "./button";
 import { PiTextAa } from "react-icons/pi";
 import { ImageIcon, Smile, XIcon } from "lucide-react";
 import { MdSend } from "react-icons/md";

@@ -35,21 +35,13 @@ export const OnboardingSchema = z
     path: ["branch"],
   });
 
-const MAX_UPLOAD_SIZE = 1024 * 1024 * 16; // 16MB MAX BYTES ON MONGODB
-const ACCEPTED_FILE_TYPES = [
-  "image/png",
-  "image/jpeg",
-  "image/jpg",
-  "image/webp",
-];
-
 /**
  * Zod Schema for GDSC event form.
  */
 export const EventSchema = z
   .object({
     eventName: z.string().min(2).max(100),
-    room: z.string().optional(),
+    room: z.string(),
     tags: z.array(z.string()).optional(),
     startTime: z.string(),
     endTime: z.string(),
@@ -76,39 +68,15 @@ export const EventSchema = z
     (data) => {
       const time12HourPattern = /^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i;
 
-      if (
-        !time12HourPattern.test(data.startTime) ||
-        !time12HourPattern.test(data.endTime)
-      ) {
-        return false;
-      }
+      return (
+        time12HourPattern.test(data.startTime) &&
+        time12HourPattern.test(data.endTime)
+      );
     },
     {
       message: "Start and end time must be in the format 'HH:MM AM/PM'.",
       path: ["startTime", "endTime"],
     }
-  )
-  .refine((data) => {
-    let incorrectFileSizeFound = false;
-
-    for (const file of data.about?.images || []) {
-      if (file.size > MAX_UPLOAD_SIZE) {
-        incorrectFileSizeFound = true;
-      }
-    }
-  }, "Each file must be less than 16MB")
-  .refine((data) => {
-    let incorrectFileTypeFound = false;
-
-    for (const file of data.about?.images || []) {
-      if (!ACCEPTED_FILE_TYPES.includes(file.type)) {
-        incorrectFileTypeFound = true;
-      }
-    }
-  }, "Each file size must be either PNG, JPEG, JPG, or WEBP")
-  .refine((data) => data.type === "virtual" || data.room !== null, {
-    message: "Room is required for non-virtual events.",
-    path: ["room"],
-  });
+  );
 
 export type EventFormValues = z.infer<typeof EventSchema>;
