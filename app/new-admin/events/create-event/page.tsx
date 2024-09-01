@@ -21,6 +21,7 @@ import DescriptionForm from "@/components/main/admin/create-event/forms/descript
 import LinksForm from "@/components/main/admin/create-event/forms/links-form";
 import Summary from "@/components/main/admin/create-event/summary";
 import { useState } from "react";
+import { createEvent } from "@/actions/event";
 
 export default function CreateEvent() {
   const {
@@ -93,9 +94,49 @@ export default function CreateEvent() {
 
     if (isLastStep) {
       if (isValid) {
-        nextStep();
+        setFormErrorMessage(null);
 
-        // TO-DO: Send API call to create event
+        try {
+          const serverFormData = new FormData();
+
+          serverFormData.append("eventName", values.eventName);
+          serverFormData.append("type", values.type || "other");
+          serverFormData.append("date", values.date.toISOString());
+          serverFormData.append("startTime", values.startTime);
+          serverFormData.append("endTime", values.endTime);
+          serverFormData.append("room", values.room);
+          serverFormData.append("description", values.description);
+          serverFormData.append(
+            "location",
+            values.location || "California State University, San Marcos"
+          );
+          serverFormData.append("slidesURL", values.slidesURL || "");
+          serverFormData.append("githubRepo", values.githubRepo || "");
+          serverFormData.append(
+            "organizerIds",
+            JSON.stringify(values.organizerIds)
+          );
+          serverFormData.append("imageSrc", values.imageSrc || "");
+
+          // We can't stringify the File type, so we can send the about data separately
+          serverFormData.append(
+            "aboutBody",
+            JSON.stringify(values.about?.body)
+          );
+          values.about?.images?.forEach((file, index) => {
+            serverFormData.append(`aboutImages[${index}]`, file);
+          });
+          serverFormData.append("imageCount", values.about?.images?.length.toString() || "0");
+
+          const eventCreationResponse = await createEvent(serverFormData);
+
+          console.log(eventCreationResponse);
+        } catch (error) {
+          console.log(error);
+        }
+
+        // Show the success message
+        nextStep();
       } else {
         setFormErrorMessage("Please fill out all required fields.");
       }

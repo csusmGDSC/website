@@ -21,6 +21,7 @@
  * @property {string[]} [usersAttendedIds] - The IDs of the users that attended the event.
  * @property {Date} createdAt - The date when the event was created.
  * @property {Date} updatedAt - The date when the event was last updated.
+ * @property {string} [createdBy] - The ID of the user who created the event.
  */
 export interface GDSCEvent {
   id: string;
@@ -43,6 +44,7 @@ export interface GDSCEvent {
   usersAttendedIds?: string[];
   createdAt: Date;
   updatedAt: Date;
+  createdBy?: string;
 }
 
 // TO:DO MIGRATE STRING INPUT TO CSUSM_ROOM TYPE.

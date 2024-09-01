@@ -17,7 +17,7 @@ datasource db {
 model GDSCEvent {
   id               String    @id @default(auto()) @map("_id") @db.ObjectId
   name             String
-  roomId           String?   @db.ObjectId
+  room             String?
   tags             String[]
   startTime        String
   endTime          String
@@ -26,7 +26,7 @@ model GDSCEvent {
   date             DateTime?
   githubRepo       String?
   slidesURL        String?
-  imageSrc         String?
+  imageSrc         Bytes?
   extraImageSrcs   Bytes[]
   description      String
   about            String?
@@ -35,22 +35,9 @@ model GDSCEvent {
   usersAttendedIds String[]
   updatedAt        DateTime
   createdAt        DateTime
-
-  room CSUSM_ROOM? @relation(fields: [roomId], references: [id])
+  createdBy        String
 
   @@map("events")
-}
-
-// Prisma schema for CSUSM_ROOM
-model CSUSM_ROOM {
-  id       String      @id @default(auto()) @map("_id") @db.ObjectId
-  building String
-  room     Int
-  type     RoomType
-  capacity Int
-  events   GDSCEvent[]
-
-  @@map("rooms")
 }
 
 enum EventType {
