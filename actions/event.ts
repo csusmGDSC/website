@@ -15,9 +15,16 @@ export async function getEvents(): Promise<GDSCEventPrisma[]> {
   return db.gDSCEvent.findMany();
 }
 
-export async function getEvent(
-  id: GDSCEventPrisma["id"]
+export async function getEventById(
+  id: string
 ): Promise<GDSCEventPrisma | null> {
+  // Check if the id is a valid ObjectId
+  const objectIdRegex = /^[a-fA-F0-9]{24}$/;
+  
+  if (!objectIdRegex.test(id)) {
+    return null;
+  }
+  
   return db.gDSCEvent.findUnique({ where: { id } });
 }
 
