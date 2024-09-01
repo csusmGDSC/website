@@ -1,3 +1,4 @@
+"use client"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AvatarCard from "@/components/ui/cards/avatar-card";
 import Container from "@/components/ui/container";
@@ -6,7 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { LucideMonitorPlay } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { CiInstagram } from "react-icons/ci";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import {
@@ -20,9 +21,15 @@ import {
 } from "react-icons/fa6";
 import { GrResources } from "react-icons/gr";
 import { MdAccessTime, MdArticle, MdPerson } from "react-icons/md";
+import { testEvents } from "@/constants/test/example-events";
+import { GDSCEvent } from "@/types/gdsc-event";
+ 
+const TEST_EVENT = testEvents[0]
 
 // TO-DO: Make the event details more dynamic using Event interface
-const EventDetails = ({}) => {
+
+const EventDetails = () => {
+  const [eventData, setEventData] = useState<GDSCEvent>(TEST_EVENT);
   return (
     <section className="w-full pt-10">
       <Container className="custom-max-width flex flex-col gap-10">
@@ -52,16 +59,16 @@ const EventDetails = ({}) => {
           <div className="flex-1 h-full flex flex-col gap-6">
             <div>
               <h1 className="text-3xl font-bold text-primary">
-                Intro to Web: React Ecosystem
+                {eventData.name}
               </h1>
               <span className="text-primary/90 items-center flex gap-2">
                 <FaBuilding />
-                <h2 className="font-semibold">Science Hall 2, Room 302</h2>
+                <h2 className="font-semibold">{eventData.room}</h2>
               </span>
               <span className="text-primary/70 flex items-center gap-2">
                 <FaLocationDot />
                 <h3 className="font-semibold">
-                  California State University - San Marcos, United States
+                  {eventData.location}
                 </h3>
               </span>
             </div>
@@ -69,12 +76,7 @@ const EventDetails = ({}) => {
             <hr />
 
             <p className="text-sm text-primary">
-              The conference featured keynote speeches from prominent React core
-              team members, highlighting new features and improvements in the
-              React library. Workshops and breakout sessions provided hands-on
-              experience with cutting-edge tools and techniques, focusing on
-              performance optimization, server-side rendering, and state
-              management.
+              {eventData.description}
             </p>
 
             <div className="flex flex-row gap-4 text-neutral-700">
@@ -117,24 +119,7 @@ const EventDetails = ({}) => {
             <h1 className="text-3xl font-bold text-primary">About the Event</h1>
 
             <p className="text-sm text-primary">
-              Malware Analysis Course Workshop lessons will make you aware with
-              all the basics of Malware Analysis. It starts by a revision on
-              Cyber Security basics that needed from (Programming Basics to
-              Network Basics).
-              <br />
-              <br />
-              Then it will Dive into Malware Word by: Defining what is Malware,
-              Types of Malware, and the Steps of Analysis.
-              <br />
-              <br />
-              The road will be a bit long from Diving into the World of Virtual
-              Machines, Basics of Static & Dynamic Analysis, Get Assembly x86,
-              Dive into Assembly x86, Dive into IDA & Disassemble
-              Algorithms(Advanced Static Analysis), Intro to Ghidra(Advanced
-              Static Analysis), Intro to Debuggers(Advanced Dynamic Analysis),
-              <br />
-              <br />
-              Finally we will end this course by Reporting.
+              {eventData.about}
             </p>
 
             <hr />
@@ -143,12 +128,12 @@ const EventDetails = ({}) => {
               <h1 className="text-3xl font-bold text-primary">Location</h1>
               <span className="text-primary/90 items-center flex gap-2">
                 <FaBuilding />
-                <h2 className="font-semibold">Science Hall 2, Room 302</h2>
+                <h2 className="font-semibold">{eventData.room}</h2>
               </span>
               <span className="text-primary/70 flex items-center gap-2">
                 <FaLocationDot />
                 <h3 className="font-semibold">
-                  California State University - San Marcos, United States
+                  {eventData.location}
                 </h3>
               </span>
             </div>
@@ -169,59 +154,59 @@ const EventDetails = ({}) => {
             <div className="flex flex-row flex-wrap gap-3 ">
               <AvatarCard
                 name="Jaedon"
-                role="Technical Lead"
+                role="Project"
                 linkedinLink=""
                 gitHubLink=""
                 instagramLink=""
                 imageSrc="/images/team/jaedonspurlock.jpg"
               />
               <AvatarCard
-                name="Jaedon"
-                role="Technical Lead"
+                name="Josh"
+                role="Project"
                 linkedinLink=""
                 gitHubLink=""
                 instagramLink=""
-                imageSrc="/images/team/jaedonspurlock.jpg"
+                imageSrc=""
               />
               <AvatarCard
-                name="Jaedon"
-                role="Technical Lead"
+                name="Gabriel"
+                role="Project"
                 linkedinLink=""
                 gitHubLink=""
                 instagramLink=""
-                imageSrc="/images/team/jaedonspurlock.jpg"
+                imageSrc=""
               />
               <AvatarCard
-                name="Jaedon"
-                role="Technical Lead"
+                name="Thanh"
+                role="Interview"
                 linkedinLink=""
                 gitHubLink=""
                 instagramLink=""
-                imageSrc="/images/team/jaedonspurlock.jpg"
+                imageSrc=""
               />
               <AvatarCard
-                name="Jaedon"
-                role="Technical Lead"
+                name="Jacob"
+                role="Interview"
                 linkedinLink=""
                 gitHubLink=""
                 instagramLink=""
-                imageSrc="/images/team/jaedonspurlock.jpg"
+                imageSrc=""
               />
               <AvatarCard
-                name="Jaedon"
-                role="Technical Lead"
+                name="Aaron"
+                role="Interview"
                 linkedinLink=""
                 gitHubLink=""
                 instagramLink=""
-                imageSrc="/images/team/jaedonspurlock.jpg"
+                imageSrc=""
               />
               <AvatarCard
-                name="Jaedon"
-                role="Technical Lead"
+                name="Chris"
+                role="Prrject"
                 linkedinLink=""
                 gitHubLink=""
                 instagramLink=""
-                imageSrc="/images/team/jaedonspurlock.jpg"
+                imageSrc=""
               />
             </div>
           </div>
@@ -235,28 +220,33 @@ const EventDetails = ({}) => {
               <span className="flex items-center gap-2">
                 <MdAccessTime />
                 <p className="text-primary font-semibold">
-                  Aug 31, 12:00 - 1:00 PM
+                  {eventData.date ? eventData.date.toLocaleDateString() : ''} at{" "}
+                  {eventData.date ? eventData.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
                 </p>
               </span>
 
-              <Button
-                variant="outline"
-                className="w-full gap-2 font-semibold text-primary/90"
-              >
-                <FaGithub /> Source Code
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full font-semibold text-primary/90"
-              >
-                View Slides
-              </Button>
+              <Link href={eventData.githubRepo || ''} target="_blank" className="w-full">
+                <Button
+                  variant="outline"
+                  className="w-full gap-2 font-semibold text-primary/90"
+                >
+                  <FaGithub /> Source Code
+                </Button>
+              </Link>
+              <Link href={eventData.slidesURL || ''} target="_blank" className="w-full">
+                <Button
+                  variant="outline"
+                  className="w-full font-semibold text-primary/90"
+                >
+                  Slides
+                </Button>
+              </Link>
               <Button className="bg-blue w-full font-medium hover:bg-blue/80">
                 RSVP Now
               </Button>
               <div className="flex gap-2 my-4 text-primary/70 justify-center items-center">
                 <MdPerson size={30} />
-                <p>23 others coming</p>
+                <p>Attendees: {eventData.attendeeIds?.length ?? 0}</p>
               </div>
             </div>
           </div>
