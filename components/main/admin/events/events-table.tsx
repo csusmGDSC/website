@@ -63,7 +63,7 @@ const EventsTableActions = ({ refresh }: { refresh: () => void }) => {
       icon: IoMdAdd,
       className: "hover:text-blue/80",
       id: "add",
-      onClick: () => router.push("/new-admin/events/create-event"),
+      onClick: () => router.push("/admin/events/create-event"),
     },
     {
       action: "Refresh",

@@ -9,7 +9,7 @@ import { FaDiscord, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   const url = usePathname();
-  const isAdminPage = url.split("/")[1] === "new-admin";
+  const isAdminPage = url.split("/")[1] === "admin";
 
   return (
     // TO-DO: Change this later to SITE-CONFIG hidden URLS

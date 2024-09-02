@@ -27,18 +27,18 @@ const data = {
   navMain: [
     {
       title: "Overview",
-      url: "/new-admin",
+      url: "/admin",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
           title: "Events",
-          url: "/new-admin/events",
+          url: "/admin/events",
           description: "View all GDSC events",
         },
         {
           title: "Users",
-          url: "/new-admin/users",
+          url: "/admin/users",
           description: "View all GDSC users",
         },
       ],

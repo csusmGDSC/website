@@ -70,7 +70,7 @@ const UserButton = () => {
           {user.user?.publicMetadata?.role === "ADMIN" && (
             <DropdownMenuItem
               className="gap-2"
-              onClick={() => router.push("/new-admin")}
+              onClick={() => router.push("/admin")}
             >
               <GrUserAdmin className="h-4 w-4 text-muted-foreground" />
               Admin
