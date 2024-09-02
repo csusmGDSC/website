@@ -1,13 +1,21 @@
+"use client";
+
 import Container from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import React from "react";
 import { BiQuestionMark } from "react-icons/bi";
+import { useClerk, useUser } from "@clerk/nextjs";
 
 /**
  * Component that shows the BottomApplySection of GDSC-CSUSM
  */
 const BottomApplySection = () => {
+  const { isSignedIn } = useUser();
+  const clerk = useClerk();
+
+  if (isSignedIn) return null;
+
   return (
     <section className="w-full -mb-20 pb-20 custom-gradient-background">
       <Container className="flex flex-col items-center justify-center mt-32 custom-max-width">
@@ -17,22 +25,17 @@ const BottomApplySection = () => {
           </h1>
 
           <span className="flex flex-row gap-1 items-center">
-            <a
-              href="https://gdsc.community.dev/"
-              target="_blank"
-              className="w-1/2"
-            >
-              <Button
-                className="h-10 rounded-md font-bold w-full
+            <Button
+              className="h-10 rounded-md font-bold w-1/2
                 text-xs bg-blue hover:bg-blue/80 gap-2 text-white group"
-              >
-                APPLY
-                <ChevronRight
-                  size={20}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </Button>
-            </a>
+              onClick={() => clerk.openSignUp()}
+            >
+              APPLY
+              <ChevronRight
+                size={20}
+                className="group-hover:translate-x-1 transition-transform"
+              />
+            </Button>
             <a
               href="https://gdsc.community.dev/"
               target="_blank"

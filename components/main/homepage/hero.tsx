@@ -1,15 +1,20 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
 import { IoMdAlert } from "react-icons/io";
-import { GrDocumentUser } from "react-icons/gr";
 import DotPattern from "@/components/ui/magicui/dot-background";
 import { ChevronRight } from "lucide-react";
+import { useClerk, useUser } from "@clerk/nextjs";
 
 /**
  * Component that shows the hero (top section) of the web-page
  */
 const Hero = () => {
+  const clerk = useClerk();
+  const user = useUser();
+
   return (
     <section
       className="relative w-full h-[30rem] items-center flex flex-col
@@ -29,33 +34,47 @@ const Hero = () => {
           </h1>
 
           <p className="text-center md:text-left text-foreground/70">
-            {description}
+            {user.isSignedIn
+              ? "Welcome back " + user.user?.fullName + "!"
+              : description}
           </p>
 
           <span className="flex flex-col md:flex-row gap-10 items-center w-full">
-            <a
-              href="https://gdsc.community.dev/"
-              target="_blank"
-              className="w-1/2"
-            >
-              <Button
-                className="m-auto w-full md:m-0 h-10 rounded-md font-bold
+            {user.isSignedIn ? (
+              <a href="/events" target={"_self"} className="w-1/2">
+                <Button
+                  className="m-auto w-full md:m-0 h-10 rounded-md font-bold
                 text-xs bg-blue hover:bg-blue/80 gap-2 text-white group"
+                >
+                  Explore GDSC
+                  <ChevronRight
+                    size={20}
+                    className="group-hover:translate-x-1 transition-transform"
+                  />
+                </Button>
+              </a>
+            ) : (
+              <Button
+                className="m-auto w-1/2 md:m-0 h-10 rounded-md font-bold
+                text-xs bg-blue hover:bg-blue/80 gap-2 text-white group"
+                onClick={() => clerk.openSignUp()}
               >
-                APPLY
+                Apply
                 <ChevronRight
                   size={20}
                   className="group-hover:translate-x-1 transition-transform"
                 />
               </Button>
-            </a>
-            <a
-              className="flex items-center gap-2 hover:underline text-blue transition-colors"
-              href="https://gdsc.community.dev/"
-              target="_blank"
-            >
-              <IoMdAlert size={20} /> Learn More
-            </a>
+            )}
+            {!user.isSignedIn && (
+              <a
+                className="flex items-center gap-2 hover:underline text-blue transition-colors"
+                href="https://gdsc.community.dev/"
+                target="_blank"
+              >
+                <IoMdAlert size={20} /> Learn More
+              </a>
+            )}
           </span>
         </div>
 
