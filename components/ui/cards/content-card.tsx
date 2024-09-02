@@ -107,10 +107,12 @@ const ContentInfo: React.FC<ContentProps> = ({ title, description, date }) => {
   return (
     <div className="space-y-2 line-clamp-6">
       <h1 className="font-bold text-foreground/90">{title}</h1>
-      <span className="flex gap-2 items-center">
-        <CiCalendar />
-        <h2 className="text-sm text-foreground/80">{date}</h2>
-      </span>
+      {date && (
+        <span className="flex gap-2 items-center">
+          <CiCalendar />
+          <h2 className="text-sm text-foreground/80">{date}</h2>
+        </span>
+      )}
       <p className="text-sm text-foreground/70">{description}</p>
     </div>
   );
