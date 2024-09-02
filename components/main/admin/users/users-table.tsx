@@ -39,7 +39,11 @@ const UsersTable = () => {
     <Container className="-mt-20">
       <div>
         <UsersTableActions />
-        <DataTable columns={UserTableColumns} data={testUsers} />
+        <DataTable
+          columns={UserTableColumns}
+          data={testUsers}
+          loading={false}
+        />
       </div>
     </Container>
   );

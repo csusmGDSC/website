@@ -1,12 +1,24 @@
+"use server";
+
 import PastEvents from "@/components/main/events/past-events";
 import UpcomingEvents from "@/components/main/events/upcoming-events";
 import PageHeader from "@/components/ui/page-header";
-import { Input } from "@/components/ui/input";
 import { testEvents } from "@/constants/test/example-events";
 import React from "react";
-import { FaSearch } from "react-icons/fa";
+import { getEventsWithoutJSON } from "@/actions/event";
 
-const Events = () => {
+export default async function Events() {
+  const events = await getEventsWithoutJSON();
+  const today = new Date();
+
+  const upcoming = events.filter((event) => {
+    return new Date(event.date ?? new Date()) >= today;
+  });
+
+  const past = events.filter((event) => {
+    return new Date(event.date ?? new Date()) < today;
+  });
+
   return (
     <main className="w-full mt-[4.5rem]">
       {/* PAGE HEADER */}
@@ -19,17 +31,10 @@ const Events = () => {
       {/* PAGE CONTENT */}
       <div className="w-full flex-center-col">
         <div className="custom-max-width flex flex-col gap-10">
-          {/* <span className="relative">
-            <Input placeholder="Search events..." />
-            <FaSearch className="absolute right-4 top-1 translate-y-1/2 text-blue" />
-          </span> */}
-
-          <UpcomingEvents />
-          <PastEvents events={testEvents} />
+          <UpcomingEvents events={upcoming} />
+          <PastEvents events={past} />
         </div>
       </div>
     </main>
   );
-};
-
-export default Events;
+}

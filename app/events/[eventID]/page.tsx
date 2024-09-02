@@ -131,7 +131,7 @@ export default async function EventDetails({ params }: { params: IParams }) {
             <h1 className="text-3xl font-bold text-primary">About the Event</h1>
 
             <div>
-              {/* We have to use a quill editor to render the OPs language, so we can't use p tags here */}
+              {/* We have to use a quill editor to render the Delta OPs language, so we can't use p tags here */}
               <Renderer value={eventData?.about || ""} />
             </div>
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { CSUSM_ROOM, GDSCEvent } from "@/types/gdsc-event";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +15,8 @@ import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import DataTableColumnHeader from "../table-sorting-button";
 import Link from "next/link";
-import { testEvents } from "@/constants/test/example-events";
+
+import { GDSCEvent } from "@prisma/client";
 
 export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
   {
@@ -68,13 +68,12 @@ export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
     header: "Time",
     enableHiding: false,
     cell: ({ row }) => {
-      const currentEvent = testEvents.filter(
-        (e) => e.name === row.getValue("name")
-      )[0];
+      const startTime = row.original.startTime;
+      const endTime = row.original.endTime;
 
       return (
         <p className="text-xs">
-          {currentEvent.startTime} - {currentEvent.endTime}
+          {startTime} - {endTime}
         </p>
       );
     },
@@ -84,11 +83,7 @@ export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
     header: "Room",
     enableHiding: false,
     cell: ({ row }) => {
-      const currentEvent = testEvents.filter(
-        (e) => e.name === row.getValue("name")
-      )[0];
-
-      return <p className="text-xs font-semibold">{currentEvent?.room}</p>;
+      return <p className="text-xs font-semibold">{row?.getValue("room")}</p>;
     },
   },
   {
@@ -132,7 +127,7 @@ export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem>
-              <Link href="/events/123" target="_blank">
+              <Link href={`/events/${row.original.id}`} target="_blank">
                 Go to Page
               </Link>
             </DropdownMenuItem>

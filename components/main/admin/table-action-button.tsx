@@ -38,7 +38,7 @@ export const TableActionButton = ({
   return (
     <TooltipProvider>
       <Tooltip delayDuration={150}>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <Button
             variant="outline"
             {...props}

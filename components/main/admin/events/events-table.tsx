@@ -2,7 +2,7 @@
 
 import Container from "@/components/ui/container";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
@@ -14,15 +14,34 @@ import {
 } from "../table-action-button";
 import { DataTable } from "../data-table";
 import { EventTableColumns } from "./events-column-def";
-import { testEvents } from "@/constants/test/example-events";
 import { useRouter } from "next/navigation";
+import { GDSCEvent } from "@prisma/client";
+import { getEvents } from "@/actions/event";
 
 const EventsTable = () => {
+  const [events, setEvents] = useState<GDSCEvent[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const fetchEvents = async () => {
+    setLoading(true);
+    const eventData: GDSCEvent[] = JSON.parse(await getEvents());
+    setEvents(eventData);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
   return (
     <Container className="-mt-20">
       <div>
-        <EventsTableActions />
-        <DataTable columns={EventTableColumns} data={testEvents} />
+        <EventsTableActions refresh={() => fetchEvents()} />
+        <DataTable
+          columns={EventTableColumns}
+          data={events}
+          loading={loading}
+        />
       </div>
     </Container>
   );
@@ -35,7 +54,7 @@ export default EventsTable;
  *
  * @return {JSX.Element} The JSX element representing the events table actions.
  */
-const EventsTableActions = () => {
+const EventsTableActions = ({ refresh }: { refresh: () => void }) => {
   const router = useRouter();
 
   const ButtonActions: TableActionButtonProps[] = [
@@ -51,7 +70,7 @@ const EventsTableActions = () => {
       icon: LuRefreshCw,
       className: "hover:text-blue/80",
       id: "refresh",
-      onClick: () => {},
+      onClick: () => refresh(),
     },
     {
       action: "Delete",
