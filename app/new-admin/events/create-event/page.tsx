@@ -126,17 +126,26 @@ export default function CreateEvent() {
           values.about?.images?.forEach((file, index) => {
             serverFormData.append(`aboutImages[${index}]`, file);
           });
-          serverFormData.append("imageCount", values.about?.images?.length.toString() || "0");
+          serverFormData.append(
+            "imageCount",
+            values.about?.images?.length.toString() || "0"
+          );
 
           const eventCreationResponse = await createEvent(serverFormData);
 
-          console.log(eventCreationResponse);
+          if (eventCreationResponse.error) {
+            setFormErrorMessage(eventCreationResponse.error);
+          } else {
+            setFormErrorMessage(null);
+          }
         } catch (error) {
           console.log(error);
         }
 
-        // Show the success message
-        nextStep();
+        if (!formErrorMessage) {
+          // Show the success message
+          nextStep();
+        }
       } else {
         setFormErrorMessage("Please fill out all required fields.");
       }

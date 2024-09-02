@@ -1,16 +1,39 @@
 import CardGrid from "@/components/ui/cards/card-grid";
 import ContentCard from "@/components/ui/cards/content-card";
 import TitleHeader from "@/components/ui/title-header";
-import { testEvents } from "@/constants/test/example-events";
 import { convertToReadableDate } from "@/lib/utils";
+import { GDSCEvent } from "@prisma/client";
 import React from "react";
 
-const UpcomingEvents = () => {
+interface UpcomingEventsProps {
+  events: GDSCEvent[];
+}
+
+const UpcomingEvents = ({ events }: UpcomingEventsProps) => {
   return (
     <section>
       <TitleHeader heading="Upcoming Events" />
       <CardGrid placeholder="There are no upcoming events at the moment.">
-        {/* TODO: ADD UPCOMING EVENTS */}
+        {events?.map((e, index) => (
+          <ContentCard
+            title={e.name}
+            description={e.description}
+            date={
+              e.date
+                ? convertToReadableDate(
+                    e.date.getMonth(),
+                    e.date.getDate(),
+                    e.date.getFullYear()
+                  )
+                : undefined
+            }
+            key={index}
+            className="sm:!w-[calc(50%-1rem)] md:!w-[calc(33.333%-1rem)]"
+            websiteUrl={`/events/${e.id}`}
+            tags={e.tags}
+            type="event"
+          />
+        ))}
       </CardGrid>
     </section>
   );

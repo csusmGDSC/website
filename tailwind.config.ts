@@ -64,6 +64,30 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "loader-bounce": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "40%": { transform: "translateY(-1.2rem)" },
+        },
+        rotate: {
+          "100%": { transform: "rotate(360deg)" },
+        },
+        dash: {
+          "0%": { "stroke-dasharray": "1, 200", "stroke-dashoffset": "0" },
+          "50%": {
+            "stroke-dasharray": "89, 200",
+            "stroke-dashoffset": "-35px",
+          },
+          "100%": {
+            "stroke-dasharray": "89, 200",
+            "stroke-dashoffset": "-124px",
+          },
+        },
+        color: {
+          "0%, 100%": { stroke: "#EA4335" },
+          "40%": { stroke: "#4285F4" },
+          "66%": { stroke: "#34A853" },
+          "80%, 90%": { stroke: "#FFCE44" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -97,6 +121,10 @@ const config = {
         marquee: "marquee var(--duration) linear infinite",
         "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
         orbit: "orbit calc(var(--duration)*1s) linear infinite",
+        "loader-bounce": "loader-bounce 1.4s infinite ease-in-out",
+        rotate: "rotate 2s linear infinite",
+        dash: "dash 1.5s ease-in-out infinite",
+        color: "color 6s ease-in-out infinite",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],

@@ -10,24 +10,52 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { EventSchema } from "@/schemas";
 import * as z from "zod";
+import { LogIn } from "lucide-react";
 
-export async function getEvents(): Promise<GDSCEventPrisma[]> {
-  return db.gDSCEvent.findMany();
+/**
+ * Retrieves a list of events from the database and converts them to JSON for client components.
+ *
+ * @return {GDSCEventPrisma[]} An array of events
+ */
+export async function getEvents(): Promise<string> {
+  const events = await db.gDSCEvent.findMany();
+  return JSON.stringify(events);
 }
 
+/**
+ * Retrieves a list of events from the database without converting them to JSON for server components
+ *
+ * @return {GDSCEventPrisma[]} An array of events
+ */
+export async function getEventsWithoutJSON(): Promise<GDSCEventPrisma[]> {
+  return await db.gDSCEvent.findMany();
+}
+
+/**
+ * Retrieves a single event from the database by its ID.
+ *
+ * @param {string} id - The ID of the event to retrieve
+ * @return {GDSCEventPrisma | null} The event with the specified ID, or null if the ID is invalid
+ */
 export async function getEventById(
   id: string
 ): Promise<GDSCEventPrisma | null> {
   // Check if the id is a valid ObjectId
   const objectIdRegex = /^[a-fA-F0-9]{24}$/;
-  
+
   if (!objectIdRegex.test(id)) {
     return null;
   }
-  
+
   return db.gDSCEvent.findUnique({ where: { id } });
 }
 
+/**
+ * Creates a new event in the database.
+ *
+ * @param {FormData} values - A FormData object containing the event details.
+ * @return {object} An object with a message or error property indicating the result of the operation.
+ */
 export async function createEvent(values: FormData) {
   const user = auth();
 
@@ -62,10 +90,23 @@ export async function createEvent(values: FormData) {
     organizerIds: JSON.parse(values.get("organizerIds") as any) as string[],
     about: {
       body: JSON.parse(values.get("aboutBody") as string),
-      images: aboutImages,
+      images: aboutImages as File[],
     },
-    imageSrc: values.get("imageSrc") as File,
+    ...(values.get("imageSrc") &&
+      values.get("imageSrc") !== "" && {
+        imageSrc: values.get("imageSrc") as File,
+      }),
   };
+
+  // Validate the parsed values, all used values after should be from validatedFields except for images
+  const validatedFields = EventSchema.safeParse(parsedValues);
+  if (!validatedFields.success) {
+    console.log(
+      "ERROR OCCURED IN CREATING EVENT: ",
+      validatedFields.error.errors[0].message
+    );
+    return { error: validatedFields.error.errors[0].message };
+  }
 
   // Convert files to buffer since mongodb can't save File types
   let mainImageBuffer: Buffer | null = null;
@@ -79,12 +120,6 @@ export async function createEvent(values: FormData) {
         Buffer.from(await image.arrayBuffer())
       )
     );
-  }
-
-  // Validate the parsed values, all used values after should be from validatedFields
-  const validatedFields = EventSchema.safeParse(parsedValues);
-  if (!validatedFields.success) {
-    return { error: validatedFields.error.errors[0].message };
   }
 
   const createdAtDate = new Date();
