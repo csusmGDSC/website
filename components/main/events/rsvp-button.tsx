@@ -2,7 +2,7 @@
 
 import { addAttendeeToEvent, removeAttendeeFromEvent } from "@/actions/event";
 import { Button } from "@/components/ui/button";
-import { useUser } from "@clerk/nextjs";
+import { useClerk, useUser } from "@clerk/nextjs";
 import { GDSCEvent } from "@prisma/client";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
 import { formatDate } from "date-fns";
@@ -23,18 +23,18 @@ export const RSVPButton = ({
   setAttendeeCount,
 }: RSVPButtonProps) => {
   const user = useUser();
+  const clerk = useClerk();
 
-  if (!user || !user.user) return null;
-
-  // The user is not immediately available on mount, which causes the button to always show 
-  // RSVP mode, even if user is already in event. Moving the state below the condition fixes this.
-  
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [isAttending, setIsAttending] = useState(
-    event.attendeeIds.includes(user.user.id)
+    event.attendeeIds.includes(user?.user?.id || "")
   );
 
   const rsvpToEvent = async () => {
+    if (!user || !user.user) {
+      clerk.openSignIn();
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -57,6 +57,11 @@ export const RSVPButton = ({
   };
 
   const unRsvpToEvent = async () => {
+    if (!user || !user.user) {
+      clerk.openSignIn();
+      return;
+    }
+
     setLoading(true);
 
     try {
