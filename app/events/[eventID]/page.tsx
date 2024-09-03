@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AvatarCard from "@/components/ui/cards/avatar-card";
 import Container from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { LucideMonitorPlay } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,12 +20,28 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 import { GrResources } from "react-icons/gr";
-import { MdAccessTime, MdArticle, MdPerson } from "react-icons/md";
+import {
+  MdAccessTime,
+  MdArticle,
+  MdCalendarToday,
+  MdPerson,
+} from "react-icons/md";
 import { getEventById } from "@/actions/event";
 import dynamic from "next/dynamic";
 import EmptyState from "@/components/main/empty-state";
 import { GDSCUser } from "@/types/gdsc-user";
-import { getMultipleUsersByIds, getUserById } from "@/actions/users";
+import { getMultipleUsersByIds } from "@/actions/users";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { formatDate } from "date-fns";
+import { RSVPButton } from "@/components/main/events/rsvp-button";
+import { AddToCalendarButton } from "add-to-calendar-button-react";
+import { RSVPForm } from "@/components/main/events/rsvp-form";
 
 const Renderer = dynamic(() => import("@/components/ui/renderer"), {
   ssr: false,
@@ -37,7 +53,7 @@ interface IParams {
 
 export default async function EventDetails({ params }: { params: IParams }) {
   const eventData = await getEventById(params.eventID);
-  const organizers = await getMultipleUsersByIds([]);
+  const organizers = await getMultipleUsersByIds(eventData?.organizerIds || []);
 
   if (!eventData) {
     return (
@@ -65,7 +81,11 @@ export default async function EventDetails({ params }: { params: IParams }) {
         {/* EVENT IMAGE */}
         <div className="w-full overflow-hidden h-[300px] rounded-xl custom-box-shadow">
           <Image
-            src="/images/stock/reflections.jpg"
+            src={
+              eventData.imageSrc
+                ? `https://utfs.io/f/${eventData.imageSrc}`
+                : "/images/stock/reflections.jpg"
+            }
             alt={"event-image"}
             width="1920"
             height="1080"
@@ -75,7 +95,7 @@ export default async function EventDetails({ params }: { params: IParams }) {
 
         <div className="flex flex-col sm:flex-row gap-10 relative">
           {/* EVENT DETAILS */}
-          <div className="flex-1 h-full flex flex-col gap-6">
+          <div className="flex-1 h-full flex flex-col gap-6 w-1/2">
             <div>
               <h1 className="text-3xl font-bold text-primary">
                 {eventData?.name}
@@ -135,8 +155,43 @@ export default async function EventDetails({ params }: { params: IParams }) {
 
             <div>
               {/* We have to use a quill editor to render the Delta OPs language, so we can't use p tags here */}
-              <Renderer value={eventData?.about || ""} />
+              <Renderer value={eventData?.about || '{"ops":[{"insert":""}]}'} />
             </div>
+
+            <ScrollArea className="w-full">
+              <div className="flex gap-2">
+                {eventData.extraImageSrcs.map((imageSrc) => {
+                  return (
+                    <Dialog key={imageSrc}>
+                      <DialogTrigger>
+                        <div className="w-[250px] overflow-hidden rounded-xl custom-box-shadow">
+                          <Image
+                            src={`https://utfs.io/f/${imageSrc}`}
+                            alt={"event-image"}
+                            width="1920"
+                            height="1080"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogTitle>{eventData.name}</DialogTitle>
+                        <DialogDescription>
+                          <Image
+                            src={`https://utfs.io/f/${imageSrc}`}
+                            alt={"event-image"}
+                            width="1920"
+                            height="1080"
+                            className="w-full h-full object-cover rounded-md"
+                          />
+                        </DialogDescription>
+                      </DialogContent>
+                    </Dialog>
+                  );
+                })}
+              </div>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
 
             <hr />
 
@@ -152,15 +207,15 @@ export default async function EventDetails({ params }: { params: IParams }) {
               </span>
             </div>
 
-            <div className="w-full overflow-hidden rounded-xl custom-box-shadow">
+            {/* <div className="w-full overflow-hidden rounded-xl custom-box-shadow">
               <Image
-                src="/images/temp-map-csusm.png"
+                src={"/images/temp-map-csusm.png"}
                 alt={"event-image"}
                 width="1920"
                 height="1080"
                 className="w-full h-full object-cover"
               />
-            </div>
+            </div> */}
 
             <hr />
 
@@ -173,58 +228,7 @@ export default async function EventDetails({ params }: { params: IParams }) {
           </div>
 
           {/* RSVP FORM */}
-          <div>
-            <div className="w-full sm:w-[18rem] rounded-xl custom-box-shadow flex flex-col p-4 gap-3 sticky top-32 dark:bg-primary-foreground">
-              <h1 className="text-3xl font-semibold text-primary">
-                Interested?
-              </h1>
-              <span className="flex items-center gap-2">
-                <MdAccessTime />
-                <p className="text-primary font-semibold">
-                  {eventData?.date ? eventData.date.toLocaleDateString() : ""}{" "}
-                  at{" "}
-                  {eventData?.date
-                    ? eventData.date.toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })
-                    : ""}
-                </p>
-              </span>
-
-              <Link
-                href={eventData?.githubRepo || ""}
-                target="_blank"
-                className="w-full"
-              >
-                <Button
-                  variant="outline"
-                  className="w-full gap-2 font-semibold text-primary/90"
-                >
-                  <FaGithub /> Source Code
-                </Button>
-              </Link>
-              <Link
-                href={eventData?.slidesURL || ""}
-                target="_blank"
-                className="w-full"
-              >
-                <Button
-                  variant="outline"
-                  className="w-full font-semibold text-primary/90"
-                >
-                  Slides
-                </Button>
-              </Link>
-              <Button className="bg-blue w-full font-medium hover:bg-blue/80">
-                RSVP Now
-              </Button>
-              <div className="flex gap-2 my-4 text-primary/70 justify-center items-center">
-                <MdPerson size={30} />
-                <p>Attendees: {eventData?.attendeeIds?.length ?? 0}</p>
-              </div>
-            </div>
-          </div>
+          <RSVPForm event={eventData}/>
         </div>
 
         {/* <hr />

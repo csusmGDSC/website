@@ -37,6 +37,11 @@ const PastEvents = ({ events }: PastEventsProps) => {
                       )
                     : undefined
                 }
+                imageSrc={
+                  e.imageSrc
+                    ? `https://utfs.io/f/${e.imageSrc}`
+                    : "/images/stock/reflections.jpg"
+                }
                 key={index}
                 className="sm:!w-[calc(50%-1rem)] md:!w-[calc(33.333%-1rem)]"
                 websiteUrl={`/events/${e.id}`}

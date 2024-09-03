@@ -23,16 +23,20 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import Image from "next/image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useUser } from "@clerk/nextjs";
+import { GDSCUser } from "@/types/gdsc-user";
+import { SelectUserFromList } from "@/components/main/select-user";
+import { MdPerson } from "react-icons/md";
+import { UserRowCard } from "../user-row-card";
 
 interface EventInfoFormProps {
   form: UseFormReturn<EventFormValues>;
 }
 
 const EventInfoForm = ({ form }: EventInfoFormProps) => {
-  const { user } = useUser();
   const imageElementRef = useRef<HTMLInputElement>(null);
+
+  const [organizerList, setOrganizerList] = useState<GDSCUser[]>([]);
+  const [selectUserListOpen, setSelectUserListOpen] = useState(false);
 
   return (
     <FormWrapper
@@ -225,42 +229,53 @@ const EventInfoForm = ({ form }: EventInfoFormProps) => {
         )}
       />
 
-      {/* ORGANIZERS OF EVENT, TODO: MAKE THIS DYNAMIC, DOESN'T DO ANYTHING YET */}
-      {/* <FormField
+      <FormField
         control={form.control}
         name="organizerIds"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Organizers</FormLabel> */}
-      <div className="w-full border border-border rounded-xl p-5 bg-primary-foreground flex items-center justify-between">
-        <span className="flex gap-2 items-center">
-          <Avatar>
-            <AvatarImage src={user?.imageUrl} />
-            <AvatarFallback>{user?.fullName![0] || "?"}</AvatarFallback>
-          </Avatar>
+            <FormLabel>Organizers</FormLabel>
+            {organizerList.map((organizer) => (
+              <UserRowCard
+                key={organizer.id}
+                user={organizer}
+                onDelete={() => {
+                  field.onChange(
+                    field.value.filter((id) => id !== organizer.id)
+                  );
 
-          <span>
-            <p className="text-sm text-primary/90">{user?.fullName}</p>
-            <p className="text-sm text-primary/70">
-              {user?.publicMetadata.branch as string} team
-            </p>
-          </span>
-        </span>
+                  setOrganizerList((prevList) => {
+                    return prevList.filter(
+                      (currOrganizer) => currOrganizer.id !== organizer.id
+                    );
+                  });
+                }}
+              />
+            ))}
+            <div
+              className="border hover:cursor-pointer hover:bg-secondary transition-colors text-sm border-dashed gap-2 px-4 py-6 rounded-lg flex items-center justify-center"
+              onClick={() => setSelectUserListOpen(true)}
+            >
+              <MdPerson /> Add Organizer
+            </div>
+            <SelectUserFromList
+              open={selectUserListOpen}
+              setOpen={setSelectUserListOpen}
+              setUser={(user: GDSCUser) => {
+                if (user) {
+                  field.onChange([...field.value, user.id]);
 
-        <Button
-          variant="ghost"
-          size="sm"
-          type="button"
-          onClick={() => {}}
-          className="rounded-full"
-        >
-          <XIcon />
-        </Button>
-      </div>
-      {/* <FormMessage />
+                  // Doing this to avoid re-calling users API query
+                  setOrganizerList([...organizerList, user]);
+                }
+              }}
+              usersSelected={organizerList}
+              setUsersSelected={setOrganizerList}
+            />
+            <FormMessage />
           </FormItem>
         )}
-      /> */}
+      />
     </FormWrapper>
   );
 };

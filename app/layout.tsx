@@ -9,6 +9,7 @@ import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
 import GDSCTeamContextProvider from "@/context/gdsc-team-context";
 import GDSCEventsContextProvider from "@/context/gdsc-events-context";
+import { Toaster } from "@/components/ui/sonner";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -51,6 +52,7 @@ export default function RootLayout({
               >
                 <Header />
                 {children}
+                <Toaster />
                 <Footer />
               </ThemeProvider>
             </body>

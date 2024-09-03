@@ -22,6 +22,7 @@ import LinksForm from "@/components/main/admin/create-event/forms/links-form";
 import Summary from "@/components/main/admin/create-event/summary";
 import { useState } from "react";
 import { createEvent } from "@/actions/event";
+import { uploadFiles, useUploadThing } from "@/hooks/use-upload";
 
 export default function CreateEvent() {
   const {
@@ -46,12 +47,79 @@ export default function CreateEvent() {
       },
       location: "California State University, San Marcos",
       date: new Date(),
-      organizerIds: ["12345"],
+      organizerIds: [],
     },
   });
 
   const [formErrorMessage, setFormErrorMessage] = useState<string | null>(null);
   const [eventCreatedId, setEventCreatedId] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const createGDSCEvent = async (
+    values: z.infer<typeof EventSchema>,
+    mainImageUrl: string | null,
+    extraImageUrls: string[]
+  ) => {
+    console.log("UPLOADED FILES", mainImageUrl, extraImageUrls);
+
+    const serverFormData = new FormData();
+
+    try {
+      serverFormData.append("eventName", values.eventName);
+      serverFormData.append("type", values.type || "other");
+      serverFormData.append("date", values.date.toISOString());
+      serverFormData.append("startTime", values.startTime);
+      serverFormData.append("endTime", values.endTime);
+      serverFormData.append("room", values.room);
+      serverFormData.append("description", values.description);
+      //prettier-ignore
+      serverFormData.append("location", values.location || "California State University, San Marcos" );
+      serverFormData.append("slidesURL", values.slidesURL || "");
+      serverFormData.append("githubRepo", values.githubRepo || "");
+      //prettier-ignore
+      serverFormData.append("organizerIds", JSON.stringify(values.organizerIds));
+      serverFormData.append("imageSrc", mainImageUrl || "");
+      serverFormData.append("aboutBody", JSON.stringify(values.about?.body));
+      serverFormData.append("extraImageSrcs", JSON.stringify(extraImageUrls));
+
+      const eventCreationResponse = await createEvent(serverFormData);
+
+      if (eventCreationResponse.error) {
+        setFormErrorMessage(eventCreationResponse.error);
+      } else {
+        setFormErrorMessage(null);
+      }
+
+      if (eventCreationResponse.eventId) {
+        setEventCreatedId(eventCreationResponse.eventId);
+      }
+    } catch (error) {
+      console.log("Error while creating event: ", error);
+    }
+  };
+
+  const getImageUrls = async (values: z.infer<typeof EventSchema>) => {
+    let mainImageUrl: string | null = null;
+    let extraImageUrls: string[] = [];
+
+    if (values.imageSrc) {
+      const mainImageRes = await uploadFiles("imageUploader", {
+        files: [values.imageSrc],
+      });
+
+      mainImageUrl = mainImageRes?.[0]?.key;
+    }
+
+    if (values.about?.images && values.about?.images.length > 0) {
+      const extraImagesRes = await uploadFiles("imageUploader", {
+        files: values.about?.images || [],
+      });
+
+      extraImageUrls = extraImagesRes?.map((image) => image.key) || [];
+    }
+
+    return { mainImageUrl, extraImageUrls };
+  };
 
   const validateCurrentStep = async () => {
     let isValid = false;
@@ -94,63 +162,23 @@ export default function CreateEvent() {
     if (isLastStep) {
       if (isValid) {
         setFormErrorMessage(null);
+        setLoading(true);
 
         try {
-          const serverFormData = new FormData();
-
-          serverFormData.append("eventName", values.eventName);
-          serverFormData.append("type", values.type || "other");
-          serverFormData.append("date", values.date.toISOString());
-          serverFormData.append("startTime", values.startTime);
-          serverFormData.append("endTime", values.endTime);
-          serverFormData.append("room", values.room);
-          serverFormData.append("description", values.description);
-          serverFormData.append(
-            "location",
-            values.location || "California State University, San Marcos"
-          );
-          serverFormData.append("slidesURL", values.slidesURL || "");
-          serverFormData.append("githubRepo", values.githubRepo || "");
-          serverFormData.append(
-            "organizerIds",
-            JSON.stringify(values.organizerIds)
-          );
-          serverFormData.append("imageSrc", values.imageSrc || "");
-
-          // We can't stringify the File type, so we can send the about data separately
-          serverFormData.append(
-            "aboutBody",
-            JSON.stringify(values.about?.body)
-          );
-          values.about?.images?.forEach((file, index) => {
-            serverFormData.append(`aboutImages[${index}]`, file);
-          });
-          serverFormData.append(
-            "imageCount",
-            values.about?.images?.length.toString() || "0"
-          );
-
-          const eventCreationResponse = await createEvent(serverFormData);
-
-          if (eventCreationResponse.error) {
-            setFormErrorMessage(eventCreationResponse.error);
-          } else {
-            setFormErrorMessage(null);
-          }
-
-          if (eventCreationResponse.eventId) {
-            setEventCreatedId(eventCreationResponse.eventId);
-          }
+          const { mainImageUrl, extraImageUrls } = await getImageUrls(values);
+          createGDSCEvent(values, mainImageUrl, extraImageUrls);
         } catch (error) {
-          console.log(error);
+          console.error("Error uploading files or creating event:", error);
         }
 
         if (!formErrorMessage) {
-          // Show the success message
           nextStep();
         }
+
+        setLoading(false);
       } else {
         setFormErrorMessage("Please fill out all required fields.");
+        setLoading(false);
       }
     } else {
       // If the current inptus are valid, go to the next step
@@ -237,6 +265,7 @@ export default function CreateEvent() {
                     <div className="relative after:pointer-events-none after:absolute after:inset-px after:rounded-[11px] after:shadow-highlight after:shadow-white/10 focus-within:after:shadow-[#77f6aa] after:transition">
                       <Button
                         type="button"
+                        disabled={loading}
                         onClick={(e) => {
                           // Manually submit form because using "submit" type causes the whole form to validate before actually
                           // calling the function, which we don't want to do in a multi-step form since only some of the values may be valid
