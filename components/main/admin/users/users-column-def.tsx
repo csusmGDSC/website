@@ -19,41 +19,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export const UserTableColumns: ColumnDef<GDSCUser>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: true,
-  },
-  {
-    accessorKey: "image",
-    header: "Image",
+    accessorKey: "id",
+    header: "ID",
     enableHiding: false,
-    cell: ({ row }) => {
-      return (
-        <Avatar>
-          <AvatarImage src={row.getValue("image")} />
-          <AvatarFallback>
-            {(row.getValue("fullName") as string)[0]}
-          </AvatarFallback>
-        </Avatar>
-      );
-    },
+    cell: ({ row }) => <p className="text-xs">{row.getValue("id")}</p>,
   },
   {
     accessorKey: "fullName",
@@ -71,9 +40,7 @@ export const UserTableColumns: ColumnDef<GDSCUser>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Email" />
     ),
-    cell: ({ row }) => (
-      <p className="text-xs font-semibold">{row.getValue("email")}</p>
-    ),
+    cell: ({ row }) => <p className="text-xs">{row.getValue("email")}</p>,
   },
   {
     accessorKey: "role",
@@ -87,9 +54,7 @@ export const UserTableColumns: ColumnDef<GDSCUser>[] = [
     accessorKey: "position",
     enableHiding: false,
     header: "Position",
-    cell: ({ row }) => (
-      <p className="text-xs font-semibold">{row.getValue("position")}</p>
-    ),
+    cell: ({ row }) => <p className="text-xs">{row.getValue("position")}</p>,
   },
   {
     accessorKey: "branch",
@@ -130,9 +95,7 @@ export const UserTableColumns: ColumnDef<GDSCUser>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem className="hover:cursor-pointer">Edit</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

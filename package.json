@@ -11,6 +11,7 @@
     "test:watch": "jest --watch --passWithNoTests"
   },
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^5.0.33",
     "@clerk/nextjs": "^5.3.3",
     "@emoji-mart/data": "^1.2.1",
     "@emoji-mart/react": "^1.1.1",

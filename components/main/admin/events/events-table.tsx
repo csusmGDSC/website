@@ -15,28 +15,14 @@ import {
 import { DataTable } from "../data-table";
 import { EventTableColumns } from "./events-column-def";
 import { useRouter } from "next/navigation";
-import { GDSCEvent } from "@prisma/client";
-import { getEvents } from "@/actions/event";
+import { useGDSCEvents } from "@/hooks/use-gdsc-event";
 
 const EventsTable = () => {
-  const [events, setEvents] = useState<GDSCEvent[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  const fetchEvents = async () => {
-    setLoading(true);
-    const eventData: GDSCEvent[] = JSON.parse(await getEvents());
-    setEvents(eventData);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchEvents();
-  }, []);
-
+  const { events, loading, triggerRefresh } = useGDSCEvents();
   return (
     <Container className="-mt-20">
       <div>
-        <EventsTableActions refresh={() => fetchEvents()} />
+        <EventsTableActions refresh={() => triggerRefresh()} />
         <DataTable
           columns={EventTableColumns}
           data={events}
@@ -71,14 +57,7 @@ const EventsTableActions = ({ refresh }: { refresh: () => void }) => {
       className: "hover:text-blue/80",
       id: "refresh",
       onClick: () => refresh(),
-    },
-    {
-      action: "Delete",
-      icon: MdDelete,
-      className: "hover:text-red",
-      id: "delete",
-      onClick: () => {},
-    },
+    }
   ];
 
   return (

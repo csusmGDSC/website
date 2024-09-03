@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 
 import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
+import GDSCTeamContextProvider from "@/context/gdsc-team-context";
+import GDSCEventsContextProvider from "@/context/gdsc-events-context";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -33,20 +35,28 @@ export default function RootLayout({
         },
       }}
     >
-      <html lang="en">
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased overflow-x-hidden",
-            fontSans.variable
-          )}
-        >
-          <ThemeProvider defaultTheme="system" attribute="class" enableSystem>
-            <Header />
-            {children}
-            <Footer />
-          </ThemeProvider>
-        </body>
-      </html>
+      <GDSCTeamContextProvider>
+        <GDSCEventsContextProvider>
+          <html lang="en">
+            <body
+              className={cn(
+                "min-h-screen bg-background font-sans antialiased overflow-x-hidden",
+                fontSans.variable
+              )}
+            >
+              <ThemeProvider
+                defaultTheme="system"
+                attribute="class"
+                enableSystem
+              >
+                <Header />
+                {children}
+                <Footer />
+              </ThemeProvider>
+            </body>
+          </html>
+        </GDSCEventsContextProvider>
+      </GDSCTeamContextProvider>
     </ClerkProvider>
   );
 }

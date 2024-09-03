@@ -35,8 +35,6 @@ export default function CreateEvent() {
     showSuccessMsg,
   } = useMultipleStepForm(STEPS.REVIEW_AND_SUBMIT + 1);
 
-  const { user } = useUser();
-
   const form = useForm<z.infer<typeof EventSchema>>({
     resolver: zodResolver(EventSchema),
     defaultValues: {
@@ -53,6 +51,7 @@ export default function CreateEvent() {
   });
 
   const [formErrorMessage, setFormErrorMessage] = useState<string | null>(null);
+  const [eventCreatedId, setEventCreatedId] = useState<string | null>(null);
 
   const validateCurrentStep = async () => {
     let isValid = false;
@@ -138,6 +137,10 @@ export default function CreateEvent() {
           } else {
             setFormErrorMessage(null);
           }
+
+          if (eventCreationResponse.eventId) {
+            setEventCreatedId(eventCreationResponse.eventId);
+          }
         } catch (error) {
           console.log(error);
         }
@@ -187,7 +190,7 @@ export default function CreateEvent() {
         >
           {showSuccessMsg ? (
             <AnimatePresence mode="wait">
-              <SuccessMessage />
+              <SuccessMessage eventId={eventCreatedId || ""} />
             </AnimatePresence>
           ) : (
             <Form {...form}>

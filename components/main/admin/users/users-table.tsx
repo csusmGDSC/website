@@ -1,11 +1,9 @@
 "use client";
 
 import Container from "@/components/ui/container";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React from "react";
 import { FaSearch } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { LuRefreshCw } from "react-icons/lu";
 
@@ -15,35 +13,16 @@ import {
 } from "../table-action-button";
 import { DataTable } from "../data-table";
 import { UserTableColumns } from "./users-column-def";
-import { testUsers } from "@/constants/test/example-users";
-
-const ButtonActions: TableActionButtonProps[] = [
-  {
-    action: "Refresh",
-    icon: LuRefreshCw,
-    className: "hover:text-blue/80",
-    id: "refresh",
-    onClick: () => {},
-  },
-  {
-    action: "Delete",
-    icon: MdDelete,
-    className: "hover:text-red",
-    id: "delete",
-    onClick: () => {},
-  },
-];
+import { useGDSCTeam } from "@/hooks/use-gdsc-team";
 
 const UsersTable = () => {
+  const { team, loading, triggerRefresh } = useGDSCTeam();
+
   return (
     <Container className="-mt-20">
       <div>
-        <UsersTableActions />
-        <DataTable
-          columns={UserTableColumns}
-          data={testUsers}
-          loading={false}
-        />
+        <UsersTableActions refresh={() => triggerRefresh()} />
+        <DataTable columns={UserTableColumns} data={team} loading={loading} />
       </div>
     </Container>
   );
@@ -56,7 +35,19 @@ export default UsersTable;
  *
  * @return {JSX.Element} The JSX element representing the events table actions.
  */
-const UsersTableActions = () => {
+const UsersTableActions = ({ refresh }: { refresh: () => void }) => {
+  const ButtonActions: TableActionButtonProps[] = [
+    {
+      action: "Refresh",
+      icon: LuRefreshCw,
+      className: "hover:text-blue/80",
+      id: "refresh",
+      onClick: () => {
+        refresh();
+      },
+    },
+  ];
+
   return (
     <div className="flex flex-col sm:flex-row items-center py-4 justify-between">
       <span className="flex items-center gap-4 text-blue">
