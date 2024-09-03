@@ -82,7 +82,10 @@ export const bufferToBase64 = (buffer: Buffer): string => {
  * @param {Object} image - The image object containing data and mimeType.
  * @return {string} A data URL string representation of the image.
  */
-export const getImageDataUrl = (image: { data: Buffer; mimeType: string }): string => {
+export const getImageDataUrl = (image: {
+  data: Buffer;
+  mimeType: string;
+}): string => {
   const base64String = bufferToBase64(image.data);
   return `data:${image.mimeType};base64,${base64String}`;
 };

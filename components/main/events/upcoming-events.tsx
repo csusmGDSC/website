@@ -28,6 +28,11 @@ const UpcomingEvents = ({ events }: UpcomingEventsProps) => {
                 : undefined
             }
             key={index}
+            imageSrc={
+              e.imageSrc
+                ? `https://utfs.io/f/${e.imageSrc}`
+                : "/images/stock/reflections.jpg"
+            }
             className="sm:!w-[calc(50%-1rem)] md:!w-[calc(33.333%-1rem)]"
             websiteUrl={`/events/${e.id}`}
             tags={e.tags}

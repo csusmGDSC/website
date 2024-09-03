@@ -13,6 +13,8 @@ import { formatDate } from "date-fns";
 import { FaBuilding } from "react-icons/fa6";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { STEPS } from "./sidebar";
+import { UserRowCard } from "./user-row-card";
+import { useGDSCTeam } from "@/hooks/use-gdsc-team";
 
 const Renderer = dynamic(() => import("@/components/ui/renderer"), {
   ssr: false,
@@ -24,7 +26,7 @@ interface SummaryProps {
 }
 
 const Summary = ({ form, goTo }: SummaryProps) => {
-  const { user } = useUser();
+  const { team } = useGDSCTeam();
 
   return (
     <FormWrapper
@@ -78,20 +80,13 @@ const Summary = ({ form, goTo }: SummaryProps) => {
 
       {/* ORGANIZERS SUMMARY */}
       <p className="text-xl text-primary font-semibold">Organizers</p>
-      <div className="w-full border border-border rounded-xl p-5 bg-primary-foreground flex items-center justify-between">
-        <span className="flex gap-2 items-center">
-          <Avatar>
-            <AvatarImage src={user?.imageUrl} />
-            <AvatarFallback>{user?.fullName![0] || "?"}</AvatarFallback>
-          </Avatar>
-
-          <span>
-            <p className="text-sm text-primary/90">{user?.fullName}</p>
-            <p className="text-sm text-primary/70">
-              {user?.publicMetadata.branch as string} team
-            </p>
-          </span>
-        </span>
+      <div className="flex flex-col gap-2">
+        {form.watch("organizerIds")?.map((organizerId) => (
+          <UserRowCard
+            key={organizerId}
+            user={team.filter((user) => user.id === organizerId)[0]}
+          />
+        ))}
       </div>
 
       {/* EVENT IMAGE SUMMARY */}

@@ -26,8 +26,8 @@ model GDSCEvent {
   date             DateTime?
   githubRepo       String?
   slidesURL        String?
-  imageSrc         Bytes?
-  extraImageSrcs   Bytes[]
+  imageSrc         String?
+  extraImageSrcs   String[]
   description      String
   about            String?
   attendeeIds      String[]
