@@ -23,7 +23,7 @@ const successVariants = {
   },
 };
 
-const SuccessMessage = () => {
+const SuccessMessage = ({ eventId }: { eventId: string }) => {
   const router = useRouter();
   return (
     <motion.section
@@ -32,8 +32,11 @@ const SuccessMessage = () => {
       initial="hidden"
       animate="visible"
     >
-      <Link href="/admin/events" className="absolute top-0 left-0 flex gap-2 text-sm text-priamry hover:underline">
-        <ChevronLeft size={20}/> Back to Events
+      <Link
+        href="/admin/events"
+        className="absolute top-0 left-0 flex gap-2 text-sm text-priamry hover:underline"
+      >
+        <ChevronLeft size={20} /> Back to Events
       </Link>
       <Image
         src="/images/gdsc/gdsc-csusm title light.png"
@@ -52,7 +55,7 @@ const SuccessMessage = () => {
       <div className="flex items-center mt-6">
         <div className="relative after:pointer-events-none after:absolute after:inset-px after:rounded-[11px] after:shadow-highlight after:shadow-white/10 focus-within:after:shadow-[#77f6aa] after:transition">
           <Button
-            onClick={() => router.push("/admin/events")}
+            onClick={() => router.push(`/events/${eventId}`)}
             className="relative bg-blue border group border-border hover:bg-blue/70 rounded-xl text-white hover:text-white"
           >
             <FaArrowRight className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />

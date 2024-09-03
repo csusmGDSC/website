@@ -51,6 +51,25 @@ export async function getEventById(
 }
 
 /**
+ * Deletes an event from the database by its ID.
+ *
+ * @param {string} id - The ID of the event to delete
+ * @return {boolean} True if the event was deleted, False if the ID is invalid
+ */
+export async function deleteEventById(id: string) {
+  // Check if the id is a valid ObjectId
+  const objectIdRegex = /^[a-fA-F0-9]{24}$/;
+
+  if (!objectIdRegex.test(id)) {
+    return false;
+  }
+
+  db.gDSCEvent.delete({ where: { id } }).then(() => {
+    return true;
+  });
+}
+
+/**
  * Creates a new event in the database.
  *
  * @param {FormData} values - A FormData object containing the event details.
@@ -149,9 +168,9 @@ export async function createEvent(values: FormData) {
     createdBy: user.userId as string,
   };
 
-  await db.gDSCEvent.create({
+  const createdEvent = await db.gDSCEvent.create({
     data: newGDSCEvent,
   });
 
-  return { message: "Event successfully created" };
+  return { message: "Event successfully created", eventId: createdEvent.id };
 }

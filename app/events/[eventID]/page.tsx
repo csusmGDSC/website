@@ -24,6 +24,8 @@ import { MdAccessTime, MdArticle, MdPerson } from "react-icons/md";
 import { getEventById } from "@/actions/event";
 import dynamic from "next/dynamic";
 import EmptyState from "@/components/main/empty-state";
+import { GDSCUser } from "@/types/gdsc-user";
+import { getMultipleUsersByIds, getUserById } from "@/actions/users";
 
 const Renderer = dynamic(() => import("@/components/ui/renderer"), {
   ssr: false,
@@ -35,6 +37,7 @@ interface IParams {
 
 export default async function EventDetails({ params }: { params: IParams }) {
   const eventData = await getEventById(params.eventID);
+  const organizers = await getMultipleUsersByIds([]);
 
   if (!eventData) {
     return (
@@ -163,62 +166,9 @@ export default async function EventDetails({ params }: { params: IParams }) {
 
             <h1 className="text-3xl font-bold text-primary">Organizers</h1>
             <div className="flex flex-row flex-wrap gap-3 ">
-              <AvatarCard
-                name="Jaedon"
-                role="Project"
-                linkedinLink=""
-                gitHubLink=""
-                instagramLink=""
-                imageSrc="/images/team/jaedonspurlock.jpg"
-              />
-              <AvatarCard
-                name="Josh"
-                role="Project"
-                linkedinLink=""
-                gitHubLink=""
-                instagramLink=""
-                imageSrc=""
-              />
-              <AvatarCard
-                name="Gabriel"
-                role="Project"
-                linkedinLink=""
-                gitHubLink=""
-                instagramLink=""
-                imageSrc=""
-              />
-              <AvatarCard
-                name="Thanh"
-                role="Interview"
-                linkedinLink=""
-                gitHubLink=""
-                instagramLink=""
-                imageSrc=""
-              />
-              <AvatarCard
-                name="Jacob"
-                role="Interview"
-                linkedinLink=""
-                gitHubLink=""
-                instagramLink=""
-                imageSrc=""
-              />
-              <AvatarCard
-                name="Aaron"
-                role="Interview"
-                linkedinLink=""
-                gitHubLink=""
-                instagramLink=""
-                imageSrc=""
-              />
-              <AvatarCard
-                name="Chris"
-                role="Prrject"
-                linkedinLink=""
-                gitHubLink=""
-                instagramLink=""
-                imageSrc=""
-              />
+              {organizers.map((organizer: GDSCUser) => (
+                <AvatarCard key={organizer.id} user={organizer} />
+              ))}
             </div>
           </div>
 

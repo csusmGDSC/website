@@ -3,7 +3,6 @@
 import PastEvents from "@/components/main/events/past-events";
 import UpcomingEvents from "@/components/main/events/upcoming-events";
 import PageHeader from "@/components/ui/page-header";
-import { testEvents } from "@/constants/test/example-events";
 import React from "react";
 import { getEventsWithoutJSON } from "@/actions/event";
 
