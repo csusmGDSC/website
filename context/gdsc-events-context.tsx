@@ -1,6 +1,6 @@
 "use client";
 
-import { getEventsWithoutJSON } from "@/actions/event";
+import { getEvents } from "@/actions/event";
 import { GDSCEvent } from "@prisma/client";
 
 import React, { useEffect, useState, createContext } from "react";
@@ -37,8 +37,14 @@ export default function GDSCEventsContextProvider({
 
   const fetchEvents = async () => {
     setLoading(true);
-    const eventData: GDSCEvent[] = await getEventsWithoutJSON();
-    setEvents(eventData);
+    try {
+      const eventData: GDSCEvent[] = JSON.parse(await getEvents());
+      setEvents(eventData ?? []);
+    } catch (error) {
+      console.log("ERROR GETTING EVENTS: ", error);
+      setEvents([]);
+    }
+
     setLoading(false);
   };
 
