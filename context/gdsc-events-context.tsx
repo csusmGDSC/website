@@ -38,7 +38,7 @@ export default function GDSCEventsContextProvider({
   const fetchEvents = async () => {
     setLoading(true);
     try {
-      const eventData: GDSCEvent[] = JSON.parse(await getEvents());
+      const eventData: GDSCEvent[] = JSON.parse((await getEvents()) ?? "[]");
       setEvents(eventData ?? []);
     } catch (error) {
       console.log("ERROR GETTING EVENTS: ", error);
