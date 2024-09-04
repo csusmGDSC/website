@@ -1,18 +1,19 @@
-"use server";
+"use client";
 
 import PastEvents from "@/components/main/events/past-events";
 import UpcomingEvents from "@/components/main/events/upcoming-events";
 import PageHeader from "@/components/ui/page-header";
 import React from "react";
-import { getEventsWithoutJSON } from "@/actions/event";
+import { useGDSCEvents } from "@/hooks/use-gdsc-event";
+import GoogleLoadingBounce from "@/components/ui/loaders/google-loading-bounce";
 
 /**
  * Retrieves and renders a list of upcoming and past events.
  *
  * @return {JSX.Element} The rendered events page
  */
-export default async function Events() {
-  const events = await getEventsWithoutJSON();
+export default function Events() {
+  const { events, loading } = useGDSCEvents();
   const today = new Date();
 
   const upcoming = events.filter((event) => {
@@ -35,8 +36,16 @@ export default async function Events() {
       {/* PAGE CONTENT */}
       <div className="w-full flex-center-col">
         <div className="custom-max-width flex flex-col gap-10">
-          <UpcomingEvents events={upcoming} />
-          <PastEvents events={past} />
+          {loading ? (
+            <div className="w-full flex items-center justify-center">
+              <GoogleLoadingBounce />
+            </div>
+          ) : (
+            <>
+              <UpcomingEvents events={upcoming} />
+              <PastEvents events={past} />
+            </>
+          )}
         </div>
       </div>
     </main>

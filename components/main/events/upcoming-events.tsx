@@ -3,6 +3,7 @@ import ContentCard from "@/components/ui/cards/content-card";
 import TitleHeader from "@/components/ui/title-header";
 import { convertToReadableDate } from "@/lib/utils";
 import { GDSCEvent } from "@prisma/client";
+import { formatDate } from "date-fns";
 import React from "react";
 
 interface UpcomingEventsProps {
@@ -20,15 +21,7 @@ const UpcomingEvents = ({ events }: UpcomingEventsProps) => {
             <ContentCard
               title={e.name}
               description={e.description}
-              date={
-                e.date
-                  ? convertToReadableDate(
-                      e.date.getMonth(),
-                      e.date.getDate(),
-                      e.date.getFullYear()
-                    )
-                  : undefined
-              }
+              date={e.date ? formatDate(new Date(e.date), "PPP") : undefined}
               key={index}
               imageSrc={
                 e.imageSrc

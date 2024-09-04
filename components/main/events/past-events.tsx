@@ -6,6 +6,7 @@ import { convertToReadableDate } from "@/lib/utils";
 import { GDSCEvent } from "@prisma/client";
 
 import { TabsContent } from "@radix-ui/react-tabs";
+import { formatDate } from "date-fns";
 import React from "react";
 
 interface PastEventsProps {
@@ -31,13 +32,7 @@ const PastEvents = ({ events }: PastEventsProps) => {
                   title={e.name}
                   description={e.description}
                   date={
-                    e.date
-                      ? convertToReadableDate(
-                          e.date.getMonth(),
-                          e.date.getDate(),
-                          e.date.getFullYear()
-                        )
-                      : undefined
+                    e.date ? formatDate(new Date(e.date), "PPP") : undefined
                   }
                   imageSrc={
                     e.imageSrc
