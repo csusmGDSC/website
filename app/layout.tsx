@@ -47,19 +47,17 @@ export default function RootLayout({
           <html lang="en">
             <body
               className={cn(
-                "min-h-screen bg-background font-sans antialiased overflow-x-hidden",
+                "min-h-screen bg-background flex flex-col font-sans antialiased overflow-x-hidden",
                 fontSans.variable
               )}
             >
-              <div className="h-full justify-between flex flex-col">
-                <div>
-                  <Header />
-                  {children}
-                  <Toaster />
-                </div>
-
-                <Footer />
+              <div className="flex-1">
+                <Header />
+                {children}
+                <Toaster />
               </div>
+
+              <Footer />
             </body>
           </html>
         </GDSCEventsContextProvider>
