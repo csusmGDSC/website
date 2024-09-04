@@ -5,7 +5,6 @@ import Header from "@/components/main/header";
 import Footer from "@/components/main/footer";
 import { cn } from "@/lib/utils";
 
-import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
 import GDSCTeamContextProvider from "@/context/gdsc-team-context";
 import GDSCEventsContextProvider from "@/context/gdsc-events-context";
@@ -45,16 +44,15 @@ export default function RootLayout({
                 fontSans.variable
               )}
             >
-              <ThemeProvider
-                defaultTheme="system"
-                attribute="class"
-                enableSystem
-              >
-                <Header />
-                {children}
-                <Toaster />
+              <div className="h-full justify-between flex flex-col">
+                <div>
+                  <Header />
+                  {children}
+                  <Toaster />
+                </div>
+
                 <Footer />
-              </ThemeProvider>
+              </div>
             </body>
           </html>
         </GDSCEventsContextProvider>

@@ -36,7 +36,7 @@ const InterviewPreparation = () => {
   return (
     <>
       <TitleHeader heading="Interview Preparation" />
-      <p className="text-sm px-2 md:px-0 mb-8 w-full text-center text-primary/80 sm:text-left">
+      <p className="text-sm px-2 md:px-0 mb-8 w-full text-primary/80 text-left">
         Joining GDSC-CSUSM team will allow you to participate in various
         projects and resources designed to enhance your interview skills. Both
         individual and collaborative projects are available to help you learn

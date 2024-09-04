@@ -32,7 +32,7 @@ const AccordionGroup: React.FC<AccordionGroupProps> = ({
       >
         {accordionTuples.map((tuple, index) => (
           <AccordionItem key={index} value={`item-${index}}`} className="py-1">
-            <AccordionTrigger className="text-foreground/70 text-sm">
+            <AccordionTrigger className="text-foreground/70 text-sm !text-left">
               {tuple[0]}
             </AccordionTrigger>
             <AccordionContent className="text-foreground/70 text-xs">
