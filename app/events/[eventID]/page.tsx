@@ -51,6 +51,13 @@ interface IParams {
   eventID: string;
 }
 
+/**
+ * EventDetails component displays the details of a specific event.
+ *
+ * @param {{ params: IParams }} props - The component props.
+ * @param {IParams} props.params - The event ID and other parameters.
+ * @return {JSX.Element} The event details JSX element.
+ */
 export default async function EventDetails({ params }: { params: IParams }) {
   const eventData = await getEventById(params.eventID);
   const organizers = await getMultipleUsersByIds(eventData?.organizerIds || []);

@@ -22,6 +22,13 @@ export const metadata: Metadata = {
     "Google Developer Student Club at California State University, San Marcos. Visit upcoming events, project developments, and interview preperation sessions.",
 };
 
+/**
+ * A root layout component that wraps the entire application.
+ *
+ * @param {Readonly<{ children: React.ReactNode }>} props - The component props.
+ * @param {React.ReactNode} props.children - The child elements to be rendered.
+ * @return {JSX.Element} The root layout element.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

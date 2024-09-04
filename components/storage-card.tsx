@@ -3,6 +3,12 @@ import { Database } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 
+/**
+ * A React component that displays a storage card with database storage information.
+ * TO-DO: Use the actual database to get its size, right now this is hardcoded for testing
+ * 
+ * @return {JSX.Element} The StorageCard component
+ */
 export function StorageCard() {
   return (
     <Card className="rounded-md text-xs shadow-sm">

@@ -17,6 +17,13 @@ import { GrUserAdmin } from "react-icons/gr";
 import { MdManageHistory } from "react-icons/md";
 import { useRouter } from "next/navigation";
 
+/**
+ * Renders a user button component that displays the user's avatar and provides a dropdown menu
+ * with options to manage the user's account, sign out, and access admin features (if the user
+ * has the role "ADMIN").
+ *
+ * @return {JSX.Element} The user button component.
+ */
 const UserButton = () => {
   const user = useUser();
   const clerk = useClerk();

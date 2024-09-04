@@ -4,6 +4,11 @@ import * as React from "react";
 import { ChevronsUpDown, Plus } from "lucide-react";
 import Image from "next/image";
 
+/**
+ * Renders a component representing a team.
+ *
+ * @return {JSX.Element} The rendered team component.
+ */
 export function Team() {
   return (
     <div className="w-full rounded-md">

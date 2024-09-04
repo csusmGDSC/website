@@ -38,6 +38,12 @@ const links = [
   // },
 ] as const;
 
+/**
+ * A functional component that renders the header section of the website.
+ * It includes the GDSC logo, navigation links, and authentication buttons.
+ *
+ * @return {JSX.Element} The JSX element representing the header section.
+ */
 const Header = () => {
   const pathname = usePathname();
   const clerk = useClerk();

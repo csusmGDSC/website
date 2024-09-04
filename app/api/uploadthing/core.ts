@@ -4,6 +4,9 @@ import { auth } from "@clerk/nextjs/server";
 
 const f = createUploadthing();
 
+/**
+ * Read the docs for more info on UploadThing routing: https://docs.uploadthing.com/getting-started/appdir
+ */
 export const GDSCFileRouter = {
   imageUploader: f({ image: { maxFileSize: "16MB", maxFileCount: 10 } })
     .middleware(async ({ req }) => {

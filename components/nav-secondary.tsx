@@ -6,6 +6,13 @@ import { IconType } from "react-icons";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * A secondary navigation component that renders a list of items with icons and links.
+ *
+ * @param {object} className - Additional class names to apply to the navigation component.
+ * @param {object[]} items - An array of navigation items, each containing a title, URL, and icon.
+ * @return {JSX.Element|null} The rendered navigation component, or null if no items are provided.
+ */
 export function NavSecondary({
   className,
   items,

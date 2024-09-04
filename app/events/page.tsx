@@ -6,6 +6,11 @@ import PageHeader from "@/components/ui/page-header";
 import React from "react";
 import { getEventsWithoutJSON } from "@/actions/event";
 
+/**
+ * Retrieves and renders a list of upcoming and past events.
+ *
+ * @return {JSX.Element} The rendered events page
+ */
 export default async function Events() {
   const events = await getEventsWithoutJSON();
   const today = new Date();

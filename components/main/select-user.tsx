@@ -12,6 +12,17 @@ import {
 import { useGDSCTeam } from "@/hooks/use-gdsc-team";
 import { GDSCUser } from "@/types/gdsc-user";
 
+/**
+ * A function to render a dialog for selecting users from a list.
+ * It categorizes users into admins and members, and allows selection of users.
+ *
+ * @param {boolean} open - Whether the dialog is open or not.
+ * @param {Dispatch<SetStateAction<boolean>>} setOpen - A function to set the open state of the dialog.
+ * @param {(user: GDSCUser) => void} setUser - A function to set the selected user.
+ * @param {GDSCUser[]} usersSelected - An array of already selected users.
+ * @param {Dispatch<SetStateAction<GDSCUser[]>>} setUsersSelected - A function to set the array of selected users.
+ * @return {JSX.Element} The JSX element representing the dialog.
+ */
 export const SelectUserFromList = ({
   open,
   setOpen,

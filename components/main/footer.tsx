@@ -7,6 +7,12 @@ import React from "react";
 import { CiInstagram } from "react-icons/ci";
 import { FaDiscord, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
+/**
+ * A functional component representing the website's footer.
+ * It contains links to various pages, social media, and copyright information.
+ *
+ * @return {JSX.Element} The JSX element representing the footer.
+ */
 const Footer = () => {
   const url = usePathname();
   const isAdminPage = url.split("/")[1] === "admin";
