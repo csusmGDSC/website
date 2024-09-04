@@ -76,8 +76,6 @@ export default function CreateEvent() {
     mainImageUrl: string | null,
     extraImageUrls: string[]
   ) => {
-    console.log("UPLOADED FILES", mainImageUrl, extraImageUrls);
-
     const serverFormData = new FormData();
 
     try {
@@ -108,8 +106,11 @@ export default function CreateEvent() {
 
       if (eventCreationResponse.eventId) {
         setEventCreatedId(eventCreationResponse.eventId);
+      } else {
+        setFormErrorMessage("Error. Server could not create event.");
       }
     } catch (error) {
+      setFormErrorMessage("Error. Server could not create event.");
       console.log("Error while creating event: ", error);
     }
   };
@@ -142,7 +143,6 @@ export default function CreateEvent() {
 
     return { mainImageUrl, extraImageUrls };
   };
-
 
   const validateCurrentStep = async () => {
     let isValid = false;
@@ -195,12 +195,16 @@ export default function CreateEvent() {
 
         try {
           const { mainImageUrl, extraImageUrls } = await getImageUrls(values);
-          createGDSCEvent(values, mainImageUrl, extraImageUrls);
+          await createGDSCEvent(values, mainImageUrl, extraImageUrls);
         } catch (error) {
           console.error("Error uploading files or creating event:", error);
         }
 
-        if (!formErrorMessage) {
+        if (!eventCreatedId) {
+          setFormErrorMessage("Error. Server could not create event.");
+        }
+
+        if (!formErrorMessage && eventCreatedId) {
           nextStep();
         }
 

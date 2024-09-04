@@ -24,31 +24,33 @@ const PastEvents = ({ events }: PastEventsProps) => {
         </TabsList>
         <TabsContent value="2024" className="mt-6">
           <CardGrid placeholder="There are no past events yet.">
-            {events?.map((e, index) => (
-              <ContentCard
-                title={e.name}
-                description={e.description}
-                date={
-                  e.date
-                    ? convertToReadableDate(
-                        e.date.getMonth(),
-                        e.date.getDate(),
-                        e.date.getFullYear()
-                      )
-                    : undefined
-                }
-                imageSrc={
-                  e.imageSrc
-                    ? `https://utfs.io/f/${e.imageSrc}`
-                    : "/images/stock/reflections.jpg"
-                }
-                key={index}
-                className="sm:!w-[calc(50%-1rem)] md:!w-[calc(33.333%-1rem)]"
-                websiteUrl={`/events/${e.id}`}
-                tags={e.tags}
-                type="event"
-              />
-            ))}
+            {events &&
+              events.length > 0 &&
+              events?.map((e, index) => (
+                <ContentCard
+                  title={e.name}
+                  description={e.description}
+                  date={
+                    e.date
+                      ? convertToReadableDate(
+                          e.date.getMonth(),
+                          e.date.getDate(),
+                          e.date.getFullYear()
+                        )
+                      : undefined
+                  }
+                  imageSrc={
+                    e.imageSrc
+                      ? `https://utfs.io/f/${e.imageSrc}`
+                      : "/images/stock/reflections.jpg"
+                  }
+                  key={index}
+                  className="sm:!w-[calc(50%-1rem)] md:!w-[calc(33.333%-1rem)]"
+                  websiteUrl={`/events/${e.id}`}
+                  tags={e.tags}
+                  type="event"
+                />
+              ))}
           </CardGrid>
         </TabsContent>
       </Tabs>
