@@ -18,6 +18,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useUser } from "@clerk/nextjs";
 
+/**
+ * Renders the user navigation component.
+ *
+ * @return {JSX.Element} The user navigation component.
+ */
 export function NavUser() {
   const user = useUser();
 

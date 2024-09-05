@@ -11,6 +11,21 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 
+/**
+ * A navigation component that renders a list of items with collapsible sub-items.
+ *
+ * @param {object} props - The component props.
+ * @param {string} props.className - The CSS class name to apply to the component.
+ * @param {object[]} props.items - The list of navigation items.
+ * @param {string} props.items[].title - The title of the navigation item.
+ * @param {string} props.items[].url - The URL of the navigation item.
+ * @param {LucideIcon} props.items[].icon - The icon of the navigation item.
+ * @param {boolean} [props.items[].isActive] - Whether the navigation item is active.
+ * @param {object[]} [props.items[].items] - The list of sub-items.
+ * @param {string} props.items[].items[].title - The title of the sub-item.
+ * @param {string} props.items[].items[].url - The URL of the sub-item.
+ * @return {JSX.Element} The rendered navigation component.
+ */
 export function NavMain({
   className,
   items,

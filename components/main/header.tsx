@@ -7,6 +7,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth, useClerk } from "@clerk/nextjs";
 import UserButton from "./user-button";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
+import { MdMenu } from "react-icons/md";
 
 // TO-DO: Keep links in different place
 const links = [
@@ -36,6 +38,12 @@ const links = [
   // },
 ] as const;
 
+/**
+ * A functional component that renders the header section of the website.
+ * It includes the GDSC logo, navigation links, and authentication buttons.
+ *
+ * @return {JSX.Element} The JSX element representing the header section.
+ */
 const Header = () => {
   const pathname = usePathname();
   const clerk = useClerk();
@@ -43,7 +51,7 @@ const Header = () => {
 
   return (
     <header className="w-full h-[4.5rem] border-b border-b-border items-center flex flex-col fixed top-0 z-[999] bg-background">
-      <div className="h-full flex flex-row justify-between items-center custom-max-width">
+      <div className="h-full flex flex-row sm:justify-between items-center custom-max-width">
         {/* GDSC logo, Click on it should bring back to root page*/}
         <Link href="/">
           <Image
@@ -56,8 +64,9 @@ const Header = () => {
         </Link>
 
         {/* Navigation links */}
-        <nav className="m-auto md:m-0 md:ml-auto h-full flex items-center gap-6">
-          <ul className="flex flex-row space-x-6 h-full">
+        <nav className="mx-4 sm:mx-0 w-full sm:w-auto h-full flex items-center justify-between sm:gap-6">
+          {/* WEBSITE MENU, DOES NOT SHOW ON MOBILE */}
+          <ul className="hidden sm:flex flex-row space-x-6 h-full">
             {links.map((link, index) => (
               <li key={index}>
                 <Link
@@ -72,8 +81,40 @@ const Header = () => {
               </li>
             ))}
           </ul>
+
+          {/* MOBILE TRIGGER MENU, DOES NOT SHOW ON WEBSITE */}
+          <Sheet>
+            <SheetTrigger className="flex p-3 flex-col items-center justify-center sm:hidden border border-border rounded-md">
+              <MdMenu />
+            </SheetTrigger>
+            <SheetContent side="left">
+              <SheetTitle>
+                <p>GDSC CSUSM</p>
+              </SheetTitle>
+              <hr />
+              <ul className="flex flex-col gap-2 h-full">
+                {links.map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      className={cn(
+                        "text-foreground/70 flex items-center hover:cursor-pointer hover:text-foreground transition",
+                        pathname === link.ref ? "text-blue" : ""
+                      )}
+                      href={link.ref}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </SheetContent>
+          </Sheet>
+
+          {/* USER BUTTON FOR AUTHENTICATION AND ADMIN ACCESS */}
           {auth.isSignedIn ? (
-            <UserButton />
+            <div>
+              <UserButton />
+            </div>
           ) : (
             <p
               onClick={() => clerk.openSignIn()}

@@ -6,6 +6,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 
+/**
+ * A component that displays an empty state with a label, optional action label, and link.
+ *
+ * @param {string} label - The main label to display.
+ * @param {string} [actionLabel] - The label for the action button.
+ * @param {string} [href] - The link for the action button.
+ * @return {JSX.Element} The empty state component.
+ */
 const EmptyState = ({
   label,
   actionLabel,

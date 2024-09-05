@@ -11,6 +11,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+/**
+ * A navigation component for displaying a list of projects.
+ *
+ * @param {object[]} projects - An array of project objects, each containing name, url, and icon properties.
+ * @param {React.ComponentProps<'ul'>} className - Additional class names to apply to the component.
+ * @return {JSX.Element} The rendered navigation component.
+ */
 export function NavProjects({
   projects,
   className,

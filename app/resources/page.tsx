@@ -2,6 +2,11 @@ import FAQ from "@/components/main/resources/faq";
 import PageHeader from "@/components/ui/page-header";
 import React from "react";
 
+/**
+ * Renders the Resources component.
+ *
+ * @return {JSX.Element} The rendered JSX element.
+ */
 const Resources = () => {
   return (
     <main className="w-full mt-[4.5rem]">

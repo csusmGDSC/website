@@ -24,6 +24,11 @@ import { useState } from "react";
 import { createEvent } from "@/actions/event";
 import { uploadFiles, useUploadThing } from "@/hooks/use-upload";
 
+/**
+ * Creates a multi-step form for creating a new event.
+ *
+ * @return {JSX.Element} The JSX element representing the form.
+ */
 export default function CreateEvent() {
   const {
     previousStep,
@@ -36,6 +41,9 @@ export default function CreateEvent() {
     showSuccessMsg,
   } = useMultipleStepForm(STEPS.REVIEW_AND_SUBMIT + 1);
 
+  /**
+   * The form object using react-hook-form and zod.
+   */
   const form = useForm<z.infer<typeof EventSchema>>({
     resolver: zodResolver(EventSchema),
     defaultValues: {
@@ -55,13 +63,19 @@ export default function CreateEvent() {
   const [eventCreatedId, setEventCreatedId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
+  /**
+   * Creates a new GDSC event by sending a request to the server with the provided event details.
+   *
+   * @param {z.infer<typeof EventSchema>} values - The event details to be sent to the server.
+   * @param {string | null} mainImageUrl - The URL of the main image for the event.
+   * @param {string[]} extraImageUrls - The URLs of additional images for the event.
+   * @return {Promise<void>} A promise that resolves when the event creation request is complete.
+   */
   const createGDSCEvent = async (
     values: z.infer<typeof EventSchema>,
     mainImageUrl: string | null,
     extraImageUrls: string[]
   ) => {
-    console.log("UPLOADED FILES", mainImageUrl, extraImageUrls);
-
     const serverFormData = new FormData();
 
     try {
@@ -92,12 +106,21 @@ export default function CreateEvent() {
 
       if (eventCreationResponse.eventId) {
         setEventCreatedId(eventCreationResponse.eventId);
+      } else {
+        setFormErrorMessage("Error. Server could not create event.");
       }
     } catch (error) {
+      setFormErrorMessage("Error. Server could not create event.");
       console.log("Error while creating event: ", error);
     }
   };
 
+  /**
+   * Generates and retrieves the URLs of the main and extra images for an event.
+   *
+   * @param {z.infer<typeof EventSchema>} values - The event details containing image sources.
+   * @return {{ mainImageUrl: string | null, extraImageUrls: string[] }} An object containing the main image URL and an array of extra image URLs.
+   */
   const getImageUrls = async (values: z.infer<typeof EventSchema>) => {
     let mainImageUrl: string | null = null;
     let extraImageUrls: string[] = [];
@@ -156,6 +179,12 @@ export default function CreateEvent() {
     return isValid;
   };
 
+  /**
+   * Handles the form submission for creating a new event.
+   *
+   * @param {z.infer<typeof EventSchema>} values - The form values to be submitted.
+   * @return {Promise<void>} A promise that resolves when the submission is complete.
+   */
   const handleSubmit = async (values: z.infer<typeof EventSchema>) => {
     const isValid = await validateCurrentStep();
 
@@ -166,12 +195,16 @@ export default function CreateEvent() {
 
         try {
           const { mainImageUrl, extraImageUrls } = await getImageUrls(values);
-          createGDSCEvent(values, mainImageUrl, extraImageUrls);
+          await createGDSCEvent(values, mainImageUrl, extraImageUrls);
         } catch (error) {
           console.error("Error uploading files or creating event:", error);
         }
 
-        if (!formErrorMessage) {
+        if (!eventCreatedId) {
+          setFormErrorMessage("Error. Server could not create event.");
+        }
+
+        if (!formErrorMessage && eventCreatedId) {
           nextStep();
         }
 

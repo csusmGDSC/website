@@ -17,8 +17,13 @@ import * as z from "zod";
  * @return {GDSCEventPrisma[]} An array of events
  */
 export async function getEvents(): Promise<string> {
-  const events = await db.gDSCEvent.findMany();
-  return JSON.stringify(events);
+  try {
+    const events = await db.gDSCEvent.findMany();
+    return JSON.stringify(events);
+  } catch (error) {
+    console.log("ERROR GETTING EVENTS: ", error);
+    return JSON.stringify([]);
+  }
 }
 
 /**
@@ -27,7 +32,12 @@ export async function getEvents(): Promise<string> {
  * @return {GDSCEventPrisma[]} An array of events
  */
 export async function getEventsWithoutJSON(): Promise<GDSCEventPrisma[]> {
-  return await db.gDSCEvent.findMany();
+  try {
+    return await db.gDSCEvent.findMany();
+  } catch (error) {
+    console.log("ERROR GETTING EVENTS: ", error);
+    return [];
+  }
 }
 
 /**
@@ -46,7 +56,12 @@ export async function getEventById(
     return null;
   }
 
-  return db.gDSCEvent.findUnique({ where: { id } });
+  try {
+    return db.gDSCEvent.findUnique({ where: { id } });
+  } catch (error) {
+    console.log("ERROR GETTING EVENT: ", error);
+    return null;
+  }
 }
 
 /**
@@ -63,9 +78,14 @@ export async function deleteEventById(id: string) {
     return false;
   }
 
-  db.gDSCEvent.delete({ where: { id } }).then(() => {
-    return true;
-  });
+  try {
+    db.gDSCEvent.delete({ where: { id } }).then(() => {
+      return true;
+    });
+  } catch (error) {
+    console.log("ERROR DELETING EVENT: ", error);
+    return false;
+  }
 }
 
 export async function addAttendeeToEvent(userId: string, eventId: string) {
@@ -85,10 +105,15 @@ export async function addAttendeeToEvent(userId: string, eventId: string) {
 
   attendees.push(userId);
 
-  await db.gDSCEvent.update({
-    where: { id: eventId },
-    data: { attendeeIds: attendees },
-  });
+  try {
+    await db.gDSCEvent.update({
+      where: { id: eventId },
+      data: { attendeeIds: attendees },
+    });
+  } catch (error) {
+    console.log("ERROR ADDING ATTENDEE: ", error);
+    return { error: "Error adding attendee" };
+  }
 
   return { message: "User added to event!" };
 }
@@ -110,10 +135,15 @@ export async function removeAttendeeFromEvent(userId: string, eventId: string) {
 
   attendees = attendees.filter((id) => id !== userId);
 
-  await db.gDSCEvent.update({
-    where: { id: eventId },
-    data: { attendeeIds: attendees },
-  });
+  try {
+    await db.gDSCEvent.update({
+      where: { id: eventId },
+      data: { attendeeIds: attendees },
+    });
+  } catch (error) {
+    console.log("ERROR REMOVING ATTENDEE: ", error);
+    return { error: "Error removing attendee" };
+  }
 
   return { message: "User removed from event!" };
 }
@@ -188,9 +218,14 @@ export async function createEvent(values: FormData) {
     createdBy: user.userId as string,
   };
 
-  const createdEvent = await db.gDSCEvent.create({
-    data: newGDSCEvent,
-  });
+  try {
+    const createdEvent = await db.gDSCEvent.create({
+      data: newGDSCEvent,
+    });
 
-  return { message: "Event successfully created", eventId: createdEvent.id };
+    return { message: "Event successfully created", eventId: createdEvent.id };
+  } catch (error) {
+    console.log("ERROR CREATING EVENT: ", error);
+    return { error: "Error creating event" };
+  }
 }

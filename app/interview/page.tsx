@@ -2,6 +2,12 @@ import PageHeader from "@/components/ui/page-header";
 import React from "react";
 import InterviewPreparation from "@/components/main/interview/interview-preparation";
 import InterviewCompetitions from "@/components/main/interview/interview-competitions";
+
+/**
+ * A functional component that renders the interview page.
+ *
+ * @return {JSX.Element} The JSX element representing the interview page.
+ */
 const Interview = () => {
   return (
     <main className="w-full mt-[4.5rem]">

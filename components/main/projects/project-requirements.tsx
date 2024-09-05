@@ -25,7 +25,7 @@ const ProjectRequirements = () => {
   return (
     <section>
       <TitleHeader heading="Contributions" />
-      <p className="text-sm px-2 md:px-0 mb-8 w-full text-center sm:text-left">
+      <p className="text-sm px-2 md:px-0 mb-8 w-full text-left">
         Joining GDSC-CSUSM will allow you to partake in various community
         projects, where you can learn a variety of technical skills that you can
         apply on your resume. Both member&apos;s individual projects, as well as

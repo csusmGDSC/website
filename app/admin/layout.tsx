@@ -5,6 +5,14 @@ import { AppSidebar } from "@/components/app-sidebar";
 import Container from "@/components/ui/container";
 import { SidebarLayout, SidebarTrigger } from "@/components/ui/sidebar";
 
+/**
+ * A layout component that wraps the admin's main content.
+ * It checks for admin role and redirects to the root page if not authorized.
+ * It also handles the sidebar's state using cookies.
+ *
+ * @param {React.ReactNode} children - The main content of the application
+ * @return {JSX.Element} The layout component with the main content and sidebar
+ */
 export default async function RootLayout({
   children,
 }: {

@@ -5,7 +5,6 @@ import Header from "@/components/main/header";
 import Footer from "@/components/main/footer";
 import { cn } from "@/lib/utils";
 
-import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
 import GDSCTeamContextProvider from "@/context/gdsc-team-context";
 import GDSCEventsContextProvider from "@/context/gdsc-events-context";
@@ -23,6 +22,13 @@ export const metadata: Metadata = {
     "Google Developer Student Club at California State University, San Marcos. Visit upcoming events, project developments, and interview preperation sessions.",
 };
 
+/**
+ * A root layout component that wraps the entire application.
+ *
+ * @param {Readonly<{ children: React.ReactNode }>} props - The component props.
+ * @param {React.ReactNode} props.children - The child elements to be rendered.
+ * @return {JSX.Element} The root layout element.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,20 +47,17 @@ export default function RootLayout({
           <html lang="en">
             <body
               className={cn(
-                "min-h-screen bg-background font-sans antialiased overflow-x-hidden",
+                "min-h-screen bg-background flex flex-col font-sans antialiased overflow-x-hidden",
                 fontSans.variable
               )}
             >
-              <ThemeProvider
-                defaultTheme="system"
-                attribute="class"
-                enableSystem
-              >
+              <div className="flex-1">
                 <Header />
                 {children}
                 <Toaster />
-                <Footer />
-              </ThemeProvider>
+              </div>
+
+              <Footer />
             </body>
           </html>
         </GDSCEventsContextProvider>
