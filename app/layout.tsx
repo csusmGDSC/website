@@ -9,6 +9,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import GDSCTeamContextProvider from "@/context/gdsc-team-context";
 import GDSCEventsContextProvider from "@/context/gdsc-events-context";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/react";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -51,6 +52,7 @@ export default function RootLayout({
                 fontSans.variable
               )}
             >
+              <Analytics />
               <div className="flex-1">
                 <Header />
                 {children}
