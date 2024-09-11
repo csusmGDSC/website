@@ -16,7 +16,7 @@ export async function mapClerkUserToGDSCUser(user: User): Promise<GDSCUser> {
     linkedin: (user.publicMetadata.linkedin as string) || "",
     instagram: (user.publicMetadata.instagram as string) || "",
     twitter: (user.publicMetadata.twitter as string) || "",
-    bio: (user.publicMetadata.shortBio as string) || "",
+    bio: (user.publicMetadata.bio as string) || "",
     tags: (user.publicMetadata.tags as string[]) || [],
     graduationYear: (user.publicMetadata.graduationYear as number) || 0,
     total_points: (user.publicMetadata.total_points as number) || 0,
@@ -29,8 +29,12 @@ export async function mapClerkUserToGDSCUser(user: User): Promise<GDSCUser> {
 export async function getUsers(): Promise<GDSCUser[]> {
   const users = await clerkClient.users.getUserList();
 
+  const usersWithOnboarding = users.data.filter(
+    (user) => user.publicMetadata.onboardingComplete
+  );
+
   const GDSCUserData: GDSCUser[] = [];
-  for (const user of users.data) {
+  for (const user of usersWithOnboarding) {
     GDSCUserData.push(await mapClerkUserToGDSCUser(user));
   }
   return GDSCUserData;

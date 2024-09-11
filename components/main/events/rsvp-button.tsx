@@ -6,7 +6,7 @@ import { useClerk, useUser } from "@clerk/nextjs";
 import { GDSCEvent } from "@prisma/client";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
 import { formatDate } from "date-fns";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 interface RSVPButtonProps {
@@ -25,9 +25,12 @@ export const RSVPButton = ({
   const user = useUser();
   const clerk = useClerk();
 
-  const [isAttending, setIsAttending] = useState(
-    event.attendeeIds.includes(user?.user?.id || "")
-  );
+  const [isAttending, setIsAttending] = useState(false);
+
+  useEffect(() => {
+    const attending = event.attendeeIds.includes(user?.user?.id || "");
+    setIsAttending(attending);
+  }, [user, event.attendeeIds]);
 
   const rsvpToEvent = async () => {
     if (!user || !user.user) {
@@ -59,6 +62,13 @@ export const RSVPButton = ({
   const unRsvpToEvent = async () => {
     if (!user || !user.user) {
       clerk.openSignIn();
+      return;
+    }
+
+    const userIsOrganizer = event.organizerIds.includes(user.user.id);
+
+    if (userIsOrganizer) {
+      toast.error("Can't sign out as organizer!");
       return;
     }
 

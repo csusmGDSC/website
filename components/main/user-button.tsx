@@ -68,7 +68,7 @@ const UserButton = () => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
-            className="gap-2"
+            className="gap-2 hover:cursor-pointer"
             onClick={() => clerk.openUserProfile()}
           >
             <MdManageHistory className="h-4 w-4 text-muted-foreground" />
@@ -76,20 +76,24 @@ const UserButton = () => {
           </DropdownMenuItem>
           {user.user?.publicMetadata?.role === "ADMIN" && (
             <DropdownMenuItem
-              className="gap-2"
+              className="gap-2 hover:cursor-pointer"
               onClick={() => router.push("/admin")}
             >
               <GrUserAdmin className="h-4 w-4 text-muted-foreground" />
               Admin
             </DropdownMenuItem>
           )}
-          <DropdownMenuItem className="gap-2">
+          {/* TODO: Add settings page */}
+          {/* <DropdownMenuItem className="gap-2 hover:cursor-pointer">
             <Settings className="h-4 w-4 text-muted-foreground" />
             Settings
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="gap-2" onClick={() => clerk.signOut()}>
+        <DropdownMenuItem
+          className="gap-2 hover:cursor-pointer"
+          onClick={() => clerk.signOut()}
+        >
           <LogOut className="h-4 w-4 text-muted-foreground" />
           Sign out
         </DropdownMenuItem>

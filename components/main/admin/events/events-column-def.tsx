@@ -27,16 +27,9 @@ import {
   AlertDialogHeader,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { formatDate } from "date-fns";
 
 export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
-  {
-    accessorKey: "id",
-    enableHiding: false,
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="ID" />
-    ),
-    cell: ({ row }) => <p className="text-xs">{row.getValue("id")}</p>,
-  },
   {
     accessorKey: "name",
     enableHiding: false,
@@ -136,9 +129,9 @@ export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
               >
                 Copy event ID
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:cursor-pointer">
+              {/* <DropdownMenuItem className="hover:cursor-pointer">
                 Edit
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
               <DropdownMenuSeparator />
               <AlertDialogTrigger asChild>
                 <DropdownMenuItem

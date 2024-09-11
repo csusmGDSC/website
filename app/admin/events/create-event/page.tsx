@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { AnimatePresence } from "framer-motion";
 import { useMultipleStepForm } from "@/hooks/use-multiple-step-form";
-import { useUser } from "@clerk/nextjs";
 
 import Container from "@/components/ui/container";
 import SideBar, { STEPS } from "@/components/main/admin/create-event/sidebar";
@@ -22,7 +21,8 @@ import LinksForm from "@/components/main/admin/create-event/forms/links-form";
 import Summary from "@/components/main/admin/create-event/summary";
 import { useState } from "react";
 import { createEvent } from "@/actions/event";
-import { uploadFiles, useUploadThing } from "@/hooks/use-upload";
+import { uploadFiles } from "@/hooks/use-upload";
+import GoogleLoadingBounce from "@/components/ui/loaders/google-loading-bounce";
 
 /**
  * Creates a multi-step form for creating a new event.
@@ -97,21 +97,9 @@ export default function CreateEvent() {
       serverFormData.append("extraImageSrcs", JSON.stringify(extraImageUrls));
 
       const eventCreationResponse = await createEvent(serverFormData);
-
-      if (eventCreationResponse.error) {
-        setFormErrorMessage(eventCreationResponse.error);
-      } else {
-        setFormErrorMessage(null);
-      }
-
-      if (eventCreationResponse.eventId) {
-        setEventCreatedId(eventCreationResponse.eventId);
-      } else {
-        setFormErrorMessage("Error. Server could not create event.");
-      }
+      return eventCreationResponse;
     } catch (error) {
-      setFormErrorMessage("Error. Server could not create event.");
-      console.log("Error while creating event: ", error);
+      return { error: "Failed to create event. Please try again later." };
     }
   };
 
@@ -193,18 +181,19 @@ export default function CreateEvent() {
         setFormErrorMessage(null);
         setLoading(true);
 
-        try {
-          const { mainImageUrl, extraImageUrls } = await getImageUrls(values);
-          await createGDSCEvent(values, mainImageUrl, extraImageUrls);
-        } catch (error) {
-          console.error("Error uploading files or creating event:", error);
-        }
+        const { mainImageUrl, extraImageUrls } = await getImageUrls(values);
+        const response = await createGDSCEvent(
+          values,
+          mainImageUrl,
+          extraImageUrls
+        );
 
-        if (!eventCreatedId) {
+        if (!response.eventId) {
           setFormErrorMessage("Error. Server could not create event.");
         }
 
-        if (!formErrorMessage && eventCreatedId) {
+        if (!formErrorMessage && response.eventId) {
+          setEventCreatedId(response.eventId); // Store the created event ID in state for the success message
           nextStep();
         }
 
@@ -307,7 +296,13 @@ export default function CreateEvent() {
                         }}
                         className="relative text-white bg-blue border border-border hover:bg-blue/70 rounded-xl hover:text-white"
                       >
-                        {isLastStep ? "Create" : "Next Step"}
+                        {loading ? (
+                          <GoogleLoadingBounce size="xs" />
+                        ) : isLastStep ? (
+                          "Create"
+                        ) : (
+                          "Next Step"
+                        )}
                       </Button>
                     </div>
                   </div>
