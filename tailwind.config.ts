@@ -68,6 +68,14 @@ const config = {
           "0%, 100%": { transform: "translateY(0)" },
           "40%": { transform: "translateY(-1.2rem)" },
         },
+        ripple: {
+          "0%, 100%": {
+            transform: "translate(-50%, -50%) scale(1)",
+          },
+          "50%": {
+            transform: "translate(-50%, -50%) scale(0.9)",
+          },
+        },
         rotate: {
           "100%": { transform: "rotate(360deg)" },
         },
@@ -125,6 +133,7 @@ const config = {
         rotate: "rotate 2s linear infinite",
         dash: "dash 1.5s ease-in-out infinite",
         color: "color 6s ease-in-out infinite",
+        ripple: "ripple var(--duration,8s) ease calc(var(--i, 0)*.2s) infinite",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],

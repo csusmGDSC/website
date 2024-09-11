@@ -22,21 +22,13 @@ const Footer = () => {
     <footer className={isAdminPage ? "hidden" : ""}>
       <div className="w-full sm:h-[12rem] pb-4 sm:pb-0 border-t border-b-border bg-background items-center flex flex-col mt-20">
         <div className="h-full grid grid-cols-1 sm:grid-cols-4 custom-max-width">
-          <div className="flex flex-col items-center justify-between h-full pt-10 sm:col-span-2 sm:mr-auto">
+          <div className="flex flex-col items-center h-full pt-10 sm:col-span-2 sm:mr-auto">
             <Image
               src="/images/gdsc/gdsc-csusm title light.png"
               alt="navbar-logo"
               width="355"
               height="24"
               className="w-auto h-auto"
-            />
-
-            <Image
-              src="/images/google-city.png"
-              alt="navbar-logo"
-              className="hidden md:block w-auto h-auto"
-              width="255"
-              height="24"
             />
           </div>
 
