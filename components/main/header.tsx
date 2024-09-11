@@ -51,13 +51,13 @@ const Header = () => {
 
   return (
     <header className="w-full h-[4.5rem] border-b border-b-border items-center flex flex-col fixed top-0 z-[40] bg-background">
-      <div className="h-full flex flex-row sm:justify-between items-center custom-max-width">
+      <div className="h-full flex flex-row justify-center lg:justify-between items-center custom-max-width">
         {/* GDSC logo, Click on it should bring back to root page*/}
         <Link href="/">
           <Image
             src="/images/gdsc/gdsc-csusm title light.png"
             alt="navbar-logo"
-            className="hidden md:block w-auto h-auto"
+            className="hidden lg:block w-auto h-auto"
             width="355"
             height="24"
           />

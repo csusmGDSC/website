@@ -13,7 +13,7 @@ import ContentCard from "@/components/ui/cards/content-card";
 const Features = () => {
   return (
     <Container
-      heading="What does GDSC-CSUSM do?"
+      heading="Propel Your Development"
       subheading="We help students grow and accelerate their technical development"
       className="custom-max-width mt-10"
     >

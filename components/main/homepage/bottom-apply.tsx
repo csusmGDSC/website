@@ -17,8 +17,8 @@ const BottomApplySection = () => {
   if (isSignedIn) return null;
 
   return (
-    <section className="w-full -mb-20 pb-20 custom-gradient-background">
-      <Container className="flex flex-col items-center justify-center mt-32 custom-max-width">
+    <section className="w-full -mb-20 pb-20 border-t border-border mt-20 bg-primary-foreground">
+      <Container className="flex flex-col items-center justify-center custom-max-width">
         <div className="flex flex-col gap-10 sm:gap-0 sm:flex-row justify-between w-full">
           <h1 className="text-5xl font-semibold text-primary/90">
             Ready to join?
