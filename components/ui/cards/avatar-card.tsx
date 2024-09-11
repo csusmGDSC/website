@@ -6,6 +6,7 @@ import { DialogDescription } from "@radix-ui/react-dialog";
 import { Button } from "../button";
 import { GDSCUser } from "@/types/gdsc-user";
 import { CiGlobe } from "react-icons/ci";
+import Link from "next/link";
 
 /**
  * Component that shows an avatar along with their information and socials
@@ -15,11 +16,31 @@ const AvatarCard = ({ user }: { user: GDSCUser }) => {
   const socialStyle =
     "hover:text-blue hover:cursor-pointer transition text-xl text-foreground/50";
 
-  const Linkedin = () => <BsLinkedin className={socialStyle} />;
-  const Github = () => <BsGithub className={socialStyle} />;
-  const Instagram = () => <BsInstagram className={socialStyle} />;
-  const Website = () => <CiGlobe className={socialStyle} />;
-  const Twitter = () => <BsTwitterX className={socialStyle} />;
+  const Linkedin = ({ link }: { link: string }) => (
+    <Link href={link} target="_blank">
+      <BsLinkedin className={socialStyle} />
+    </Link>
+  );
+  const Github = ({ link }: { link: string }) => (
+    <Link href={link} target="_blank">
+      <BsGithub className={socialStyle} />
+    </Link>
+  );
+  const Instagram = ({ link }: { link: string }) => (
+    <Link href={link} target="_blank">
+      <BsInstagram className={socialStyle} />
+    </Link>
+  );
+  const Website = ({ link }: { link: string }) => (
+    <Link href={link} target="_blank">
+      <CiGlobe className={socialStyle} />
+    </Link>
+  );
+  const Twitter = ({ link }: { link: string }) => (
+    <Link href={link} target="_blank">
+      <BsTwitterX className={socialStyle} />
+    </Link>
+  );
 
   return (
     <div className="flex flex-col items-center w-[200px] h-[300px] justify-center p-6 dark:bg-primary-foreground rounded-xl custom-box-shadow">
@@ -32,9 +53,9 @@ const AvatarCard = ({ user }: { user: GDSCUser }) => {
       </h2>
       <p className="text-sm font-medium text-foreground/50">{user.branch}</p>
       <div className="mt-2 flex gap-2">
-        <Linkedin />
-        <Github />
-        <Website />
+        <Linkedin link={user.linkedin || ""} />
+        <Github link={user.github || ""} />
+        <Website link={user.website || ""} />
       </div>
       <Dialog>
         <DialogTrigger asChild>
@@ -59,18 +80,18 @@ const AvatarCard = ({ user }: { user: GDSCUser }) => {
                   </p>
                 </span>
                 <div className="flex gap-2">
-                  <Linkedin />
-                  <Github />
-                  <Instagram />
-                  <Twitter />
-                  <Website />
+                  <Linkedin link={user.linkedin || ""} />
+                  <Github link={user.github || ""} />
+                  <Instagram link={user.instagram || ""} />
+                  <Twitter link={user.twitter || ""} />
+                  <Website link={user.website || ""} />
                 </div>
               </div>
             </div>
             <hr className="my-4" />
             <div className="text-primary/90">
               {user.bio && user.bio.length > 0 ? (
-                <p>user.bio</p>
+                <p>{user.bio}</p>
               ) : (
                 <p>No bio provided</p>
               )}
