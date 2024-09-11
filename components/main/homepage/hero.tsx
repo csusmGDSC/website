@@ -25,7 +25,7 @@ const Hero = () => {
 
       {/* Hero Section Content */}
       <div className="px-2 md:px-0 flex flex-row items-center custom-max-width gap-8">
-        <div className="space-y-10 w-full md:w-2/3">
+        <div className="space-y-10 w-full md:w-1/2">
           <h1
             className="text-center md:text-left text-4xl md:text-3xl lg:text-4xl
             font-semibold text-foreground/70"
@@ -79,12 +79,12 @@ const Hero = () => {
         </div>
 
         <div
-          className="hidden md:block h-full w-1/3 max-w-[32rem]
+          className="hidden md:block w-1/2 h-full max-w-[32rem]
           overflow-hidden rounded-lg z-10"
         >
           <Image
-            src="/images/hero-image.png"
-            alt="header-background"
+            src="/images/illustrations/1.png"
+            alt="hero-image"
             width="1920"
             height="1080"
             className="object-cover w-full h-full"
