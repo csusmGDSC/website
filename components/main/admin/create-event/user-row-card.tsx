@@ -12,7 +12,7 @@ export const UserRowCard = ({
   onDelete?: () => void;
 }) => {
   return (
-    <div className="w-full border border-border rounded-xl p-5 bg-primary-foreground flex items-center justify-between">
+    <div className="w-full border border-border rounded-md p-5 bg-primary-foreground flex items-center justify-between">
       <span className="flex gap-2 items-center">
         <Avatar>
           <AvatarImage src={user?.image} />

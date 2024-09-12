@@ -246,7 +246,7 @@ const Editor = ({
                     src={URL.createObjectURL(imageSrc)}
                     alt="Uploaded"
                     fill
-                    className="rounded-xl border object-cover"
+                    className="rounded-md border object-cover"
                   />
                 </div>
               ))}

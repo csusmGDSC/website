@@ -2,7 +2,6 @@ import CardGrid from "@/components/ui/cards/card-grid";
 import ContentCard from "@/components/ui/cards/content-card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TitleHeader from "@/components/ui/title-header";
-import { convertToReadableDate } from "@/lib/utils";
 import { GDSCEvent } from "@prisma/client";
 
 import { TabsContent } from "@radix-ui/react-tabs";
@@ -43,6 +42,7 @@ const PastEvents = ({ events }: PastEventsProps) => {
                   className="sm:!w-[calc(50%-1rem)] md:!w-[calc(33.333%-1rem)]"
                   websiteUrl={`/events/${e.id}`}
                   tags={e.tags}
+                  eventType={e.type}
                   type="event"
                 />
               ))}

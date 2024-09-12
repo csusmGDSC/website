@@ -240,7 +240,7 @@ export default function OnboardingPage() {
                               );
                             }}
                             className={cn(
-                              "rounded-xl text-primary",
+                              "rounded-md text-primary",
                               field.value === gdsc_position
                                 ? "bg-blue hover:bg-blue/80 hover:text-white text-white font-medium"
                                 : ""
@@ -280,7 +280,7 @@ export default function OnboardingPage() {
                               );
                             }}
                             className={cn(
-                              "rounded-xl text-primary",
+                              "rounded-md text-primary",
                               field.value === gdsc_branch
                                 ? "bg-blue hover:bg-blue/80 hover:text-white text-white font-medium"
                                 : ""

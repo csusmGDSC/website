@@ -294,7 +294,7 @@ export default function CreateEvent() {
                           e.preventDefault;
                           handleSubmit(form.getValues());
                         }}
-                        className="relative text-white bg-blue border border-border hover:bg-blue/70 rounded-xl hover:text-white"
+                        className="relative text-white bg-blue border border-border hover:bg-blue/70 rounded-md hover:text-white"
                       >
                         {loading ? (
                           <GoogleLoadingBounce size="xs" />

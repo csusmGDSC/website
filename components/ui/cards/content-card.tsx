@@ -4,7 +4,9 @@ import React from "react";
 import { BsGithub } from "react-icons/bs";
 import Link from "next/link";
 import { CiCalendar, CiGlobe } from "react-icons/ci";
+import { VscSymbolEvent } from "react-icons/vsc";
 import { Button } from "../button";
+import { GDSCEvent } from "@prisma/client";
 
 interface ContentProps {
   title?: string;
@@ -16,6 +18,7 @@ interface ContentProps {
   date?: string;
   tags?: string[];
   type?: "event" | "project" | "other";
+  eventType?: GDSCEvent["type"];
 }
 
 /**
@@ -29,6 +32,8 @@ interface ContentProps {
  * @param {string} className - Additional CSS class names to apply to the component.
  * @param {string} date - The date associated with the content.
  * @param {string[]} tags - An array of tags associated with the content.
+ * @param {string} type - The type of content.
+ * @param {string} eventType - The type of event if type is event.
  * @return {JSX.Element} The content card component.
  */
 const ContentCard: React.FC<ContentProps> = ({
@@ -41,11 +46,12 @@ const ContentCard: React.FC<ContentProps> = ({
   date,
   tags,
   type,
+  eventType,
 }) => {
   return (
     <div
       className={cn(
-        "rounded-xl border border-border w-full overflow-hidden custom-box-shadow",
+        "rounded-md border border-border w-full overflow-hidden custom-box-shadow",
         className
       )}
     >
@@ -58,7 +64,12 @@ const ContentCard: React.FC<ContentProps> = ({
         )}
       >
         <div>
-          <ContentInfo title={title} description={description} date={date} />
+          <ContentInfo
+            title={title}
+            description={description}
+            date={date}
+            eventType={eventType}
+          />
           <ContentTags tags={tags} />
         </div>
         <ContentDetails
@@ -101,16 +112,31 @@ const ContentImage: React.FC<ContentProps> = ({ imageSrc }) => {
  * @param {string} props.title - The title of the content.
  * @param {string} props.description - The description of the content.
  * @param {string} props.date - The date of the content.
+ * @param {string} props.eventType - The type of event if type is event.
  * @return {ReactElement} The JSX element representing the content information.
  */
-const ContentInfo: React.FC<ContentProps> = ({ title, description, date }) => {
+const ContentInfo: React.FC<ContentProps> = ({
+  title,
+  description,
+  date,
+  eventType,
+}) => {
   return (
     <div className="space-y-2 line-clamp-6">
-      <h1 className="font-bold text-foreground/90">{title}</h1>
+      <h1 className="font-bold text-foreground/90 line-clamp-1">{title}</h1>
       {date && (
         <span className="flex gap-2 items-center">
           <CiCalendar />
           <h2 className="text-sm text-foreground/80">{date}</h2>
+        </span>
+      )}
+      {eventType && (
+        <span className="flex gap-2 items-center">
+          <CiGlobe />
+          <h2 className="text-sm text-foreground/80">
+            {/* Uppercase first letter */}
+            {eventType.charAt(0).toUpperCase() + eventType.slice(1)}
+          </h2>
         </span>
       )}
       <p className="text-sm text-foreground/70">{description}</p>

@@ -73,7 +73,7 @@ export default async function EventDetails({ params }: { params: IParams }) {
         </Link>
 
         {/* EVENT IMAGE */}
-        <div className="w-full overflow-hidden h-[300px] rounded-xl custom-box-shadow">
+        <div className="w-full overflow-hidden h-[300px] rounded-md custom-box-shadow">
           <Image
             src={
               eventData.imageSrc
@@ -89,7 +89,7 @@ export default async function EventDetails({ params }: { params: IParams }) {
 
         <div className="flex flex-col sm:flex-row gap-10 relative">
           {/* EVENT DETAILS */}
-          <div className="flex-1 h-full flex flex-col gap-6 w-1/2">
+          <div className="flex-1 h-full flex flex-col gap-6 w-full md:w-1/2">
             <div>
               <h1 className="text-3xl font-bold text-primary">
                 {eventData?.name}
@@ -158,7 +158,7 @@ export default async function EventDetails({ params }: { params: IParams }) {
                   return (
                     <Dialog key={imageSrc}>
                       <DialogTrigger>
-                        <div className="w-[250px] overflow-hidden rounded-xl custom-box-shadow">
+                        <div className="w-[250px] overflow-hidden rounded-md custom-box-shadow">
                           <Image
                             src={`https://utfs.io/f/${imageSrc}`}
                             alt={"event-image"}
@@ -204,7 +204,7 @@ export default async function EventDetails({ params }: { params: IParams }) {
             <hr />
 
             <h1 className="text-3xl font-bold text-primary">Organizers</h1>
-            <div className="flex flex-row flex-wrap gap-3 ">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
               {organizers.map((organizer: GDSCUser) => (
                 <AvatarCard key={organizer.id} user={organizer} />
               ))}
@@ -212,7 +212,7 @@ export default async function EventDetails({ params }: { params: IParams }) {
           </div>
 
           {/* RSVP FORM */}
-          <RSVPForm event={eventData}/>
+          <RSVPForm event={eventData} />
         </div>
       </Container>
     </section>

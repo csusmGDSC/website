@@ -84,7 +84,7 @@ const EventInfoForm = ({ form }: EventInfoFormProps) => {
                       );
                     }}
                     className={cn(
-                      "rounded-xl text-primary",
+                      "rounded-md text-primary",
                       field.value === event_type
                         ? "bg-blue hover:bg-blue/80 hover:text-white text-white font-medium"
                         : ""
@@ -199,7 +199,7 @@ const EventInfoForm = ({ form }: EventInfoFormProps) => {
                   <Image
                     src={URL.createObjectURL(form.watch("imageSrc")!)}
                     alt="event-image"
-                    className="rounded-xl border object-cover aspect-square w-full h-full"
+                    className="rounded-md border object-cover aspect-square w-full h-full"
                     width={0}
                     height={0}
                   />

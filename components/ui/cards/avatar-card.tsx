@@ -43,7 +43,7 @@ const AvatarCard = ({ user }: { user: GDSCUser }) => {
   );
 
   return (
-    <div className="flex flex-col items-center w-[200px] h-[300px] justify-center p-6 dark:bg-primary-foreground rounded-xl custom-box-shadow">
+    <div className="flex flex-col items-center w-full h-[300px] justify-center p-6 dark:bg-primary-foreground rounded-md custom-box-shadow">
       <Avatar className="w-24 h-24">
         <AvatarImage src={user?.image} />
         <AvatarFallback>{user.fullName[0] || ""}</AvatarFallback>

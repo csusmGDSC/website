@@ -21,7 +21,7 @@ export const RSVPForm = ({ event }: RSVPFormProps) => {
 
   return (
     <div>
-      <div className="w-full sm:w-[18rem] rounded-xl custom-box-shadow flex flex-col p-4 gap-3 sticky top-32 dark:bg-primary-foreground">
+      <div className="w-full sm:w-[18rem] rounded-md custom-box-shadow flex flex-col p-4 gap-3 sticky top-32 dark:bg-primary-foreground">
         <h1 className="text-3xl font-semibold text-primary">RSVP</h1>
         <div>
           <span className="flex items-center gap-2">

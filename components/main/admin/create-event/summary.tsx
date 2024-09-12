@@ -44,7 +44,7 @@ const Summary = ({ form, goTo }: SummaryProps) => {
           <MdEdit />
         </Button>
       </div>
-      <div className="bg-primary-foreground rounded-xl border border-border p-5 text-sm">
+      <div className="bg-primary-foreground rounded-md border border-border p-5 text-sm">
         <div className="flex justify-between">
           <p>Name</p>
           <p className="text-primary/80">
@@ -99,7 +99,7 @@ const Summary = ({ form, goTo }: SummaryProps) => {
               : "/images/stock/reflections.jpg"
           }
           alt="event-image"
-          className="rounded-xl border object-cover aspect-square w-full h-full"
+          className="rounded-md border object-cover aspect-square w-full h-full"
           width={1920}
           height={1080}
         />
@@ -116,7 +116,7 @@ const Summary = ({ form, goTo }: SummaryProps) => {
           <MdEdit />
         </Button>
       </div>
-      <div className="bg-primary-foreground rounded-xl border border-border p-5">
+      <div className="bg-primary-foreground rounded-md border border-border p-5">
         <p className="text-primary text-sm text-wrap">
           {form.watch("description")?.length > 0
             ? form.watch("description")
@@ -126,7 +126,7 @@ const Summary = ({ form, goTo }: SummaryProps) => {
 
       {/* ABOUT SUMMARY */}
       <p className="text-xl text-primary font-semibold">About</p>
-      <div className="text-primary text-wrap bg-primary-foreground rounded-xl border border-border p-5">
+      <div className="text-primary text-wrap bg-primary-foreground rounded-md border border-border p-5">
         {form.watch("about") ? (
           <Renderer value={form.watch("about")?.body || ""} />
         ) : (
@@ -144,7 +144,7 @@ const Summary = ({ form, goTo }: SummaryProps) => {
                 <Image
                   src={URL.createObjectURL(image)}
                   alt="extra-image"
-                  className="rounded-xl border object-cover aspect-square w-full h-full"
+                  className="rounded-md border object-cover aspect-square w-full h-full"
                   width={0}
                   height={0}
                 />
@@ -169,21 +169,21 @@ const Summary = ({ form, goTo }: SummaryProps) => {
         </Button>
       </div>
       {form.watch("type") === "virtual" ? (
-        <div className="p-5 bg-primary-foreground border border-border w-full rounded-xl">
+        <div className="p-5 bg-primary-foreground border border-border w-full rounded-md">
           <span className="flex gap-2 items-center text-primary text-sm">
             <MdLaptop size={25} /> <p>Virtual</p>
           </span>
         </div>
       ) : (
         <>
-          <div className="p-5 bg-primary-foreground border border-border w-full rounded-xl">
+          <div className="p-5 bg-primary-foreground border border-border w-full rounded-md">
             <span className="flex gap-2 items-center text-primary text-sm">
               <MdSchool size={25} />{" "}
               <p>California State University, San Marcos</p>
             </span>
           </div>
           {form.watch("room") && (
-            <div className="p-5 bg-primary-foreground border border-border w-full rounded-xl">
+            <div className="p-5 bg-primary-foreground border border-border w-full rounded-md">
               <span className="flex gap-2 items-center text-primary text-sm">
                 <FaBuilding size={25} /> <p>{form.watch("room")}</p>
               </span>
@@ -203,7 +203,7 @@ const Summary = ({ form, goTo }: SummaryProps) => {
           <MdEdit />
         </Button>
       </div>
-      <div className="bg-primary-foreground rounded-xl border border-border p-5 text-sm">
+      <div className="bg-primary-foreground rounded-md border border-border p-5 text-sm">
         <div className="flex justify-between">
           <p>Github Repository</p>
           {form.watch("githubRepo") ? (

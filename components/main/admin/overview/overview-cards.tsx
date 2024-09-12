@@ -9,7 +9,7 @@ const OverviewCards = () => {
   return (
     <Container className="-mt-16">
       <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <li className="w-full rounded-xl border border-border p-2 flex items-center gap-4">
+        <li className="w-full rounded-md border border-border p-2 flex items-center gap-4">
           <span className="p-4 rounded-full bg-blue bg-opacity-10">
             <MdEvent size={30} className="text-blue" />
           </span>
@@ -22,7 +22,7 @@ const OverviewCards = () => {
           </span>
         </li>
 
-        <li className="w-full rounded-xl border border-border p-2 flex items-center gap-4">
+        <li className="w-full rounded-md border border-border p-2 flex items-center gap-4">
           <span className="p-4 rounded-full bg-red bg-opacity-10">
             <IoPeopleCircle size={30} className="text-red" />
           </span>
@@ -35,7 +35,7 @@ const OverviewCards = () => {
           </span>
         </li>
 
-        <li className="w-full rounded-xl border border-border p-2 flex items-center gap-4">
+        <li className="w-full rounded-md border border-border p-2 flex items-center gap-4">
           <span className="p-4 rounded-full bg-yellow bg-opacity-10">
             <FaProjectDiagram size={30} className="text-yellow" />
           </span>
@@ -48,7 +48,7 @@ const OverviewCards = () => {
           </span>
         </li>
 
-        <li className="w-full rounded-xl border border-border p-2 flex items-center gap-4">
+        <li className="w-full rounded-md border border-border p-2 flex items-center gap-4">
           <span className="p-4 rounded-full bg-green bg-opacity-10">
             <IoIosDocument size={30} className="text-green" />
           </span>
