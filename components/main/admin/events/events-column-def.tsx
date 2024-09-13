@@ -88,6 +88,10 @@ export const EventTableColumns: ColumnDef<GDSCEvent>[] = [
         workshop: "bg-blue/20",
         other: "bg-primary-foreground/20",
         virtual: "bg-green/20",
+        hackathon: "bg-primary-foreground/20",
+        project: "bg-green/20",
+        meeting: "bg-blue/20",
+        leetcode: "bg-red/20",
       };
 
       return (

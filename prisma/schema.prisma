@@ -44,6 +44,7 @@ model GDSCEvent {
 enum EventType {
   virtual
   leetcode
+  hackathon
   workshop
   meeting
   project
