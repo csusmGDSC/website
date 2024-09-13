@@ -25,17 +25,9 @@ const links = [
     ref: "/projects",
   },
   {
-    name: "Interview",
-    ref: "/interview",
-  },
-  {
     name: "Resources",
     ref: "/resources",
   },
-  // {
-  //   name: "Admin",
-  //   ref: "/admin",
-  // },
 ] as const;
 
 /**

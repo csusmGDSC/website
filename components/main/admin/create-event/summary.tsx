@@ -7,8 +7,6 @@ import Link from "next/link";
 import { MdEdit, MdLaptop, MdSchool } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useUser } from "@clerk/nextjs";
 import { formatDate } from "date-fns";
 import { FaBuilding } from "react-icons/fa6";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -16,9 +14,13 @@ import { STEPS } from "./sidebar";
 import { UserRowCard } from "./user-row-card";
 import { useGDSCTeam } from "@/hooks/use-gdsc-team";
 
-const Renderer = dynamic(() => import("@/components/ui/renderer"), {
-  ssr: false,
-});
+const MDX = dynamic(
+  () =>
+    import("@uiw/react-md-editor").then((mod) => {
+      return mod.default.Markdown;
+    }),
+  { ssr: false }
+);
 
 interface SummaryProps {
   form: UseFormReturn<EventFormValues>;
@@ -44,7 +46,7 @@ const Summary = ({ form, goTo }: SummaryProps) => {
           <MdEdit />
         </Button>
       </div>
-      <div className="bg-primary-foreground rounded-xl border border-border p-5 text-sm">
+      <div className=" rounded-md border border-border p-5 text-sm">
         <div className="flex justify-between">
           <p>Name</p>
           <p className="text-primary/80">
@@ -99,7 +101,7 @@ const Summary = ({ form, goTo }: SummaryProps) => {
               : "/images/stock/reflections.jpg"
           }
           alt="event-image"
-          className="rounded-xl border object-cover aspect-square w-full h-full"
+          className="rounded-md border object-cover aspect-square w-full h-full"
           width={1920}
           height={1080}
         />
@@ -116,7 +118,7 @@ const Summary = ({ form, goTo }: SummaryProps) => {
           <MdEdit />
         </Button>
       </div>
-      <div className="bg-primary-foreground rounded-xl border border-border p-5">
+      <div className=" rounded-md border border-border p-5">
         <p className="text-primary text-sm text-wrap">
           {form.watch("description")?.length > 0
             ? form.watch("description")
@@ -126,27 +128,27 @@ const Summary = ({ form, goTo }: SummaryProps) => {
 
       {/* ABOUT SUMMARY */}
       <p className="text-xl text-primary font-semibold">About</p>
-      <div className="text-primary text-wrap bg-primary-foreground rounded-xl border border-border p-5">
+      <div className="text-primary text-wrap rounded-md border border-border p-5">
         {form.watch("about") ? (
-          <Renderer value={form.watch("about")?.body || ""} />
+          <MDX source={form.watch("about")} />
         ) : (
-          "No about provided"
+          "No about description provided"
         )}
       </div>
 
       {/* EXTRA IMAGES SUMMARY */}
       <p className="text-xl text-primary font-semibold">Extra Images</p>
-      {(form.watch("about")?.images ?? []).length > 0 ? (
+      {form.watch("extraImageSrcs") &&
+      (form.watch("extraImageSrcs") || []).length > 0 ? (
         <ScrollArea>
-          <div className="flex gap-2 overflow-x-hidden">
-            {form.watch("about")?.images?.map((image, key) => (
-              <div key={key} className="w-[200px] h-[200px]  my-4">
+          <div className="flex gap-4 py-4">
+            {(form.watch("extraImageSrcs") || []).map((imageSrc, index) => (
+              <div key={index} className="relative w-32 h-32 flex-shrink-0">
                 <Image
-                  src={URL.createObjectURL(image)}
-                  alt="extra-image"
-                  className="rounded-xl border object-cover aspect-square w-full h-full"
-                  width={0}
-                  height={0}
+                  src={URL.createObjectURL(imageSrc)}
+                  alt="Uploaded"
+                  fill
+                  className="rounded-md border object-cover"
                 />
               </div>
             ))}
@@ -169,21 +171,21 @@ const Summary = ({ form, goTo }: SummaryProps) => {
         </Button>
       </div>
       {form.watch("type") === "virtual" ? (
-        <div className="p-5 bg-primary-foreground border border-border w-full rounded-xl">
+        <div className="p-5 border border-border w-full rounded-md">
           <span className="flex gap-2 items-center text-primary text-sm">
             <MdLaptop size={25} /> <p>Virtual</p>
           </span>
         </div>
       ) : (
         <>
-          <div className="p-5 bg-primary-foreground border border-border w-full rounded-xl">
+          <div className="p-5 border border-border w-full rounded-md">
             <span className="flex gap-2 items-center text-primary text-sm">
               <MdSchool size={25} />{" "}
               <p>California State University, San Marcos</p>
             </span>
           </div>
           {form.watch("room") && (
-            <div className="p-5 bg-primary-foreground border border-border w-full rounded-xl">
+            <div className="p-5 border border-border w-full rounded-md">
               <span className="flex gap-2 items-center text-primary text-sm">
                 <FaBuilding size={25} /> <p>{form.watch("room")}</p>
               </span>
@@ -203,7 +205,7 @@ const Summary = ({ form, goTo }: SummaryProps) => {
           <MdEdit />
         </Button>
       </div>
-      <div className="bg-primary-foreground rounded-xl border border-border p-5 text-sm">
+      <div className="rounded-md border border-border p-5 text-sm">
         <div className="flex justify-between">
           <p>Github Repository</p>
           {form.watch("githubRepo") ? (
@@ -230,6 +232,22 @@ const Summary = ({ form, goTo }: SummaryProps) => {
               target="_blank"
             >
               {form.watch("slidesURL")}
+            </Link>
+          ) : (
+            <p>No URL provided</p>
+          )}
+        </div>
+
+        <div className="flex justify-between">
+          <p>Virtual/Hybrid Meeting</p>
+          {form.watch("virtualURL") ? (
+            <Link
+              className="hover:underline text-blue"
+              // @ts-ignore
+              href={form.watch("virtualURL")}
+              target="_blank"
+            >
+              {form.watch("virtualURL")}
             </Link>
           ) : (
             <p>No URL provided</p>

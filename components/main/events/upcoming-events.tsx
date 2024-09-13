@@ -1,7 +1,6 @@
 import CardGrid from "@/components/ui/cards/card-grid";
 import ContentCard from "@/components/ui/cards/content-card";
 import TitleHeader from "@/components/ui/title-header";
-import { convertToReadableDate } from "@/lib/utils";
 import { GDSCEvent } from "@prisma/client";
 import { formatDate } from "date-fns";
 import React from "react";
@@ -32,6 +31,7 @@ const UpcomingEvents = ({ events }: UpcomingEventsProps) => {
               websiteUrl={`/events/${e.id}`}
               tags={e.tags}
               type="event"
+              eventType={e.type}
             />
           ))}
       </CardGrid>

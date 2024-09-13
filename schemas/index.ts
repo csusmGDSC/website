@@ -6,7 +6,7 @@ import { EVENT_TYPES, ROOM_TYPES } from "@/types/gdsc-event";
 
 export const SHORT_BIO_MAX_LENGTH = 200;
 export const DESCRIPTION_MAX_LENGTH = 200;
-export const ABOUT_MAX_LENGTH = 3000;
+export const ABOUT_MAX_LENGTH = 10000;
 
 /**
  * Zod Schema for onboarding user form.
@@ -50,14 +50,11 @@ export const EventSchema = z
     date: z.date(),
     githubRepo: z.string().url().optional().or(z.literal("")),
     slidesURL: z.string().url().optional().or(z.literal("")),
+    virtualURL: z.string().url().optional().or(z.literal("")),
     imageSrc: z.instanceof(File).optional(),
     description: z.string().min(2).max(DESCRIPTION_MAX_LENGTH),
-    about: z
-      .object({
-        body: z.string().max(ABOUT_MAX_LENGTH).optional(),
-        images: z.array(z.instanceof(File)).optional(),
-      })
-      .optional(),
+    about: z.string().max(ABOUT_MAX_LENGTH).optional(),
+    extraImageSrcs: z.array(z.instanceof(File)).optional(),
     organizerIds: z.array(z.string()),
   })
   .refine((data) => data.type !== null, {

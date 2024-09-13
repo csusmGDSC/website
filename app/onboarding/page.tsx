@@ -7,7 +7,7 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { completeOnboarding } from "@/actions/onboarding";
 
-import { cn } from "@/lib/utils";
+import { cn, upperCaseFirstLetter } from "@/lib/utils";
 
 // CONSTANTS
 import { GDSC_BRANCHES, GDSC_POSITIONS } from "@/types/gdsc-user";
@@ -240,14 +240,13 @@ export default function OnboardingPage() {
                               );
                             }}
                             className={cn(
-                              "rounded-xl text-primary",
+                              "rounded-md text-primary",
                               field.value === gdsc_position
                                 ? "bg-blue hover:bg-blue/80 hover:text-white text-white font-medium"
                                 : ""
                             )}
                           >
-                            {gdsc_position.charAt(0).toUpperCase() +
-                              gdsc_position.slice(1)}
+                            {upperCaseFirstLetter(gdsc_position)}
                           </Button>
                         ))}
                       </div>
@@ -280,14 +279,13 @@ export default function OnboardingPage() {
                               );
                             }}
                             className={cn(
-                              "rounded-xl text-primary",
+                              "rounded-md text-primary",
                               field.value === gdsc_branch
                                 ? "bg-blue hover:bg-blue/80 hover:text-white text-white font-medium"
                                 : ""
                             )}
                           >
-                            {gdsc_branch.charAt(0).toUpperCase() +
-                              gdsc_branch.slice(1)}
+                            {upperCaseFirstLetter(gdsc_branch)}
                           </Button>
                         ))}
                       </div>

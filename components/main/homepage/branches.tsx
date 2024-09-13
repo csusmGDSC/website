@@ -100,7 +100,7 @@ const BranchCard = ({
   linkText: string;
 }) => {
   return (
-    <div className="rounded-xl p-6 w-full custom-box-shadow dark:bg-primary-foreground">
+    <div className="rounded-md p-6 w-full custom-box-shadow dark:bg-primary-foreground">
       <div>
         <h2 className="text-xl text-neutral-700 dark:text-neutral-300 font-semibold mb-2">
           {title}

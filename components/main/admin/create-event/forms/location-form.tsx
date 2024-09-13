@@ -31,7 +31,7 @@ const LocationForm = ({ form }: LocationFormProps) => {
         render={({ field }) => (
           <FormItem>
             <FormLabel>School</FormLabel>
-            <div className="p-4 border border-border w-full rounded-xl flex justify-between">
+            <div className="p-4 border border-border w-full rounded-md flex justify-between">
               <span className="flex gap-2 items-center">
                 <MdSchool size={25} />{" "}
                 <p>California State University, San Marcos</p>
