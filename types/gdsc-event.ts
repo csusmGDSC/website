@@ -66,6 +66,10 @@ export interface CSUSM_ROOM {
 
 export const EVENT_TYPES = [
   "virtual",
+  "leetcode",
+  "hackathon",
+  "meeting",
+  "project",
   "workshop",
   "competition",
   "challenge",
