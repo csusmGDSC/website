@@ -89,3 +89,7 @@ export const getImageDataUrl = (image: {
   const base64String = bufferToBase64(image.data);
   return `data:${image.mimeType};base64,${base64String}`;
 };
+
+export const upperCaseFirstLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}

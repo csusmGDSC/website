@@ -7,7 +7,7 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { completeOnboarding } from "@/actions/onboarding";
 
-import { cn } from "@/lib/utils";
+import { cn, upperCaseFirstLetter } from "@/lib/utils";
 
 // CONSTANTS
 import { GDSC_BRANCHES, GDSC_POSITIONS } from "@/types/gdsc-user";
@@ -246,8 +246,7 @@ export default function OnboardingPage() {
                                 : ""
                             )}
                           >
-                            {gdsc_position.charAt(0).toUpperCase() +
-                              gdsc_position.slice(1)}
+                            {upperCaseFirstLetter(gdsc_position)}
                           </Button>
                         ))}
                       </div>
@@ -286,8 +285,7 @@ export default function OnboardingPage() {
                                 : ""
                             )}
                           >
-                            {gdsc_branch.charAt(0).toUpperCase() +
-                              gdsc_branch.slice(1)}
+                            {upperCaseFirstLetter(gdsc_branch)}
                           </Button>
                         ))}
                       </div>

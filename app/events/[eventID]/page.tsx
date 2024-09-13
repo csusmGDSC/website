@@ -3,7 +3,6 @@
 import AvatarCard from "@/components/ui/cards/avatar-card";
 import Container from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -12,27 +11,19 @@ import {
   FaAngleLeft,
   FaBuilding,
   FaDiscord,
+  FaLaptop,
   FaLinkedin,
   FaLocationDot,
   FaXTwitter,
 } from "react-icons/fa6";
 import { getEventById } from "@/actions/event";
-import dynamic from "next/dynamic";
 import EmptyState from "@/components/main/empty-state";
 import { GDSCUser } from "@/types/gdsc-user";
 import { getMultipleUsersByIds } from "@/actions/users";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { RSVPForm } from "@/components/main/events/rsvp-form";
 
-const Renderer = dynamic(() => import("@/components/ui/renderer"), {
-  ssr: false,
-});
+import { RSVPForm } from "@/components/main/events/rsvp-form";
+import { ImageListView } from "@/components/ui/image-list-view";
+import { ClientMarkdown } from "@/components/main/events/client-markdown";
 
 interface IParams {
   eventID: string;
@@ -95,12 +86,29 @@ export default async function EventDetails({ params }: { params: IParams }) {
                 {eventData?.name}
               </h1>
               <span className="text-primary/90 items-center flex gap-2">
-                <FaBuilding />
-                <h2 className="font-semibold">{eventData?.room}</h2>
+                {eventData?.room === "N/A" ? <FaLaptop /> : <FaBuilding />}
+                <h2 className="font-semibold">
+                  {eventData?.room === "N/A" ? "Virtual" : eventData?.room}
+                </h2>
               </span>
               <span className="text-primary/70 flex items-center gap-2">
                 <FaLocationDot />
-                <h3 className="font-semibold">{eventData?.location}</h3>
+                {eventData.type === "virtual" ? (
+                  eventData.virtualURL ? (
+                    <Link
+                      href={eventData.virtualURL || "/"}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-blue hover:underline transition"
+                    >
+                      {eventData.virtualURL}
+                    </Link>
+                  ) : (
+                    <p>No virtual link provided</p>
+                  )
+                ) : (
+                  <h3 className="font-semibold">{eventData?.location}</h3>
+                )}
               </span>
             </div>
 
@@ -147,59 +155,8 @@ export default async function EventDetails({ params }: { params: IParams }) {
 
             <h1 className="text-3xl font-bold text-primary">About the Event</h1>
 
-            <div>
-              {/* We have to use a quill editor to render the Delta OPs language, so we can't use p tags here */}
-              <Renderer value={eventData?.about || '{"ops":[{"insert":""}]}'} />
-            </div>
-
-            <ScrollArea className="w-full">
-              <div className="flex gap-2">
-                {eventData.extraImageSrcs.map((imageSrc) => {
-                  return (
-                    <Dialog key={imageSrc}>
-                      <DialogTrigger>
-                        <div className="w-[250px] overflow-hidden rounded-md custom-box-shadow">
-                          <Image
-                            src={`https://utfs.io/f/${imageSrc}`}
-                            alt={"event-image"}
-                            width="1920"
-                            height="1080"
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogTitle>{eventData.name}</DialogTitle>
-                        <DialogDescription>
-                          <Image
-                            src={`https://utfs.io/f/${imageSrc}`}
-                            alt={"event-image"}
-                            width="1920"
-                            height="1080"
-                            className="w-full h-full object-cover rounded-md"
-                          />
-                        </DialogDescription>
-                      </DialogContent>
-                    </Dialog>
-                  );
-                })}
-              </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
-
-            <hr />
-
-            <div>
-              <h1 className="text-3xl font-bold text-primary">Location</h1>
-              <span className="text-primary/90 items-center flex gap-2">
-                <FaBuilding />
-                <h2 className="font-semibold">{eventData?.room}</h2>
-              </span>
-              <span className="text-primary/70 flex items-center gap-2">
-                <FaLocationDot />
-                <h3 className="font-semibold">{eventData?.location}</h3>
-              </span>
-            </div>
+            <ClientMarkdown source={eventData.about} />
+            <ImageListView images={eventData.extraImageSrcs} />
 
             <hr />
 

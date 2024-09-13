@@ -179,6 +179,9 @@ export async function createEvent(values: FormData) {
     githubRepo: values.get("githubRepo") as string,
     slidesURL: values.get("slidesURL") as string,
     organizerIds: JSON.parse(values.get("organizerIds") as any) as string[],
+    tags: JSON.parse(values.get("tags") as any) as string[],
+    about: JSON.parse(values.get("about") as any) as string,
+    virtualURL: values.get("virtualURL") as string,
   };
 
   // Validate the parsed values, all used values after should be from validatedFields except for images
@@ -209,7 +212,8 @@ export async function createEvent(values: FormData) {
     githubRepo: validatedFields.data.githubRepo || null,
     slidesURL: validatedFields.data.slidesURL || null,
     description: validatedFields.data.description,
-    about: validatedFields.data.about?.body || null,
+    about: validatedFields.data.about || null,
+    virtualURL: validatedFields.data.virtualURL || null,
     attendeeIds: validatedFields.data.organizerIds,
     organizerIds: validatedFields.data.organizerIds,
     usersAttendedIds: [],

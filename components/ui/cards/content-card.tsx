@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, upperCaseFirstLetter } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 import { BsGithub } from "react-icons/bs";
@@ -134,8 +134,7 @@ const ContentInfo: React.FC<ContentProps> = ({
         <span className="flex gap-2 items-center">
           <CiGlobe />
           <h2 className="text-sm text-foreground/80">
-            {/* Uppercase first letter */}
-            {eventType.charAt(0).toUpperCase() + eventType.slice(1)}
+            {upperCaseFirstLetter(eventType)}
           </h2>
         </span>
       )}

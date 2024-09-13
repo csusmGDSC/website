@@ -36,6 +36,7 @@ export interface GDSCEvent {
   githubRepo?: string;
   slidesURL?: string;
   imageSrc?: File | null;
+  virtualURL?: string;
   extraImageSrcs?: File[] | null;
   description: string;
   about?: string;

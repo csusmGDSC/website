@@ -49,6 +49,23 @@ const LinksForm = ({ form }: LinksFormProps) => {
           </FormItem>
         )}
       />
+
+      <FormField
+        control={form.control}
+        name="virtualURL"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Virtual Link (optional)</FormLabel>
+            <FormControl>
+              <Input
+                {...field}
+                placeholder="Enter URL for virtual/hybrid meetings"
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
     </FormWrapper>
   );
 };

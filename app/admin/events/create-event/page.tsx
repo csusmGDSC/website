@@ -48,11 +48,8 @@ export default function CreateEvent() {
     resolver: zodResolver(EventSchema),
     defaultValues: {
       tags: [],
-      about: {
-        images: [],
-        // If you don't set default ops value, it will cause runtime error
-        body: '{"ops":[{"insert":""}]}',
-      },
+      about: "",
+      extraImageSrcs: [],
       location: "California State University, San Marcos",
       date: new Date(),
       organizerIds: [],
@@ -93,8 +90,10 @@ export default function CreateEvent() {
       //prettier-ignore
       serverFormData.append("organizerIds", JSON.stringify(values.organizerIds));
       serverFormData.append("imageSrc", mainImageUrl || "");
-      serverFormData.append("aboutBody", JSON.stringify(values.about?.body));
+      serverFormData.append("about", JSON.stringify(values.about));
       serverFormData.append("extraImageSrcs", JSON.stringify(extraImageUrls));
+      serverFormData.append("tags", JSON.stringify(values.tags));
+      serverFormData.append("virtualURL", values.virtualURL || "");
 
       const eventCreationResponse = await createEvent(serverFormData);
       return eventCreationResponse;
@@ -121,9 +120,9 @@ export default function CreateEvent() {
       mainImageUrl = mainImageRes?.[0]?.key;
     }
 
-    if (values.about?.images && values.about?.images.length > 0) {
+    if (values.extraImageSrcs && values.extraImageSrcs.length > 0) {
       const extraImagesRes = await uploadFiles("imageUploader", {
-        files: values.about?.images || [],
+        files: values.extraImageSrcs || [],
       });
 
       extraImageUrls = extraImagesRes?.map((image) => image.key) || [];
@@ -132,6 +131,11 @@ export default function CreateEvent() {
     return { mainImageUrl, extraImageUrls };
   };
 
+  /**
+   * Validates the current step of the event creation process form.
+   *
+   * @return {boolean} Whether the current step is valid.
+   */
   const validateCurrentStep = async () => {
     let isValid = false;
 
@@ -149,8 +153,8 @@ export default function CreateEvent() {
       case STEPS.DESCRIPTION_AND_TAGS:
         isValid = await form.trigger([
           "description",
-          "about.body",
-          "about.images",
+          "about",
+          "extraImageSrcs",
         ]);
         break;
       case STEPS.LOCATION:
@@ -224,16 +228,14 @@ export default function CreateEvent() {
             : "min-h-[500px]"
         } w-full relative m-1 rounded-lg border border-border p-4`}
       >
-        {!showSuccessMsg ? (
+        {!showSuccessMsg && (
           <SideBar
             currentStepIndex={currentStepIndex}
             goTo={goTo}
             showLocation={form.watch("type") === "virtual" ? false : true}
           />
-        ) : (
-          ""
         )}
-        <main
+        <div
           className={`${
             showSuccessMsg ? "w-full" : "w-full lg:mt-5 lg:w-[73%]"
           }`}
@@ -245,6 +247,7 @@ export default function CreateEvent() {
           ) : (
             <Form {...form}>
               <form className="w-full flex flex-col justify-between h-full">
+                {/* FORM STEPS, EACH STEP SHOWS A DIFFERENT REACT COMPONENT */}
                 <AnimatePresence mode="wait">
                   {currentStepIndex === STEPS.BASIC_INFO && (
                     <EventInfoForm form={form} />
@@ -263,6 +266,7 @@ export default function CreateEvent() {
                   )}
                 </AnimatePresence>
 
+                {/* FORM BUTTONS */}
                 <div className="w-full items-center flex justify-between mt-10">
                   <Button
                     onClick={() => {
@@ -318,7 +322,7 @@ export default function CreateEvent() {
               </form>
             </Form>
           )}
-        </main>
+        </div>
       </div>
     </Container>
   );

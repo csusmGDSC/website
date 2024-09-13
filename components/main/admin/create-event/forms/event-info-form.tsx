@@ -19,7 +19,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CalendarIcon, ImageIcon, XIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, upperCaseFirstLetter } from "@/lib/utils";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import Image from "next/image";
@@ -90,7 +90,7 @@ const EventInfoForm = ({ form }: EventInfoFormProps) => {
                         : ""
                     )}
                   >
-                    {event_type.charAt(0).toUpperCase() + event_type.slice(1)}
+                    {upperCaseFirstLetter(event_type)}
                   </Button>
                 ))}
               </div>
