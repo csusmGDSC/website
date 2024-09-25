@@ -13,7 +13,7 @@ import { BsMicrosoftTeams } from "react-icons/bs";
 /**
  * The home page of the website, for more information on NextJS page routing, visit the documentation
  */
-export default async function Home() {
+export default function Home() {
   useEffect(() => {
     const existingNotification = document.querySelector(
       ".ant-notification-notice"
