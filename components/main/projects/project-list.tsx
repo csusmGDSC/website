@@ -1,11 +1,14 @@
 import CardGrid from "@/components/ui/cards/card-grid";
 import ContentCard from "@/components/ui/cards/content-card";
 import TitleHeader from "@/components/ui/title-header";
+import { GDSCProject } from "@/types/gdsc-project";
 import React from "react";
 
+interface ProjectListProps {
+  projects: GDSCProject[];
+}
 
-
-const ProjectList = ({projects}: any) => {
+const ProjectList = ({projects}: ProjectListProps) => {
   return (
     <section>
       <TitleHeader heading="Projects" />
