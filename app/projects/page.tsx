@@ -3,6 +3,27 @@ import ProjectRequirements from "@/components/main/projects/project-requirements
 import PageHeader from "@/components/ui/page-header";
 import React from "react";
 
+const exampleProjects = [
+  {
+    title: "Routify",
+    description:
+      "City pathfinding visualizer. Used to learn fundamental graph traversal algorithms such as BFS, DFS, or A* Search.",
+    websiteUrl: "https://www.routify.cc",
+    githubUrl: "https://www.github.com/jaedonspurlock01/routify",
+    imageSrc: "/images/projects/routify.gif",
+    tags: [
+      "JavaScript",
+      "NextJS",
+      "ReactJS",
+      "ThreeJS",
+      "Nominatim API",
+      "Overpass API",
+      "Amazon S3",
+    ],
+    date: "Jan 2024 - Mar 2024",
+  },
+];
+
 /**
  * A functional component that renders the Projects page.
  *
@@ -21,7 +42,7 @@ const Projects = () => {
       <div className="w-full flex-center-col">
         <div className="custom-max-width space-y-10">
           <ProjectRequirements />
-          <ProjectList />
+          <ProjectList projects={exampleProjects}/>
         </div>
       </div>
     </main>

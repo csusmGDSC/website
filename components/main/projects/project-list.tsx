@@ -3,33 +3,14 @@ import ContentCard from "@/components/ui/cards/content-card";
 import TitleHeader from "@/components/ui/title-header";
 import React from "react";
 
-const exampleProjects = [
-  {
-    title: "Routify",
-    description:
-      "City pathfinding visualizer. Used to learn fundamental graph traversal algorithms such as BFS, DFS, or A* Search.",
-    websiteUrl: "https://www.routify.cc",
-    githubUrl: "https://www.github.com/jaedonspurlock01/routify",
-    imageSrc: "/images/projects/routify.gif",
-    tags: [
-      "JavaScript",
-      "NextJS",
-      "ReactJS",
-      "ThreeJS",
-      "Nominatim API",
-      "Overpass API",
-      "Amazon S3",
-    ],
-    date: "Jan 2024 - Mar 2024",
-  },
-];
 
-const ProjectList = () => {
+
+const ProjectList = ({projects}: any) => {
   return (
     <section>
       <TitleHeader heading="Projects" />
       <CardGrid placeholder="There is currently no projects at the moment.">
-        {exampleProjects.map((e, index) => (
+        {projects.map((e, index) => (
           <ContentCard
             title={e.title}
             description={e.description}
