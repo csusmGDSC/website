@@ -100,6 +100,7 @@ const ContentImage: React.FC<ContentProps> = ({ imageSrc }) => {
         width="1920"
         height="1080"
         className="w-full h-full object-cover"
+        fetchPriority="auto"
       />
     </div>
   );
