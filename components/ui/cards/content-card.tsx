@@ -8,7 +8,7 @@ import { VscSymbolEvent } from "react-icons/vsc";
 import { Button } from "../button";
 import { GDSCEvent } from "@prisma/client";
 
-interface ContentProps {
+export interface ContentProps {
   title?: string;
   description?: string;
   websiteUrl?: string;
